@@ -293,8 +293,7 @@ const Customers = () => {
     const getCustomersData = async () => {
         setLoader(true)
         try {
-            const url = 'http://13.127.156.81:3000/customers'
-            // const url = 'http://localhost:3000/customers'
+            const url = `${import.meta.env.VITE_API_URL}/customers`;
             const options = {
                 method: 'GET',
             }
@@ -394,8 +393,7 @@ const Customers = () => {
 
     const onClickSingleDelete = async (ID) => {
         try {
-            const url = `http://13.127.156.81:3000/Customer/${ID}`;
-            // const url = `http://localhost:3000/Customer/${ID}`;
+            const url = `${import.meta.env.VITE_API_URL}/Customer/${ID}`;
             const options = {
                 method: 'DELETE',
                 headers: {
@@ -437,7 +435,7 @@ const Customers = () => {
         try {
             const idsToDelete = selectedRecords; // Example array of customer IDs to delete
 
-            const url = `http://13.127.156.81:3000/Delete/Multiple`;
+            const url = `${import.meta.env.VITE_API_URL}/Delete/Multiple`;
             const options = {
                 method: 'DELETE',
                 headers: {
@@ -469,7 +467,6 @@ const Customers = () => {
         else {
             newSelectedRecords = [...selectedRecords, ID]
         }
-        console.log(newSelectedRecords)
         setSelectedRecords(newSelectedRecords)
     }
 

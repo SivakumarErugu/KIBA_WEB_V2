@@ -84,12 +84,13 @@ const Login = () => {
 
         try {
             // Make API request
-            const response = await axios.post('http://13.127.156.81:3000/AdminLogin', { email, password });
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/AdminLogin`, { email, password });
 
             // Destructure response safely
             const { token } = response.data || {};
 
             if (token) {
+                console.log(token)
                 // Set the JWT token as a cookie (consider security settings)
                 Cookies.set('KIBAJWTToken', token, { expires: 7, secure: true, sameSite: 'Strict' });
 

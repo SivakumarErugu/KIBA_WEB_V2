@@ -59,7 +59,8 @@ const ChangePassword = () => {
         const newPassword = credentials.password;
 
         // Prepare the URL and request options
-        const url = `http://13.127.156.81:3000/admin/update`;
+        const url = `${import.meta.env.VITE_API_URL}/admin/update`;
+
         const options = {
             method: "PUT",
             headers: {

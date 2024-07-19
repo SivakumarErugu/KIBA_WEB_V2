@@ -37,7 +37,7 @@ const Settings = () => {
         setLoader(true)
         const getAdminData = async () => {
             try {
-                const url = 'http://13.127.156.81:3000/admin'
+                const url = `${import.meta.env.VITE_API_URL}/admin`;
                 const options = {
                     method: 'GET',
                 }
@@ -60,7 +60,7 @@ const Settings = () => {
         e.preventDefault();
 
         // Prepare the URL and request options
-        const url = `http://13.127.156.81:3000/admin/update`;
+        const url = `${import.meta.env.VITE_API_URL}/admin/update`;
         const options = {
             method: 'PUT',
             headers: {
@@ -111,7 +111,7 @@ const Settings = () => {
     useEffect(() => {
         const getAdminData = async () => {
             try {
-                const url = 'http://13.127.156.81:3000/admin'
+                const url = `${import.meta.env.VITE_API_URL}/admin`;
                 const options = {
                     method: 'GET',
                 }
@@ -134,7 +134,7 @@ const Settings = () => {
         e.preventDefault();
 
         // Prepare the URL and request options
-        const url = `http://13.127.156.81:3000/executive/${id}`;
+        const url = `${import.meta.env.VITE_API_URL}/executive/${id}`;
         const options = {
             method: 'PUT',
             headers: {

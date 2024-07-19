@@ -44,7 +44,7 @@ const Dashboard = () => {
     const getCustomersData = async () => {
         setLoader(true);
         try {
-            const url = 'http://13.127.156.81:3000/customers';
+            const url = `${import.meta.env.VITE_API_URL}/customers`;
             const response = await fetch(url);
 
             if (!response.ok) {
@@ -52,7 +52,6 @@ const Dashboard = () => {
             }
 
             const data = await response.json();
-            console.log(data);
             setCustomersData(data);
 
             // Safely handle data and calculate counts
@@ -62,7 +61,6 @@ const Dashboard = () => {
             const bovines = data?.filter(each => each.cultivation === 'Bovine') || [];
             const freeSamples = data?.filter(each => each.trail_pack === 'true') || []
             setFreeSamples(freeSamples.length)
-            console.log(shrimps)
 
             setCultivations({
                 shrimp: shrimps.length,

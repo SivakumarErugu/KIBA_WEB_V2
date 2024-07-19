@@ -159,7 +159,7 @@ const CreateCustomer = () => {
             const formData = new FormData();
             formData.append("file", image);
 
-            const res = await fetch("http://13.127.156.81:3000/upload", {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/upload`, {
                 method: "POST",
                 headers: {
                     // 'Content-Type': 'multipart/form-data'  // Do not set Content-Type header when sending FormData with fetch
@@ -209,7 +209,7 @@ const CreateCustomer = () => {
             return;
         }
 
-        const url = "http://13.127.156.81:3000/new/customer";
+        const url = `${import.meta.env.VITE_API_URL}/new/customer`;
 
         const options = {
             method: "POST",
