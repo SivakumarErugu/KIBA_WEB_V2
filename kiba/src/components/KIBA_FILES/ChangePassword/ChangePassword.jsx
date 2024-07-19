@@ -57,9 +57,9 @@ const ChangePassword = () => {
     const onChangeAdminCredentials = async (e) => {
         e.preventDefault();
         const newPassword = credentials.password;
-
+        const apiUrl = import.meta.env.VITE_API_URL;
         // Prepare the URL and request options
-        const url = `${import.meta.env.VITE_API_URL}/admin/update`;
+        const url = `${apiUrl}/admin/update`;
 
         const options = {
             method: "PUT",

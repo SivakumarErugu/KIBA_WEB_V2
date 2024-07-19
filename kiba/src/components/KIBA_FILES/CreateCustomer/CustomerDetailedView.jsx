@@ -87,6 +87,7 @@ const CustomerDetailedView = () => {
     const [isStateActive, setStateActive] = useState(false)
     const StateRef = useRef(null)
     const [uploadImgStatus, setUploadImgStatus] = useState('')
+    const apiUrl = import.meta.env.VITE_API_URL;
 
     // DROPDOWN OUTSIDE CLICK CONTROL
     useEffect(() => {
@@ -111,7 +112,7 @@ const CustomerDetailedView = () => {
     useEffect(() => {
         setLoader(true)
         const getCustomerData = async () => {
-            const url = `${import.meta.env.VITE_API_URL}/${id}`;
+            const url = `${apiUrl}/${id}`;
             const options = {
                 method: 'GET',
             }
@@ -166,7 +167,7 @@ const CustomerDetailedView = () => {
             const formData = new FormData();
             formData.append('file', image);
 
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/upload`, {
+            const res = await fetch(`${apiUrl}/upload`, {
                 method: 'POST',
                 headers: {
                     // 'Content-Type': 'multipart/form-data'  // Do not set Content-Type header when sending FormData with fetch
@@ -210,7 +211,7 @@ const CustomerDetailedView = () => {
             return;
         }
 
-        const url = `${import.meta.env.VITE_API_URL}/customer/${id}`; 
+        const url = `${apiUrl}/customer/${id}`; 
 
         const options = {
             method: 'PUT',

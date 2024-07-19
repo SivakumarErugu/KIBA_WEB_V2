@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { RouterProvider } from "react-router-dom";
+import { RouterProvider } from 'react-router-dom';
 import KibaContext from './context/KibaContext';
 import router from './Router';
 
@@ -8,12 +8,15 @@ function App() {
   const [customersTab, setCustomersTab] = useState('All Customers');
   const [admin, setAdmin] = useState({});
   const [isUserAuthenticated, setUserAuthenticated] = useState(true);
+  const [isPortrait, setIsPortrait] = useState(window.innerHeight > window.innerWidth);
+
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   // GETTING THE ADMIN DATA
   useEffect(() => {
     const getAdminData = async () => {
       try {
-        const url = 'http://13.127.156.81:3000/admin';
+        const url = `${apiUrl}/admin`;
         const options = {
           method: 'GET',
         };
@@ -28,6 +31,15 @@ function App() {
     };
 
     getAdminData();
+
+    const handleResize = () => {
+      setIsPortrait(window.innerHeight > window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   const onChangeActiveTab = (id) => {
@@ -59,7 +71,13 @@ function App() {
         login: handleUserAuthenticate,
       }}
     >
-      <RouterProvider router={router} />
+      {isPortrait ? (
+        <div className="portrait-message">
+          Please open in desktop mode.
+        </div>
+      ) : (
+        <RouterProvider router={router} />
+      )}
     </KibaContext.Provider>
   );
 }

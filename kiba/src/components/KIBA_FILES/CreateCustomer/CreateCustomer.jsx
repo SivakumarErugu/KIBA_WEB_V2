@@ -97,6 +97,7 @@ const CreateCustomer = () => {
     const [isStateActive, setStateActive] = useState(false);
     const StateRef = useRef(null);
     const [uploadImgStatus, setUploadImgStatus] = useState("");
+    const apiUrl = import.meta.env.VITE_API_URL;
 
     // DROPDOWN OUTSIDE CLICK CONTROL
     useEffect(() => {
@@ -158,8 +159,9 @@ const CreateCustomer = () => {
 
             const formData = new FormData();
             formData.append("file", image);
-
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/upload`, {
+            
+            
+            const res = await fetch(`${apiUrl}/upload`, {
                 method: "POST",
                 headers: {
                     // 'Content-Type': 'multipart/form-data'  // Do not set Content-Type header when sending FormData with fetch
@@ -209,7 +211,7 @@ const CreateCustomer = () => {
             return;
         }
 
-        const url = `${import.meta.env.VITE_API_URL}/new/customer`;
+        const url = `${apiUrl}/new/customer`;
 
         const options = {
             method: "POST",

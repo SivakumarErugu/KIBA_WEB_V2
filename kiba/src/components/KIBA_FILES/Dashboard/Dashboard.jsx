@@ -35,6 +35,7 @@ const Dashboard = () => {
         poultry: 0,
         bovine: 0
     })
+    const apiUrl = import.meta.env.VITE_API_URL;
 
     // GETTING THE TOTAL CUSTOMER LIST
     useEffect(() => {
@@ -44,7 +45,7 @@ const Dashboard = () => {
     const getCustomersData = async () => {
         setLoader(true);
         try {
-            const url = `${import.meta.env.VITE_API_URL}/customers`;
+            const url = `${apiUrl}/customers`;
             const response = await fetch(url);
 
             if (!response.ok) {

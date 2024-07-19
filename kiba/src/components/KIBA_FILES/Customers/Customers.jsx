@@ -283,6 +283,7 @@ const Customers = () => {
     const [selectedRecords, setSelectedRecords] = useState([])
     const [loader, setLoader] = useState(false)
     const [alertText, setAlertText] = useState('')
+    const apiUrl = import.meta.env.VITE_API_URL;
 
 
     // GETTING THE TOTAL CUSTOMER LIST
@@ -293,7 +294,7 @@ const Customers = () => {
     const getCustomersData = async () => {
         setLoader(true)
         try {
-            const url = `${import.meta.env.VITE_API_URL}/customers`;
+            const url = `${apiUrl}/customers`;
             const options = {
                 method: 'GET',
             }
@@ -393,7 +394,7 @@ const Customers = () => {
 
     const onClickSingleDelete = async (ID) => {
         try {
-            const url = `${import.meta.env.VITE_API_URL}/Customer/${ID}`;
+            const url = `${apiUrl}/Customer/${ID}`;
             const options = {
                 method: 'DELETE',
                 headers: {
@@ -435,7 +436,7 @@ const Customers = () => {
         try {
             const idsToDelete = selectedRecords; // Example array of customer IDs to delete
 
-            const url = `${import.meta.env.VITE_API_URL}/Delete/Multiple`;
+            const url = `${apiUrl}/Delete/Multiple`;
             const options = {
                 method: 'DELETE',
                 headers: {

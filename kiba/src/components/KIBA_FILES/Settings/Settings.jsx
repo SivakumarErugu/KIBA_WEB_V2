@@ -32,12 +32,14 @@ const Settings = () => {
     const [showExecutivePassword, setShowExecutivePassword] = useState(false)
     const [isChangeCredentialsActive, setChangeCredentialsActive] = useState(false)
 
+    const apiUrl = import.meta.env.VITE_API_URL;
+
     // GETTING THE ADMIN DATA
     useEffect(() => {
         setLoader(true)
         const getAdminData = async () => {
             try {
-                const url = `${import.meta.env.VITE_API_URL}/admin`;
+                const url = `${apiUrl}/admin`;
                 const options = {
                     method: 'GET',
                 }
@@ -60,7 +62,7 @@ const Settings = () => {
         e.preventDefault();
 
         // Prepare the URL and request options
-        const url = `${import.meta.env.VITE_API_URL}/admin/update`;
+        const url = `${apiUrl}/admin/update`;
         const options = {
             method: 'PUT',
             headers: {
@@ -111,7 +113,7 @@ const Settings = () => {
     useEffect(() => {
         const getAdminData = async () => {
             try {
-                const url = `${import.meta.env.VITE_API_URL}/admin`;
+                const url = `${apiUrl}/admin`;
                 const options = {
                     method: 'GET',
                 }
@@ -134,7 +136,7 @@ const Settings = () => {
         e.preventDefault();
 
         // Prepare the URL and request options
-        const url = `${import.meta.env.VITE_API_URL}/executive/${id}`;
+        const url = `${apiUrl}/executive/${id}`;
         const options = {
             method: 'PUT',
             headers: {
