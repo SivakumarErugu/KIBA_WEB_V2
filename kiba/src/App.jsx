@@ -13,7 +13,7 @@ function App() {
   useEffect(() => {
     const getAdminData = async () => {
       try {
-        const url = 'http://15.207.110.236:3000/admin';
+        const url = 'http://13.127.156.81:3000/admin';
         const options = {
           method: 'GET',
         };

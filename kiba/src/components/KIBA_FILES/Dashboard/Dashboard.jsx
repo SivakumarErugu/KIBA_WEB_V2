@@ -44,7 +44,7 @@ const Dashboard = () => {
     const getCustomersData = async () => {
         setLoader(true);
         try {
-            const url = 'http://15.207.110.236:3000/customers';
+            const url = 'http://13.127.156.81:3000/customers';
             const response = await fetch(url);
 
             if (!response.ok) {

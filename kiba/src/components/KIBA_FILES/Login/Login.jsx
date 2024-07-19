@@ -84,7 +84,7 @@ const Login = () => {
 
         try {
             // Make API request
-            const response = await axios.post('http://15.207.110.236:3000/AdminLogin', { email, password });
+            const response = await axios.post('http://13.127.156.81:3000/AdminLogin', { email, password });
 
             // Destructure response safely
             const { token } = response.data || {};

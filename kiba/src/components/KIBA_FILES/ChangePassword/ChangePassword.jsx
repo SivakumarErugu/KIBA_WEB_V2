@@ -59,7 +59,7 @@ const ChangePassword = () => {
         const newPassword = credentials.password;
 
         // Prepare the URL and request options
-        const url = `http://15.207.110.236:3000/admin/update`;
+        const url = `http://13.127.156.81:3000/admin/update`;
         const options = {
             method: "PUT",
             headers: {
@@ -120,7 +120,7 @@ const ChangePassword = () => {
         const email = credentials.email
         console.log(email)
         try {
-            const response = await axios.post('http://15.207.110.236:3000/send-otp', { email });
+            const response = await axios.post('http://13.127.156.81:3000/send-otp', { email });
             console.log(response.data.message)
             setMessage(response.data.message)
             setGetOtpActive(false)
@@ -136,7 +136,7 @@ const ChangePassword = () => {
         e.preventDefault()
         const email = credentials.email
         try {
-            const response = await axios.post('http://15.207.110.236:3000/verify-otp', { email, otp });
+            const response = await axios.post('http://13.127.156.81:3000/verify-otp', { email, otp });
             setMessage(response.data.message);
             setOtpActive(false)
             setpasswordActive(true)

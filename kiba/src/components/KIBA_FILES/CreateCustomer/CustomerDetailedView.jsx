@@ -111,7 +111,7 @@ const CustomerDetailedView = () => {
     useEffect(() => {
         setLoader(true)
         const getCustomerData = async () => {
-            const url = `http://15.207.110.236:3000/customer/${id}`
+            const url = `http://13.127.156.81:3000/customer/${id}`
             const options = {
                 method: 'GET',
             }
@@ -166,7 +166,7 @@ const CustomerDetailedView = () => {
             const formData = new FormData();
             formData.append('file', image);
 
-            const res = await fetch('http://15.207.110.236:3000/upload', {
+            const res = await fetch('http://13.127.156.81:3000/upload', {
                 method: 'POST',
                 headers: {
                     // 'Content-Type': 'multipart/form-data'  // Do not set Content-Type header when sending FormData with fetch
@@ -210,7 +210,7 @@ const CustomerDetailedView = () => {
             return;
         }
 
-        const url = `http://15.207.110.236:3000/customer/${id}`;
+        const url = `http://13.127.156.81:3000/customer/${id}`;
 
         const options = {
             method: 'PUT',
