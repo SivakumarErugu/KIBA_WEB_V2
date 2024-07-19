@@ -33,6 +33,7 @@ const Login = () => {
     const navigate = useNavigate();
     const [credentials, setCredentials] = useState({});
     const [showPassword, setShowPassword] = useState(false);
+    console.log('API URL:', import.meta.env.VITE_API_URL);
 
     useEffect(() => {
         // Function to get cookie by name
@@ -84,7 +85,9 @@ const Login = () => {
 
         try {
             // Make API request
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/AdminLogin`, { email, password });
+            const apiUrl = import.meta.env.VITE_API_URL;
+            console.log(apiUrl)
+            const response = await axios.post(`${apiUrl}/AdminLogin`, { email, password });
 
             // Destructure response safely
             const { token } = response.data || {};
@@ -94,8 +97,11 @@ const Login = () => {
                 // Set the JWT token as a cookie (consider security settings)
                 Cookies.set('KIBAJWTToken', token, { expires: 7, secure: true, sameSite: 'Strict' });
 
+                // return <Redirect to="/dashboard" />;
+                window.location.href = '/dashboard';
+
                 // Navigate to Dashboard
-                navigate('/dashboard');
+                // navigate('/dashboard');
             } else {
                 // Handle case where no token is returned
                 Swal.fire({
