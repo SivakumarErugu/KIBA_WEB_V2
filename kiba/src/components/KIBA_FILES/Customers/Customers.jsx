@@ -293,8 +293,8 @@ const Customers = () => {
     const getCustomersData = async () => {
         setLoader(true)
         try {
-            // const url = 'http://15.207.110.236:3000/customers'
-            const url = 'http://localhost:3000/customers'
+            const url = 'http://15.207.110.236:3000/customers'
+            // const url = 'http://localhost:3000/customers'
             const options = {
                 method: 'GET',
             }
@@ -394,8 +394,8 @@ const Customers = () => {
 
     const onClickSingleDelete = async (ID) => {
         try {
-            // const url = `http://15.207.110.236:3000/Customer/${ID}`;
-            const url = `http://localhost:3000/Customer/${ID}`;
+            const url = `http://15.207.110.236:3000/Customer/${ID}`;
+            // const url = `http://localhost:3000/Customer/${ID}`;
             const options = {
                 method: 'DELETE',
                 headers: {
@@ -437,7 +437,7 @@ const Customers = () => {
         try {
             const idsToDelete = selectedRecords; // Example array of customer IDs to delete
 
-            const url = `http://localhost:3000/Customers/Delete/Multiple`;
+            const url = `http://15.207.110.236:3000/Delete/Multiple`;
             const options = {
                 method: 'DELETE',
                 headers: {
@@ -453,7 +453,6 @@ const Customers = () => {
             }
 
             const result = await response.text();
-            console.log(result);
             alert('Customers Deleted Successfully');
             getCustomersData(); // Assuming this function retrieves updated customer data
         } catch (error) {

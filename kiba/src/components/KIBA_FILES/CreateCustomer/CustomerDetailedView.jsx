@@ -111,8 +111,7 @@ const CustomerDetailedView = () => {
     useEffect(() => {
         setLoader(true)
         const getCustomerData = async () => {
-            // const url = `http://15.207.110.236:3000/customer/${id}`
-            const url = `http://localhost:3000/customer/${id}`
+            const url = `http://15.207.110.236:3000/customer/${id}`
             const options = {
                 method: 'GET',
             }

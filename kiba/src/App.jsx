@@ -13,14 +13,13 @@ function App() {
   useEffect(() => {
     const getAdminData = async () => {
       try {
-        const url = 'http://localhost:3000/admin';
+        const url = 'http://15.207.110.236:3000/admin';
         const options = {
           method: 'GET',
         };
 
         const response = await fetch(url, options);
         const data = await response.json();
-        console.log('Admin data:', data.filter(each => each.role === 'Admin'));
         const newData = data.filter(each => each.role === 'Admin');
         setAdmin(newData[0]);
       } catch (error) {

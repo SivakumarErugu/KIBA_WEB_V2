@@ -14,9 +14,13 @@ import Dummy from './components/KIBA_FILES/DummyFolder/Dummy'
 const router = createBrowserRouter(
     [
         {
-            path: '/login',
+            path: '/',
             element: <Login />,
-            index: true
+            index: true // This will render <Login /> when the path is exactly '/'
+        },
+        {
+            path: '/login',
+            element: <Login />
         },
         {
             path: '/change-password',

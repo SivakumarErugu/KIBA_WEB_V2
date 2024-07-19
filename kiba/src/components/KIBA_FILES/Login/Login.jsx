@@ -84,7 +84,7 @@ const Login = () => {
 
         try {
             // Make API request
-            const response = await axios.post('http://localhost:3000/AdminLogin', { email, password });
+            const response = await axios.post('http://15.207.110.236:3000/AdminLogin', { email, password });
 
             // Destructure response safely
             const { token } = response.data || {};
@@ -156,7 +156,7 @@ const Login = () => {
 
 
                             <StyledSlider {...settings}>
-                                <SliderItem>
+                                <SliderItem style={{height:'100%',width:'100%'}}>
                                     <SlideImage src="https://res.cloudinary.com/dca9sij3n/image/upload/v1719660552/xeqrdakvwyaq6h4hukmy.png" alt="Image 1" />
                                 </SliderItem>
                                 <SliderItem>
