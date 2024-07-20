@@ -14,10 +14,12 @@ import { TbLayoutDashboardFilled } from "react-icons/tb";
 import { MdGroups2 } from "react-icons/md";
 import { IoIosSettings } from "react-icons/io";
 import KibaContext from "../../../context/KibaContext";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
+import Cookies from 'universal-cookie';
 
 const SideNav = () => {
     const navigate = useNavigate();
+    const cookies = new Cookies();
     // Function to remove a cookie
 
     const handleLogout = () => {
@@ -33,7 +35,8 @@ const SideNav = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 // Remove the JWT token cookie
-                Cookies.remove("KIBAJWTToken");
+                // Cookies.remove("KIBAJWTToken");
+                cookies.remove('KIBAJWTToken');
 
                 // Optionally clear any other user-related state or context here
 

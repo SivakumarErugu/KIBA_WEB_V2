@@ -6,7 +6,8 @@ import "slick-carousel/slick/slick-theme.css";
 import KibaContext from "../../../context/KibaContext";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import axios from 'axios';
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
+import Cookies from 'universal-cookie';
 
 import {
     Btn,
@@ -31,23 +32,32 @@ import {
 
 const Login = () => {
     const navigate = useNavigate();
+    const cookies = new Cookies();
     const [credentials, setCredentials] = useState({});
     const [showPassword, setShowPassword] = useState(false);
 
-    useEffect(() => {
-        // Function to get cookie by name
-        function getCookie(name) {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) return parts.pop().split(';').shift();
-        }
+    // useEffect(() => {
+    //     // Function to get cookie by name
+    //     function getCookie(name) {
+    //         const value = `; ${document.cookie}`;
+    //         const parts = value.split(`; ${name}=`);
+    //         if (parts.length === 2) return parts.pop().split(';').shift();
+    //     }
 
-        const savedToken = getCookie('KIBAJWTToken');
+    //     const savedToken = getCookie('KIBAJWTToken');
+
+    //     if (savedToken) {
+    //         navigate('/dashboard');
+    //     }
+    // }, [navigate]);
+
+    useEffect(() => {
+        const savedToken = cookies.get('KIBAJWTToken'); // Use universal-cookie to get the cookie
 
         if (savedToken) {
             navigate('/dashboard');
         }
-    }, [navigate]);
+    }, []);
 
     const settings = {
         dots: true,
@@ -93,7 +103,8 @@ const Login = () => {
             if (token) {
                 console.log(token)
                 // Set the JWT token as a cookie (consider security settings)
-                Cookies.set('KIBAJWTToken', token, { expires: 7, secure: true, sameSite: 'Strict' });
+                // Cookies.set('KIBAJWTToken', token, { expires: 7, secure: true, sameSite: 'Strict' });
+                cookies.set('KIBAJWTToken', token, { path: '/', maxAge: 604800 });
 
                 // return <Redirect to="/dashboard" />;
                 // window.location.href = '/dashboard';
@@ -161,7 +172,7 @@ const Login = () => {
 
 
                             <StyledSlider {...settings}>
-                                <SliderItem style={{height:'100%',width:'100%'}}>
+                                <SliderItem style={{ height: '100%', width: '100%' }}>
                                     <SlideImage src="https://res.cloudinary.com/dca9sij3n/image/upload/v1719660552/xeqrdakvwyaq6h4hukmy.png" alt="Image 1" />
                                 </SliderItem>
                                 <SliderItem>
