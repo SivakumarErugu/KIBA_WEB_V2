@@ -112,7 +112,7 @@ const CustomerDetailedView = () => {
     useEffect(() => {
         setLoader(true)
         const getCustomerData = async () => {
-            const url = `${apiUrl}/${id}`;
+            const url = `${apiUrl}/customer/${id}`;
             const options = {
                 method: 'GET',
             }
