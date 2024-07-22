@@ -24,8 +24,9 @@ const breakpoints = {
 export const Actions = styled.div`
     display: flex;
     align-items: center;
-    width: 30%;
+    width: 40%;
     justify-content: flex-end;
+    /* border: 1px solid red; */
 
     @media (max-width: ${breakpoints.tablet}) {
         width: 50%;
@@ -88,15 +89,19 @@ export const CreateNewContainer = styled.div`
 `;
 
 // CreeteNewBtn styling
-export const CreeteNewBtn = styled.button`
+export const CreateNewBtn = styled.button`
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 10rem;
+    height: 100%;
     padding: 0.5rem;
     background: #6A1039;
     color: #FFF;
-    margin: 0rem 0rem 0rem 0.3rem;
+    margin: 0rem 0rem 0rem 0rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
 `;
 
 // CustomContainer styling
@@ -109,7 +114,8 @@ export const CustomContainer = styled.div`
 
 // CustomInput styling
 export const CustomInput = styled.input`
-  width: 70%;
+  width: 90%;
+  flex-grow: 1;
   height: 80%;
   padding: 0.4rem;
   font-size: 1.2rem;
@@ -117,6 +123,7 @@ export const CustomInput = styled.input`
   border: none;
   border-left: 2px solid #ccc;
   outline: none;
+  overflow: hidden;
 
   @media (max-width: ${breakpoints.tablet}) {
     width: 90%;
@@ -268,9 +275,9 @@ export const FilterBtn = styled.button`
   align-items: center;
   justify-content: space-between;
   height: fit-content;
-  width: 5rem;
+  width: fit-content;
   padding: 0.4rem;
-  margin: 0rem 0.3rem 0rem 0.3rem;
+  margin: 0rem 0.2rem 0rem 0.3rem;
   font-size: 1rem;
   border: 1px solid #ccc;
   position: relative;
@@ -279,18 +286,21 @@ export const FilterBtn = styled.button`
 
 // FilterDropdown styling
 export const FilterDropdown = styled.div`
-  min-width: 250%;
-  max-width: fit-content;
+  min-width: 550%;
+  /* max-width: fit-content; */
   height: 1000%;
   display: flex;
   flex-direction: column;
   position: absolute;
   top: 2.5rem;
   right: 0;
-  background: #dee2e6;
+  /* background: #dee2e6; */
+  background: #fff;
   padding: 0.1rem;
-  border-radius: 0.7rem 0rem 0.7rem 0.7rem;
+  border-radius: 0.7rem;
   overflow-y: auto;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
+
 
   &::-webkit-scrollbar{
     width: 0.2rem;
@@ -299,12 +309,16 @@ export const FilterDropdown = styled.div`
 
 // FilterItem styling
 export const FilterItem = styled.p`
-  background: #FFF;
   margin: 0.2rem;
   padding: 0.5rem 0.5rem 0.5rem 0.5rem;
   color: #000;
   text-align: left;
-  border-radius: 0.2rem;
+  font-size: 0.8rem;
+  border-bottom: 1px solid #000;
+
+  &:hover{
+    background: #dee2e6;
+  }
 `;
 
 // HighlightText styling
@@ -331,7 +345,7 @@ export const InnerContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: #FFF;
+  background: #B4D4FF;
   padding: 1rem;
 
   @media (max-width: ${breakpoints.desktop}) {
@@ -350,6 +364,7 @@ export const Label = styled.h1`
   padding: 0px;
   margin: 0px;
   text-align: center;
+  display: flex;
 
   @media (max-width: ${breakpoints.mobile}) {
     font-size: 1.2rem;
@@ -361,7 +376,7 @@ export const MainContainer = styled.div`
   height: 100vh;
   width: 100vw;
   display: flex;
-  background: #FFF;
+  background: #B4D4FF;
 
   @media (max-width: ${breakpoints.mobile}) {
     flex-direction: column;
@@ -409,6 +424,7 @@ export const PaginationBtn = styled.button`
   border: none;
   border-radius: 50%;
   cursor: pointer;
+  background: transparent;
 
   @media (max-width: ${breakpoints.mobile}) {
     margin: 0.2rem 0;
@@ -418,10 +434,13 @@ export const PaginationBtn = styled.button`
 // SearchActionsBar styling
 export const SearchActionsBar = styled.div`
   display: flex;
-  border: 1px solid #ccc;
+  align-items: center;
+  justify-content: space-between;
   height: 7%;
+  width: 100%;
   margin-top: 0.4rem;
   border-radius: 0.7rem;
+  /* background: #EEF5FF; */
 
   @media (max-width: ${breakpoints.tablet}) {
     flex-direction: column;
@@ -435,8 +454,14 @@ export const SearchBar = styled.div`
   display: flex;
   align-items: center;
   color: #000;
-  width: 70%;
-  padding-left: 0.5rem;
+  width: 60%;
+  height: 80%;
+  padding: 0rem 0rem 0rem 0rem;
+  /* border: 2px solid red; */
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+  overflow: hidden;
 
   @media (max-width: ${breakpoints.mobile}) {
     width: 100%;
@@ -444,22 +469,24 @@ export const SearchBar = styled.div`
 `;
 
 // SpanTag styling
-export const SpanTag = styled.span`
+export const SpanTag = styled.sup`
   color: #000;
-  height: fit-content;
-  width: fit-content;
-  margin-left: 0.6rem;
+  height: 1.3rem;
+  width: 1.3rem;
+  margin-left: 0.2rem;
   background: #F9F5FF;
   color: #93312B;
-  padding: 0.2rem;
+  padding: 0.3rem;
   font-size: 0.8rem;
-  border-radius: 0.3rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 // TableTag styling
 export const TableTag = styled.table`
   border: 2px solid #ccc;
-  /* height: 100%; */
   height: fit-content;
   max-height: 100%;
   flex-grow: 1;
@@ -468,7 +495,7 @@ export const TableTag = styled.table`
   padding: 0.4rem;
   border-radius: 1rem;
   margin-top: 0.4rem;
-  overflow: hidden;
+  background: #EEF5FF;
 
   @media (max-width: ${breakpoints.tablet}) {
     height: auto;
@@ -523,9 +550,22 @@ export const TrTag = styled.tr`
   align-items: center;
   margin: 2px 0px 2px 0px;
   border-bottom: 1px solid #ccc;
+  background: #EEF5FF;
 
   @media (max-width: ${breakpoints.mobile}) {
     flex-direction: column;
     align-items: flex-start;
   }
 `;
+
+export const DivX =styled.div`
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 80%;
+  border: 2px solid #ccc;
+  border-radius: 0.5rem;
+  background: #fff;
+  padding: 0rem 0.3rem 0rem 0.3rem;
+
+`

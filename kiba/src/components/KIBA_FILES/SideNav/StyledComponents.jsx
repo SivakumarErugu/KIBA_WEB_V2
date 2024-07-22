@@ -32,24 +32,27 @@ export const IconContainer = styled.ul`
 export const NavOption = styled.li`
     height: 2.5rem;
     width: 100%;
+    /* color: ${props => (props.active ? '#fff' : '#000')}; */
     color: ${props => (props.active ? '#fff' : '#000')};
     margin: 0.5rem 0rem;
     display: flex;
     align-items: center;
     border-radius: 7px;
     padding: 0rem 0.5rem;
-    background: ${props => (props.active ? '#F3ACAC' : '#dee2e6')};
+    /* background: ${props => (props.active ? '#F3ACAC' : '#dee2e6')}; */
+    background: ${props => (props.active ? '#4361ee' : 'transparent')};
     cursor: pointer;
 
     &:hover {
-        /* color: #fff; */
-        background: ${props => (props.active ? '#fcd5ce' : '#D9D9D9')};
+        /* background: ${props => (props.active ? '#fcd5ce' : '#D9D9D9')}; */
+        background: ${props => (props.active ? '#4361ee' : '#D9D9D9')};
     }
 `;
 
 export const PTag = styled.p`
     font-size: 1.2rem;
     width: 100%;
+    color: ${props => (props.active ? '#fff' : '#000')};
 `
 export const SettingsCon = styled.div`
     width: 100%;

@@ -6,7 +6,7 @@ export const ProfileCon = styled.div`
     height: 100vh;
     width: 100vw;
     display: flex;
-    background: #FFF;
+    background: #B4D4FF;
 `
 export const InnerContainer = styled.div`
     width: 83%;
@@ -14,7 +14,7 @@ export const InnerContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background: #FFF;
+    background: #B4D4FF;
     padding: 1rem;
     /* border: 1px solid red; */
 `
@@ -34,6 +34,7 @@ export const CustomProfile = styled.form`
     flex-grow: 1;
     padding: 1rem;
     border-radius: 1rem;
+    background: #EEF5FF;
 `
 export const Title = styled.h1`
     font-size: 1.5rem;
@@ -50,7 +51,7 @@ export const FieldContainer = styled.div`
     align-items: center;
     margin: 0.5rem;
     height: 2.5rem;
-    background: #fff;
+    background: transparent;
     border-radius: 0.5rem;
     padding:  0.3rem;
     position: relative;
@@ -107,6 +108,7 @@ export const BackBtn = styled.button`
     width: fit-content;
     border: none; 
     outline: none;
+    background: transparent;
 
     &:focus {
         outline: none; /* Ensure no outline on focus */

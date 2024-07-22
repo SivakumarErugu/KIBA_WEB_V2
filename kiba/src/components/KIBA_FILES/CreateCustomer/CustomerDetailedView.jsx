@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 
 import { IoIosArrowBack } from "react-icons/io";
 import { FaAngleDown } from "react-icons/fa6";
+import { FaUserTie } from "react-icons/fa";
 
 import {
     AlertText,
@@ -129,14 +130,14 @@ const CustomerDetailedView = () => {
 
     const onChangeInput = (key, value) => {
 
-        if (key === 'is_this_same_as_whatsapp_number' && value === 'true') {
+        if (key === 'same_for_whatsapp' && value === 'true') {
             setCustomerDetails(prev => ({
                 ...prev,
                 [key]: value,
                 whatsapp_number: prev.mobile_number
             }))
         }
-        else if (key === 'is_this_same_as_whatsapp_number' && value === 'false') {
+        else if (key === 'same_for_whatsapp' && value === 'false') {
             setCustomerDetails(prev => ({
                 ...prev,
                 [key]: value,
@@ -211,7 +212,7 @@ const CustomerDetailedView = () => {
             return;
         }
 
-        const url = `${apiUrl}/customer/${id}`; 
+        const url = `${apiUrl}/customer/${id}`;
 
         const options = {
             method: 'PUT',
@@ -332,12 +333,12 @@ const CustomerDetailedView = () => {
                                                 </CustomDropDown>
 
                                                 {isCultivationActive && (
-                                                    <CustomDropDownOptions style={{ width: '68%' }}>
+                                                    <CustomDropDownOptions style={{ width: '67.5%' }}>
                                                         <CustomOption onClick={() => {
                                                             onChangeInput('cultivation', 'Shrimps')
                                                             setCultivationActive(!isCultivationActive)
                                                         }}>
-                                                            Shrimps
+                                                            Shrimp
                                                         </CustomOption>
                                                         <CustomOption onClick={() => {
                                                             onChangeInput('cultivation', 'Shrimps')
@@ -386,19 +387,19 @@ const CustomerDetailedView = () => {
                                         </InputContainer>
 
                                         <InputContainer>
-                                            <LabelTag>Is this same as your WhatsApp Number ? </LabelTag>
+                                            <LabelTag>Same for WhatsApp :</LabelTag>
                                             <RadioCon>
                                                 <Custom>
-                                                    <InputTag id='Yes' style={{ height: '70%', width: '90%', margin: '0' }} name='whatsapp' type='radio'
-                                                        checked={customerDetails.is_this_same_as_whatsapp_number === 'true'}
-                                                        onChange={() => onChangeInput('is_this_same_as_whatsapp_number', 'true')} />
+                                                    <InputTag id='Yes' name='whatsapp' type='radio'
+                                                        checked={customerDetails.same_for_whatsapp === 'true'}
+                                                        onChange={() => onChangeInput('same_for_whatsapp', 'true')} />
                                                     <LabelTwo style={{ fontSize: '1rem', color: '#495057' }} htmlFor='Yes'>Yes</LabelTwo>
                                                 </Custom>
                                                 <Custom>
-                                                    <InputTag id='No' style={{ height: '70%', width: '90%', margin: '0' }} name='whatsapp' type='radio'
-                                                        checked={customerDetails.is_this_same_as_whatsapp_number === 'false'}
-                                                        onChange={() => onChangeInput('is_this_same_as_whatsapp_number', 'false')} />
-                                                    <LabelTwo style={{ fontSize: '1rem', color: '#495057' }} id='No'>No</LabelTwo>
+                                                    <InputTag id='No'  name='whatsapp' type='radio'
+                                                        checked={customerDetails.same_for_whatsapp === 'false'}
+                                                        onChange={() => onChangeInput('same_for_whatsapp', 'false')} />
+                                                    <LabelTwo style={{ fontSize: '1rem', color: '#495057' }} htmlFor='No'>No</LabelTwo>
                                                 </Custom>
                                             </RadioCon>
                                         </InputContainer>
@@ -422,7 +423,10 @@ const CustomerDetailedView = () => {
                                             <InputTag style={{ border: trySubmit & customerDetails.whatsapp_number === '' ? '2px solid red' : '' }}
                                                 type='number' value={customerDetails.whatsapp_number}
                                                 onChange={(e) => onChangeInput('whatsapp_number', e.target.value)}
-                                                placeholder='Enter WhatsApp Number' />
+                                                placeholder='Enter WhatsApp Number'
+                                                readOnly = {customerDetails.same_for_whatsapp === 'true' ? true : false}
+                                                />
+                                                
                                         </InputContainer>
                                         {/* } */}
 
@@ -433,8 +437,8 @@ const CustomerDetailedView = () => {
                                         <InputContainer>
                                             <LabelTag>District :</LabelTag>
                                             <InputTag style={{ border: trySubmit & customerDetails.zilla === '' ? '2px solid red' : '' }}
-                                                type='text' value={customerDetails.zilla}
-                                                onChange={(e) => onChangeInput('zilla', e.target.value)}
+                                                type='text' value={customerDetails.district}
+                                                onChange={(e) => onChangeInput('district', e.target.value)}
                                                 placeholder='Enter District'
                                             />
                                         </InputContainer>
@@ -443,14 +447,14 @@ const CustomerDetailedView = () => {
                                             <LabelTag>Own Land ?</LabelTag>
                                             <RadioCon>
                                                 <Custom>
-                                                    <InputTag id='Yes' style={{ height: '70%', width: '90%', margin: '0' }} name='ownland' type='radio'
+                                                    <InputTag id='Yes' name='ownland' type='radio'
                                                         checked={customerDetails.own_land === 'true'}
                                                         onChange={() => onChangeInput('own_land', 'true')}
                                                     />
                                                     <LabelTwo style={{ fontSize: '1rem', color: '#495057' }} htmlFor='Yes'>Yes</LabelTwo>
                                                 </Custom>
                                                 <Custom>
-                                                    <InputTag id='No' style={{ height: '70%', width: '90%', margin: '0' }} name='ownland' type='radio'
+                                                    <InputTag id='No' name='ownland' type='radio'
                                                         checked={customerDetails.own_land === 'false'}
                                                         onChange={() => onChangeInput('own_land', 'false')} />
                                                     <LabelTwo style={{ fontSize: '1rem', color: '#495057' }} id='No'>No</LabelTwo>
@@ -475,7 +479,7 @@ const CustomerDetailedView = () => {
                                                 </CustomDropDown>
 
                                                 {isStateActive && (
-                                                    <CustomDropDownOptions style={{ width: '67%' }}>
+                                                    <CustomDropDownOptions style={{ width: '67.5%' }}>
                                                         {indianStates.map(state => (
                                                             <CustomOption key={state} onClick={() => {
                                                                 onChangeInput('state', state)
@@ -495,14 +499,14 @@ const CustomerDetailedView = () => {
                                             <LabelTag> Existing Customer ?</LabelTag>
                                             <RadioCon>
                                                 <Custom>
-                                                    <InputTag id='Yes' style={{ height: '70%', width: '90%', margin: '0' }} name='Customer' type='radio'
+                                                    <InputTag id='Yes' name='Customer' type='radio'
                                                         checked={customerDetails.customer === 'true'}
                                                         onChange={() => onChangeInput('customer', 'true')}
                                                     />
                                                     <LabelTwo style={{ fontSize: '1rem', color: '#495057' }} htmlFor='Yes'>Yes</LabelTwo>
                                                 </Custom>
                                                 <Custom>
-                                                    <InputTag id='No' style={{ height: '70%', width: '90%', margin: '0' }} name='Customer' type='radio'
+                                                    <InputTag id='No' name='Customer' type='radio'
                                                         checked={customerDetails.customer === 'false'}
                                                         onChange={() => onChangeInput('customer', 'false')} />
                                                     <LabelTwo style={{ fontSize: '1rem', color: '#495057' }} id='No'>No</LabelTwo>
@@ -547,24 +551,66 @@ const CustomerDetailedView = () => {
                                             />
                                         </InputContainer>
 
-                                        <InputContainer style={{ alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between' }}>
-                                            {localImage ? <LabelTag><ImgTag src={localImage} /></LabelTag> :
-                                                <LabelTag style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                                        <InputContainer
+                                            style={{
+                                                alignItems: "center",
+                                                flexDirection: "row",
+                                                justifyContent: "space-between",
+                                            }}
+                                        >
+                                            {localImage ? (
+                                                <LabelTag>
+                                                    <ImgTag src={localImage} />
+                                                </LabelTag>
+                                            ) : (
+                                                <LabelTag
+                                                    style={{ display: "flex", justifyContent: "flex-end" }}
+                                                >
                                                     <LabelTag
                                                         style={{
-                                                            border: 'none', borderRadius: '50%', height: '4rem', width: '4rem', display: 'flex', alignItems: 'center',
-                                                            justifyContent: 'center', margin: '0', background: '#fec89a'
-                                                        }}>
-                                                        {customerDetails.first_name && customerDetails.last_name ?
-                                                            (customerDetails.first_name[0] + customerDetails.last_name[0]).toUpperCase() : ''}
+                                                            border: "1px solid #ccc",
+                                                            borderRadius: "50%",
+                                                            height: "4rem",
+                                                            width: "4rem",
+                                                            display: "flex",
+                                                            alignItems: "center",
+                                                            justifyContent: "center",
+                                                            margin: "0",
+                                                        }}
+                                                    >
+                                                        {/* {customerDetails.first_name && customerDetails.last_name
+                                                ? (
+                                                    customerDetails.first_name[0] +
+                                                    customerDetails.last_name[0]
+                                                ).toUpperCase()
+                                                : ""} */}
+                                                        <FaUserTie size={35} />
                                                     </LabelTag>
-                                                </LabelTag>
 
-                                            }
-                                            {/* <LabelTag>Image</LabelTag> */}
-                                            <div style={{ width: '68%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#ccc', padding: '1rem', borderRadius: '1rem' }}>
-                                                <input type="file" accept="image/*" onChange={handleFileChange} />
-                                                <UploadBtn type='button' onClick={handleUpload}>Upload</UploadBtn>
+                                                </LabelTag>
+                                            )}
+
+                                            <div
+                                                style={{
+                                                    width: "68%",
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    justifyContent: "space-between",
+                                                    background: "#EEF5FF",
+                                                    padding: "1rem",
+                                                    borderRadius: "1rem",
+                                                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'
+                                                }}
+                                            >
+                                                <input
+                                                    type="file"
+                                                    accept="image/*"
+                                                    onChange={handleFileChange}
+                                                    style={{ color: "#000" }}
+                                                />
+                                                <UploadBtn type="button" onClick={handleUpload}>
+                                                    Upload
+                                                </UploadBtn>
                                             </div>
                                         </InputContainer>
 

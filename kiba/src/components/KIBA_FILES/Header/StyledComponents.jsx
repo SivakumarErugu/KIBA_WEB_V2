@@ -10,22 +10,24 @@ export const HeaderContainer = styled.div`
     /* border: 1px solid red; */
 `
 export const CustomProfile = styled.div`
-    width: 12%;
+    width: 5%;
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    /* justify-content: space-between; */
     color: #000;
     padding: 0.5rem;
-    border: 1px solid #ccc;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* border: 1px solid #ccc; */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
     border-radius: 10px;
+    /* border: 1px solid #ccc; */
 `
 export const ProfileIcon = styled.div`
     background: #E1D1D1; 
     border-radius: 50%;
-    height: 2.7rem;
-    width: 2.7rem;
+    height: 2.9rem;
+    width: 2.9rem;
     display: flex;
     align-items: center;
     justify-content: center;

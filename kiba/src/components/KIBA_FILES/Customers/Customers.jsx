@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // COMPONENT IMPORTS
 import SideNav from '../SideNav/SideNav'
@@ -13,7 +13,7 @@ import {
     ColumnText,
     Count,
     CreateNewContainer,
-    CreeteNewBtn,
+    CreateNewBtn,
     CustomContainer,
     CustomInput,
     CustomSpan,
@@ -40,7 +40,8 @@ import {
     Tab,
     TdTag,
     ThTag,
-    TrTag
+    TrTag,
+    DivX
 } from './StyledComponents'
 
 
@@ -279,7 +280,7 @@ const Customers = () => {
     const [isFilterActive, setFilterActive] = useState(false)
     const [selectedFilterColumn, setSelectedFilterColumn] = useState('')
     const [currentPage, setCurrentPage] = useState(1);
-    const pageSize = 9; // Number of records per page
+    const pageSize = 20; // Number of records per page
     const [selectedRecords, setSelectedRecords] = useState([])
     const [loader, setLoader] = useState(false)
     const [alertText, setAlertText] = useState('')
@@ -493,12 +494,12 @@ const Customers = () => {
                             <CustomContainer>
                                 <CreateNewContainer>
                                     <Count>
-                                        <Label>Customers</Label>
-                                        <SpanTag>{customersData.length}</SpanTag>
+                                        <Label>Customers<SpanTag>{customersData.length}</SpanTag></Label>
+
                                     </Count>
 
 
-                                    <New>
+                                    {/* <New>
                                         <Link to='/create-customer'>
                                             <CreeteNewBtn>
                                                 <BsPlusCircleDotted size={23} />
@@ -506,57 +507,69 @@ const Customers = () => {
                                             </CreeteNewBtn>
                                         </Link>
 
-                                    </New>
+                                    </New> */}
 
                                 </CreateNewContainer>
 
-                                <Tabs>
+                                {/* <Tabs>
                                     <Tab active={customersTab === 'All Customers'} id='All Customers' onClick={onTabChange}>All Customers</Tab>
-                                </Tabs>
+                                </Tabs> */}
 
                                 <SearchActionsBar>
-                                    <SearchBar>
-                                        <RiSearch2Line size={30} style={{ color: '#667085' }} />
-                                        <CustomInput type='text'
-                                            placeholder='Search Customer by name, place, ID, or any related keywords'
-                                            value={SearchText}
-                                            onChange={(e) => setSearchText(e.target.value)}
-                                        />
-                                    </SearchBar>
+                                    <DivX >
+                                        <SearchBar>
+                                            <RiSearch2Line size={30} style={{ color: '#667085' }} />
+                                            <CustomInput type='text'
+                                                placeholder='Search Customers'
+                                                value={SearchText}
+                                                onChange={(e) => setSearchText(e.target.value)}
+                                            />
+                                        </SearchBar>
 
-                                    <Actions>
+                                        <Actions>
 
-                                        {selectedRecords.length >= 2 &&
-                                            <DeleteBtn style={{ marginRight: '1rem', outline: 'none', border: 'none' }}
-                                                onClick={(e) => {
-                                                    e.preventDefault();
-                                                    e.stopPropagation();
-                                                    onClickMultipleDelete()
-                                                }}
-                                            >
-                                                <MdOutlineDeleteSweep size={29} />
-                                            </DeleteBtn>
-                                        }
+                                            {selectedRecords.length >= 2 &&
+                                                <DeleteBtn style={{ marginRight: '1rem', outline: 'none', border: 'none' }}
+                                                    onClick={(e) => {
+                                                        e.preventDefault();
+                                                        e.stopPropagation();
+                                                        onClickMultipleDelete()
+                                                    }}
+                                                >
+                                                    <MdOutlineDeleteSweep size={29} />
+                                                </DeleteBtn>
+                                            }
 
-                                        {selectedFilterColumn !== '' &&
-                                            <ColumnText>
-                                                <CustomSpan>{selectedFilterColumn}</CustomSpan>
-                                                <CancelBtn onClick={() => setSelectedFilterColumn('')}><MdOutlineCancel style={{ color: '#000' }} /></CancelBtn>
-                                            </ColumnText>
-                                        }
+                                            {selectedFilterColumn !== '' &&
+                                                <ColumnText>
+                                                    <CustomSpan>{selectedFilterColumn}</CustomSpan>
+                                                    <CancelBtn onClick={() => setSelectedFilterColumn('')}><MdOutlineCancel style={{ color: '#000' }} /></CancelBtn>
+                                                </ColumnText>
+                                            }
 
-                                        <FilterBtn onClick={() => setFilterActive(!isFilterActive)} ref={FilterDropdownRef}> <IoFilter size={20} />Filter
-                                            {isFilterActive && customersData?.[0] && (
-                                                <FilterDropdown>
-                                                    {Object.keys(customersData[0]).map(key => snakeToNormal(key)).map(each => (
-                                                        <FilterItem key={each} onClick={() => setSelectedFilterColumn(each)}>{each}</FilterItem>
-                                                    ))}
-                                                </FilterDropdown>
-                                            )}
+                                            <FilterBtn onClick={() => setFilterActive(!isFilterActive)} ref={FilterDropdownRef}> <IoFilter size={20} />
+                                                {isFilterActive && customersData?.[0] && (
+                                                    <FilterDropdown>
+                                                        {Object.keys(customersData[0]).map(key => snakeToNormal(key)).map(each => (
+                                                            <FilterItem key={each} onClick={() => setSelectedFilterColumn(each)}>{each}</FilterItem>
+                                                        ))}
+                                                    </FilterDropdown>
+                                                )}
 
-                                        </FilterBtn>
+                                            </FilterBtn>
 
-                                    </Actions>
+                                        </Actions>
+                                    </DivX>
+
+                                    <div style={{ padding: '0', height: '100%', display: 'flex', alignItems: 'center' }}>
+                                        <Link to='/create-customer' style={{ margin: '0', padding: '0', display: 'flex', height: '100%', outline: 'none', border: 'none' }}>
+                                            <CreateNewBtn>
+                                                <BsPlusCircleDotted size={23} />
+                                                New Customer
+                                            </CreateNewBtn>
+                                        </Link>
+
+                                    </div>
 
                                 </SearchActionsBar>
 
@@ -579,7 +592,7 @@ const Customers = () => {
                                         {customersData.length !== 0 ?
                                             <TableTag>
                                                 <thead style={{ width: '100%' }}>
-                                                    <TrTag style={{ width: '100%', background: '#FAFBFB', borderBottom: '2px solid #353535' }}>
+                                                    <TrTag style={{ width: '100%', borderBottom: '2px solid #353535' }}>
                                                         <ThTag style={{ width: '2%' }}></ThTag>
                                                         {/* <Checkbox type='checkbox' style={{ border: '1px solid red' }} /> */}
                                                         <ThTag style={{ paddingLeft: '0.5rem' }}>First Name</ThTag>
@@ -646,7 +659,7 @@ const Customers = () => {
                                                                         onClickSingleDelete(each.ID);
                                                                     }}
                                                                 >
-                                                                    <MdDelete size={23} />
+                                                                    <MdDelete size={20} />
                                                                 </DeleteBtn>
                                                             </TdTag>
                                                         </TrTag>

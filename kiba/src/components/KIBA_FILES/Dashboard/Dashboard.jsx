@@ -94,14 +94,26 @@ const Dashboard = () => {
     const options = {
         responsive: true,
         plugins: {
-            legend: {
-                position: 'bottom',
-            },
-            tooltip: {
-                enabled: true,
+        legend: {
+            position: 'bottom',  // Position legend to the right
+            labels: {
+                boxWidth: 10,  // Width of the legend box
+                
             },
         },
-        cutout: '70%',
+            tooltip: {
+                callbacks: {
+                    label: function(tooltipItem) {
+                        const dataset = tooltipItem.dataset;
+                        const total = dataset.data.reduce((acc, value) => acc + value, 0);
+                        const value = dataset.data[tooltipItem.dataIndex];
+                        const percentage = ((value / total) * 100).toFixed(2) + '%';
+                        return `${tooltipItem.label}: ${percentage}`;
+                    },
+                },
+            },
+        },
+        cutout: '0%',
     };
 
 
@@ -129,7 +141,7 @@ const Dashboard = () => {
                         </TilesContainer>
 
                         <ChartContainer>
-                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', width: '50%' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', width: '80%'}}>
                                 <Doughnut data={data} options={options} />
                             </div>
                         </ChartContainer>

@@ -4,14 +4,14 @@ export const MainContainer = styled.div`
     height: 100vh;
     width: 100vw;
     display: flex;
-    background: #FFF;
+    background: #B4D4FF;
 `
 export const InnerContainer = styled.div`
     width: 83%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    background: #FFF;
+    background: #B4D4FF;
     padding: 1rem;
 `
 
@@ -37,6 +37,7 @@ export const DashBoard = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background: #EEF5FF;
 `
 export const TilesContainer = styled.div`
     height: 25%;

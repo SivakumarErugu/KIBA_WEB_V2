@@ -17,7 +17,7 @@ export const CreateNew = styled.form`
     flex-grow: 1;
     padding: 1rem;
     border-radius: 1rem;
-    background: #f8f9fa;
+    background: #EEF5FF;
     position: relative;
 `
 
@@ -35,7 +35,7 @@ export const InnerContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background: #FFF;
+    background: #B4D4FF;
     padding: 1rem;
 `
 
@@ -43,7 +43,7 @@ export const MainContainer = styled.div`
     height: 100vh;
     width: 100vw;
     display: flex;
-    background: #FFF;
+    background: #B4D4FF;
 `
 export const Title = styled.h1`
     font-size: 1.5rem;
@@ -75,6 +75,13 @@ export const InputTag = styled.input`
     border-radius: 0.4rem;
     padding: 0.5rem 0.5rem 0.5rem 0.5rem;
     border: 2px solid #ccc;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    
     /* border: none; */
     /* border-bottom: 2px solid #ccc; */
 `
@@ -137,6 +144,8 @@ export const BackBtn = styled.button`
     width: fit-content;
     border: none; 
     outline: none;
+    background: transparent;
+    margin-right: 1rem;
 
     &:focus {
         outline: none; /* Ensure no outline on focus */
@@ -155,6 +164,8 @@ export const CustomDropDown = styled.div`
     padding: 0rem 0.5rem 0rem 0.5rem;
     position: relative;
     z-index: 10;
+    background: #fff;
+    cursor: pointer;
 `
 export const Span = styled.span`
     color: #000;
@@ -177,6 +188,10 @@ export const CustomOption = styled.p`
     padding: 0.1rem 0rem 0.1rem 0.5rem;
     cursor: pointer;
     margin: 0.3rem 0rem 0rem 0rem;
+
+    &:hover{
+        background: #EEF5FF;
+    }
 `
 export const CustomDropdownContainer = styled.div`
     height: 70%;

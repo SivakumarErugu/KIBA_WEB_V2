@@ -106,7 +106,7 @@ const Dummy = () => {
                 enabled: true,
             },
         },
-        cutout: '70%',
+        cutout: '0%',
     };
 
 

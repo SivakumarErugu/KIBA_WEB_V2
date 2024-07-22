@@ -79,7 +79,7 @@ const SideNav = () => {
                                         size={25}
                                         style={{ marginRight: "1rem" }}
                                     />
-                                    <PTag>Dashboard</PTag>
+                                    <PTag active={activeTab === "Dashboard"}>Dashboard</PTag>
                                 </NavOption>
                             </Link>
                             <Link to="/customers" style={{ width: "90%" }}>
@@ -89,13 +89,14 @@ const SideNav = () => {
                                     onClick={() => onClickTab("Customers")}
                                 >
                                     <MdGroups2 size={25} style={{ marginRight: "0.8rem" }} />
-                                    <PTag>Customers</PTag>
+                                    <PTag active={activeTab === "Customers"}>Customers</PTag>
                                 </NavOption>
                             </Link>
                         </IconContainer>
 
                         <SettingsCon>
-                            <Link to="/manage-credentials" style={{ width: "90%" }}>
+
+                            {/* <Link to="/manage-credentials" style={{ width: "90%" }}>
                                 <NavOption
                                     id="Settings"
                                     onClick={() => onClickTab("Settings")}
@@ -111,19 +112,21 @@ const SideNav = () => {
                                         Manage Credentials
                                     </PTag>
                                 </NavOption>
-                            </Link>
-                            <Link style={{ width: "90%" }}>
+                            </Link> */}
+
+                            {/* <Link style={{ width: "90%" }}>
                                 <NavOption
                                     id="Logout"
                                     style={{ background: "#463f3a", margin: "0", padding: "0" }}
                                 >
-                                    {/* <IoIosSettings size={35} style={{ marginRight: '0.8rem' }} /> */}
                                     <LogOutBtn type="button" onClick={handleLogout}>
                                         Log Out
                                     </LogOutBtn>
                                 </NavOption>
-                            </Link>
+                            </Link> */}
+
                         </SettingsCon>
+                        
                     </SideNavContainer>
                 );
             }}

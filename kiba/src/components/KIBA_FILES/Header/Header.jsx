@@ -12,7 +12,7 @@ const Header = () => {
     return (
         <HeaderContainer>
             <CustomProfile>
-                <SpanTag>Admin</SpanTag>
+                {/* <SpanTag>Admin</SpanTag> */}
                 <Link to='/manage-credentials'>
                     <ProfileIcon>
                         <Span>K</Span>
