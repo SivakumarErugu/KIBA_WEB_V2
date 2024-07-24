@@ -119,10 +119,8 @@ const ChangePassword = () => {
     const getOtp = async (e) => {
         e.preventDefault()
         const email = credentials.email
-        console.log(email)
         try {
             const response = await axios.post('http://13.127.156.81:3000/send-otp', { email });
-            console.log(response.data.message)
             setMessage(response.data.message)
             setGetOtpActive(false)
             setOtpActive(true)

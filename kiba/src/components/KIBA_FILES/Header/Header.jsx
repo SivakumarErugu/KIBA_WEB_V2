@@ -62,6 +62,7 @@ const Header = () => {
         });
     };
 
+    
     const onClickProfile = () => {
         setPopUp(!popUp)
         setHeaderPopup(!popUp);
@@ -73,8 +74,6 @@ const Header = () => {
     return (
         <HeaderContainer>
             <CustomProfile>
-                {/* <SpanTag>Admin</SpanTag> */}
-                {/* <Link to='/manage-credentials'> */}
                 <ProfileIcon ref={popUpRef} >
                     <Span onClick={onClickProfile}>K</Span>
 
@@ -90,7 +89,6 @@ const Header = () => {
                         <PopUpItem onClick={handleLogout} style={{ margin: '0' }}>Log Out</PopUpItem>
                     </PopUp>
                 )}
-                {/* </Link> */}
             </CustomProfile>
         </HeaderContainer>
     );

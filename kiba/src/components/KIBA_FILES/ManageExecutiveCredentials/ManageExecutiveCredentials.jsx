@@ -32,8 +32,6 @@ const ManageExecutiveCredentials = () => {
 
     const apiUrl = import.meta.env.VITE_API_URL;
 
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
     // GETTING THE Executive DATA FROM ADMIN TABLE
     useEffect(() => {
         const getAdminData = async () => {
@@ -45,7 +43,6 @@ const ManageExecutiveCredentials = () => {
 
                 const response = await fetch(url, options)
                 const data = await response.json()
-                // console.log('this is', data.filter(each => each.role == 'Executive'))
                 const newData = data.filter(each => each.role == 'Executive')
                 setExecutiveCredentials(newData[0])
             } catch {

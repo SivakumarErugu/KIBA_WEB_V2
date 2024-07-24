@@ -41,7 +41,6 @@ const ManageAdminCredentials = () => {
 
                 const response = await fetch(url, options)
                 const data = await response.json()
-                console.log('this is', data.filter(each => each.role == 'Admin'))
                 const newData = data.filter(each => each.role == 'Admin')
                 setProfile(newData[0])
                 setLoader(false)

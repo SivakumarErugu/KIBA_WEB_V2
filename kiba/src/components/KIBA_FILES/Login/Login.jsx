@@ -6,7 +6,6 @@ import "slick-carousel/slick/slick-theme.css";
 import KibaContext from "../../../context/KibaContext";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import axios from 'axios';
-// import Cookies from "js-cookie";
 import Cookies from 'universal-cookie';
 
 import {
@@ -38,21 +37,6 @@ const Login = () => {
         password: '',
     });
     const [showPassword, setShowPassword] = useState(false);
-
-    // useEffect(() => {
-    //     // Function to get cookie by name
-    //     function getCookie(name) {
-    //         const value = `; ${document.cookie}`;
-    //         const parts = value.split(`; ${name}=`);
-    //         if (parts.length === 2) return parts.pop().split(';').shift();
-    //     }
-
-    //     const savedToken = getCookie('KIBAJWTToken');
-
-    //     if (savedToken) {
-    //         navigate('/dashboard');
-    //     }
-    // }, [navigate]);
 
     useEffect(() => {
         const savedToken = cookies.get('KIBAJWTToken'); // Use universal-cookie to get the cookie
@@ -104,13 +88,9 @@ const Login = () => {
             const { token } = response.data || {};
 
             if (token) {
-                console.log(token)
                 // Set the JWT token as a cookie (consider security settings)
                 // Cookies.set('KIBAJWTToken', token, { expires: 7, secure: true, sameSite: 'Strict' });
                 cookies.set('KIBAJWTToken', token, { path: '/', maxAge: 604800 });
-
-                // return <Redirect to="/dashboard" />;
-                // window.location.href = '/dashboard';
 
                 // Navigate to Dashboard
                 navigate('/dashboard');

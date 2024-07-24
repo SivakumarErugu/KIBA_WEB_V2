@@ -7,7 +7,6 @@ import ChangePassword from './components/KIBA_FILES/ChangePassword/ChangePasswor
 import Dashboard from './components/KIBA_FILES/Dashboard/Dashboard'
 import Customers from './components/KIBA_FILES/Customers/Customers'
 import CreateCustomer from './components/KIBA_FILES/CreateCustomer/CreateCustomer'
-import Settings from './components/KIBA_FILES/Settings/Settings'
 import CustomerDetailedView from './components/KIBA_FILES/CreateCustomer/CustomerDetailedView'
 import Dummy from './components/KIBA_FILES/DummyFolder/Dummy'
 import ManageAdminCredentials from './components/KIBA_FILES/ManageAdminCredentials/ManageAdminCredentials'
@@ -46,10 +45,6 @@ const router = createBrowserRouter(
                 {
                     path: '/create-customer',
                     element: <CreateCustomer />
-                },
-                {
-                    path: '/manage-credentials',
-                    element: <Settings />
                 },
                 {
                     path: '/customer/:id',

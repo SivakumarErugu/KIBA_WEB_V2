@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import DatePicker from 'react-datepicker';
 
 export const AlertText = styled.span`
     color: #70e000;

@@ -106,10 +106,8 @@ const CreateCustomer = () => {
     const today = new Date();
     const options = { year: "numeric", month: "long", day: "numeric" };
     const formattedData = today.toLocaleDateString(undefined, options);
-    console.log(formattedData);
     const apiUrl = import.meta.env.VITE_API_URL;
     const [selectedDate, setSelectedDate] = useState(null);
-    console.log('data is', selectedDate)
 
     // DROPDOWN OUTSIDE CLICK CONTROL
     useEffect(() => {
@@ -134,7 +132,6 @@ const CreateCustomer = () => {
     }, [setCultivationActive]);
 
     const onChangeInput = (key, value) => {
-        console.log(value);
         if (key === "same_for_whatsapp" && value === "true") {
             setCustomerDetails((prev) => ({
                 ...prev,
@@ -162,7 +159,6 @@ const CreateCustomer = () => {
     };
 
     const handleUpload = async () => {
-        console.log(image);
         try {
             if (!image) {
                 console.error("Please select an image.");
@@ -185,10 +181,10 @@ const CreateCustomer = () => {
             }
 
             const data = await res.json();
-            console.log("Image uploaded successfully:", data);
+            // console.log("Image uploaded successfully:", data);
             setUploadImgStatus("Image uploaded successfully!");
             const url = data.url;
-            console.log("this is", url);
+            // console.log("this is", url);
             onChangeInput("image", url);
             // Handle success or update UI
         } catch (error) {
@@ -200,7 +196,6 @@ const CreateCustomer = () => {
     const ValidateForm = (customer) => {
         let error = false;
         error = Object.values(customer).every((each) => each !== "");
-        console.log(error);
         return error;
     };
 
@@ -208,7 +203,6 @@ const CreateCustomer = () => {
         e.preventDefault();
 
         setTrySubmit(true);
-        console.log(customerDetails);
         let customer = { ...customerDetails, created_on: formattedData };
 
         const isValid = ValidateForm(customer);
@@ -280,7 +274,6 @@ const CreateCustomer = () => {
         navigate(-1);
     };
 
-    console.log(customerDetails);
 
     return (
         <MainContainer>
@@ -503,7 +496,6 @@ const CreateCustomer = () => {
                                 />
                             </InputContainer>
 
-                            {/* {customerDetails.is_this_same_as_whatsapp_number === 'false' && */}
                             <InputContainer>
                                 <LabelTag>WhatsApp Number</LabelTag>
                                 <InputTag
@@ -748,8 +740,6 @@ const CreateCustomer = () => {
                                 // placeholder="Enter Notes"
                                 />
 
-
-
                             </InputContainer>
 
                             <InputContainer
@@ -776,15 +766,9 @@ const CreateCustomer = () => {
                                                 display: "flex",
                                                 alignItems: "center",
                                                 justifyContent: "center",
-                                                margin: "0",
+                                                margin: "0",                                                
                                             }}
                                         >
-                                            {/* {customerDetails.first_name && customerDetails.last_name
-                                                ? (
-                                                    customerDetails.first_name[0] +
-                                                    customerDetails.last_name[0]
-                                                ).toUpperCase()
-                                                : ""} */}
                                             <FaUserTie size={35} />
                                         </LabelTag>
                                     </LabelTag>
@@ -800,6 +784,10 @@ const CreateCustomer = () => {
                                         padding: "1rem",
                                         borderRadius: "1rem",
                                         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                                        border:
+                                            trySubmit & (customerDetails.notes === "")
+                                                ? "2px solid red"
+                                                : ""
                                     }}
                                 >
                                     <input
@@ -822,6 +810,7 @@ const CreateCustomer = () => {
                         {uploadImgStatus && <AlertText>{uploadImgStatus}</AlertText>}
                     </CreateNew>
                 </CustomContainer>
+                
             </InnerContainer>
         </MainContainer>
     );

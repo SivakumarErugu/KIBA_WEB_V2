@@ -26,7 +26,6 @@ export const Actions = styled.div`
     align-items: center;
     width: 40%;
     justify-content: flex-end;
-    /* border: 1px solid red; */
 
     @media (max-width: ${breakpoints.tablet}) {
         width: 50%;
@@ -440,7 +439,6 @@ export const SearchActionsBar = styled.div`
   width: 100%;
   margin-top: 0.4rem;
   border-radius: 0.7rem;
-  /* background: #EEF5FF; */
 
   @media (max-width: ${breakpoints.tablet}) {
     flex-direction: column;
@@ -457,7 +455,6 @@ export const SearchBar = styled.div`
   width: 60%;
   height: 80%;
   padding: 0rem 0rem 0rem 0rem;
-  /* border: 2px solid red; */
   border-radius: 0.5rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   

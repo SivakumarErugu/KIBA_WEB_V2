@@ -54,26 +54,3 @@ export const PTag = styled.p`
     width: 100%;
     color: ${props => (props.active ? '#fff' : '#000')};
 `
-export const SettingsCon = styled.div`
-    width: 100%;
-    position: absolute;
-    bottom: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    /* border: 1px solid red; */
-`
-export const LogOutBtn = styled.button`
-    font-size: 1.2rem;
-    width: 100%;
-    height: 2.5rem;
-    background: transparent;
-    color: #FFF;
-    text-align: center;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    background: #463f3a;
-`

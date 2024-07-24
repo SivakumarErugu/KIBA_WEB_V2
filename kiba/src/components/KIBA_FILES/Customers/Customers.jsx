@@ -302,7 +302,6 @@ const Customers = () => {
 
             const response = await fetch(url, options)
             const data = await response.json()
-            console.log(data)
             setCustomersData(data)
             setLoader(false)
         } catch {
@@ -410,7 +409,6 @@ const Customers = () => {
             }
 
             const result = await response.text();
-            console.log(result);
             getCustomersData()
             setAlertText('Customer Deleted Successfully')
             // alert('Customer Deleted Successfully');

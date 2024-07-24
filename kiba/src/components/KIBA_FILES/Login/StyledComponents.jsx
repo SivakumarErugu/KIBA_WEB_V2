@@ -88,15 +88,12 @@ export const StyledSlider = styled(Slider)`
     margin: 0;
     display: flex;
     align-items: center;
-    /* border: 1px solid red; */
 `;
 
 export const SliderItem = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    /* height: 42rem; */
-    /* height: 90% ; */
     height: fit-content;
     width: 95%; 
     background-color: #000;
@@ -125,9 +122,6 @@ export const LabelText = styled.label`
     font-size: 0.75rem;
     color: #000;
     font-weight: 700;
-    /* position: relative; */
-    /* top: 0.5rem; */
-    /* margin: 0 0 0 7px; */
     padding: 0 3px;
     background: #86B6F6;
     width: fit-content;

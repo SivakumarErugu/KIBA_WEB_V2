@@ -126,7 +126,6 @@ const CustomerDetailedView = () => {
             setCustomerDetails(data)
             setLocalImage(data.image)
             setLoader(false)
-            console.log(data.image, 'hey this')
         }
 
         getCustomerData()
@@ -180,7 +179,6 @@ const CustomerDetailedView = () => {
     };
 
     const handleUpload = async () => {
-        console.log(image);
         try {
             if (!image) {
                 console.error('Please select an image.');
@@ -203,10 +201,8 @@ const CustomerDetailedView = () => {
             }
 
             const data = await res.json();
-            console.log('Image uploaded successfully:', data);
             setUploadImgStatus('Image uploaded successfully!')
             const url = data.url;
-            console.log('this is', url);
             onChangeInput('image', url)
             // Handle success or update UI
         } catch (error) {
@@ -634,12 +630,6 @@ const CustomerDetailedView = () => {
                                                             margin: "0",
                                                         }}
                                                     >
-                                                        {/* {customerDetails.first_name && customerDetails.last_name
-                                                ? (
-                                                    customerDetails.first_name[0] +
-                                                    customerDetails.last_name[0]
-                                                ).toUpperCase()
-                                                : ""} */}
                                                         <FaUserTie size={35} />
                                                     </LabelTag>
 
@@ -655,7 +645,11 @@ const CustomerDetailedView = () => {
                                                     background: "#EEF5FF",
                                                     padding: "1rem",
                                                     borderRadius: "1rem",
-                                                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'
+                                                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                                                    border:
+                                                        trySubmit & (customerDetails.notes === "")
+                                                            ? "2px solid red"
+                                                            : ""
                                                 }}
                                             >
                                                 <input

@@ -61,11 +61,9 @@ export const InputContainer = styled.div`
     align-items: center;
     width: 48%;
     position: relative;
-    /* border: 1px solid red; */
 `
 
 export const LabelTag = styled.label`
-    /* border: 1px solid red; */
     width: 30%;
     text-align: right;
     margin-right: 1rem;
@@ -88,7 +86,6 @@ export const Row = styled.div`
     justify-content: space-between;
     width: 100%;
     height: 8%;
-    /* border: 1px solid red; */
     margin-bottom: 0.7rem;
 `
 export const RadioCon = styled.div`
@@ -96,7 +93,6 @@ export const RadioCon = styled.div`
     align-items: center;
     width: 20%;
     height: 50%;
-    /* border: 1px solid #000; */
 `
 export const Custom = styled.div`
     display: flex;
@@ -104,7 +100,6 @@ export const Custom = styled.div`
     height: 100%;
     width: 100%;
     padding: 0;
-    /* border: 1px solid red; */
 `
 export const LabelTwo = styled.label`
     font-size: 1.2rem;
@@ -121,7 +116,6 @@ export const SaveBtn = styled.button`
     margin: 0;
     margin-top: 1rem;
     color: #fff;
-    /* border: 1px solid #000; */
 `
 export const TextArea = styled.textarea`
     height: 100%;
@@ -129,7 +123,6 @@ export const TextArea = styled.textarea`
     border-radius: 0.5rem;
     border: 2px solid #ccc;
     padding: 0.5rem 0.5rem 0rem 0.5rem;
-    /* border: 1px solid red; */
 
     &::-webkit-scrollbar{
         width: 3px;
@@ -225,20 +218,20 @@ export const ImgTag = styled.img`
 `
 
 export const Switch = styled.label`
-  font-size: 17px;
-  position: relative;
-  display: inline-block;
-  align-items: center;
-  width: 3em;
-  height: 1.5em;
+    font-size: 17px;
+    position: relative;
+    display: inline-block;
+    align-items: center;
+    width: 3em;
+    height: 1.5em;
 
-  input {
+    input {
     opacity: 0;
     width: 0;
     height: 0;
-  }
+    }
 
-  .slider {
+    .slider {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -251,31 +244,31 @@ export const Switch = styled.label`
     border-radius: 30px;
 
     &:before {
-      position: absolute;
-      content: "";
-      height: 1em;
-      width: 1em;
-      border-radius: 20px;
-      left: 0.27em;
-      bottom: 0.25em;
-      background-color: #adb5bd;
-      transition: .4s;
+        position: absolute;
+        content: "";
+        height: 1em;
+        width: 1em;
+        border-radius: 20px;
+        left: 0.27em;
+        bottom: 0.25em;
+        background-color: #adb5bd;
+        transition: .4s;
     }
-  }
+    }
 
-  input:checked + .slider {
+    input:checked + .slider {
     background-color: #007bff;
     border: 1px solid #007bff;
-  }
+    }
 
-  input:focus + .slider {
+    input:focus + .slider {
     box-shadow: 0 0 1px #007bff;
-  }
+    }
 
-  input:checked + .slider:before {
+    input:checked + .slider:before {
     transform: translateX(1.4em);
     background-color: #fff;
-  }
+    }
 `;
 
 export const DatePickerWrapper  = styled.div`
