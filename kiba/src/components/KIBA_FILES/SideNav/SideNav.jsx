@@ -12,9 +12,7 @@ import {
 } from "./StyledComponents";
 import { TbLayoutDashboardFilled } from "react-icons/tb";
 import { MdGroups2 } from "react-icons/md";
-import { IoIosSettings } from "react-icons/io";
 import KibaContext from "../../../context/KibaContext";
-// import Cookies from "js-cookie";
 import Cookies from 'universal-cookie';
 
 const SideNav = () => {

@@ -5,11 +5,13 @@ const KibaContext = React.createContext({
     customersTab:'All Customers',
     Admin:[],
     isUserAuthenticated: false,
+    isHeaderPopupOn: false,
 
     setActiveTab: () =>{},
     setCustomersTab: () => {},
     setAdmin:()=> {},
-    login: () => {}
+    login: () => {},
+    setHeaderPopup: () => {}
 })
 
 export default KibaContext

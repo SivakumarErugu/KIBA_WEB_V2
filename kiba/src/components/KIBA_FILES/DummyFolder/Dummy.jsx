@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
     ChartContainer,
@@ -39,6 +39,7 @@ const Dummy = () => {
         poultry: 0,
         bovine: 0
     })
+    const apiUrl = import.meta.env.VITE_API_URL;
 
     // GETTING THE TOTAL CUSTOMER LIST
     useEffect(() => {
@@ -48,7 +49,7 @@ const Dummy = () => {
     const getCustomersData = async () => {
         setLoader(true);
         try {
-            const url = 'http://15.207.110.236:3000/customers';
+            const url = `${apiUrl}/customers`;
             const response = await fetch(url);
 
             if (!response.ok) {
@@ -82,32 +83,91 @@ const Dummy = () => {
     };
 
     const data = {
-        labels: ['Shrimp', 'Fish', 'Poultry', 'Bovine'], // Adjusted to match data
+        labels: ['Shrimp', 'Fish', 'Poultry', 'Bovine'],
         datasets: [
-            {
-                data: [cultivations.shrimp, cultivations.fish, cultivations.poultry, cultivations.bovine],
-                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'], // Added a color for each data point
-                hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'], // Same as backgroundColor, can be different if needed
-                borderWidth: 0,
-                borderRadius: 0,
-                offset: -0,
-            },
+          {
+            data: [cultivations.shrimp, cultivations.fish, cultivations.poultry, cultivations.bovine],
+            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'],
+            hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'],
+            borderWidth: 0,
+          },
         ],
-    };
+      };
 
+    const customPlugin = {
+        id: 'customPlugin',
+        afterDraw: (chart) => {
+          const ctx = chart.ctx;
+          const meta = chart.getDatasetMeta(0);
+          const total = chart.data.datasets[0].data.reduce((acc, value) => acc + value, 0);
+      
+          meta.data.forEach((element) => {
+            const value = chart.data.datasets[0].data[element.index];
+            const percentage = ((value / total) * 100).toFixed(2) + '%';
+      
+            const model = element.tooltipPosition();
+            const midAngle = (element.startAngle + element.endAngle) / 2;
+            const radius = element.outerRadius;
+      
+            // Increase radius to extend arrow outside the chart
+            const arrowLength = 20; // Adjust arrow length as needed
+            const extendedRadius = radius + arrowLength;
+      
+            // Calculate arrowhead coordinates
+            const startX = model.x;
+            const startY = model.y;
+            const endX1 = startX + extendedRadius * Math.cos(midAngle);
+            const endY1 = startY + extendedRadius * Math.sin(midAngle);
+            const arrowheadLength = 10; // Adjust arrowhead length as needed
+            const endX2 = endX1 - arrowheadLength * Math.cos(midAngle - Math.PI / 2);
+            const endY2 = endY1 - arrowheadLength * Math.sin(midAngle - Math.PI / 2);
+      
+            // Draw the arrow line and text
+            ctx.beginPath();
+            ctx.moveTo(startX, startY);
+            ctx.lineTo(endX1, endY1);
+            ctx.lineWidth = 1.5;
+            ctx.strokeStyle = element.options.backgroundColor;
+            ctx.stroke();
+      
+            ctx.fillStyle = element.options.backgroundColor;
+            ctx.font = '12px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+      
+            // Position text slightly above the arrowhead
+            const textX = endX1 + (arrowheadLength / 2) * Math.cos(midAngle);
+            const textY = endY1 + (arrowheadLength / 2) * Math.sin(midAngle);
+            ctx.fillText(percentage, textX, textY);
+          });
+        },
+      };
 
     const options = {
         responsive: true,
         plugins: {
-            legend: {
-                position: 'bottom',
+          legend: {
+            position: 'bottom',
+            labels: {
+              boxWidth: 10,
             },
-            tooltip: {
-                enabled: true,
+          },
+          tooltip: {
+            callbacks: {
+              label: function (tooltipItem) {
+                const dataset = tooltipItem.dataset;
+                const total = dataset.data.reduce((acc, value) => acc + value, 0);
+                const value = dataset.data[tooltipItem.dataIndex];
+                const percentage = ((value / total) * 100).toFixed(2) + '%';
+                return `${tooltipItem.label}: ${percentage}`;
+              },
             },
+          },
+          customPlugin, // Adding the custom plugin here
         },
         cutout: '0%',
-    };
+      };
+      
 
 
     return (
@@ -135,7 +195,7 @@ const Dummy = () => {
                         </TilesContainer>
 
                         <ChartContainer>
-                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', width: '50%' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', width: '50%', background: '#ccc' }}>
                                 <Doughnut data={data} options={options} />
                             </div>
                         </ChartContainer>

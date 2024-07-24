@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 
 import SideNav from "../SideNav/SideNav";
 import Header from "../Header/Header";
@@ -35,6 +37,7 @@ import {
     Title,
     UploadBtn,
     Switch,
+    DatePickerWrapper,
 } from "./CreateCustomerStyles";
 
 const indianStates = [
@@ -88,6 +91,8 @@ const CreateCustomer = () => {
         notes: "",
         image: "",
         customer: "false",
+        created_on: "",
+        trail_pack_given_on: "",
     });
     const [image, setImage] = useState(null);
     const [localImage, setLocalImage] = useState(null);
@@ -98,7 +103,13 @@ const CreateCustomer = () => {
     const [isStateActive, setStateActive] = useState(false);
     const StateRef = useRef(null);
     const [uploadImgStatus, setUploadImgStatus] = useState("");
+    const today = new Date();
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    const formattedData = today.toLocaleDateString(undefined, options);
+    console.log(formattedData);
     const apiUrl = import.meta.env.VITE_API_URL;
+    const [selectedDate, setSelectedDate] = useState(null);
+    console.log('data is', selectedDate)
 
     // DROPDOWN OUTSIDE CLICK CONTROL
     useEffect(() => {
@@ -160,8 +171,7 @@ const CreateCustomer = () => {
 
             const formData = new FormData();
             formData.append("file", image);
-            
-            
+
             const res = await fetch(`${apiUrl}/upload`, {
                 method: "POST",
                 headers: {
@@ -187,9 +197,9 @@ const CreateCustomer = () => {
         }
     };
 
-    const ValidateForm = () => {
+    const ValidateForm = (customer) => {
         let error = false;
-        error = Object.values(customerDetails).every((each) => each !== "");
+        error = Object.values(customer).every((each) => each !== "");
         console.log(error);
         return error;
     };
@@ -199,9 +209,9 @@ const CreateCustomer = () => {
 
         setTrySubmit(true);
         console.log(customerDetails);
-        let customer = { ...customerDetails };
+        let customer = { ...customerDetails, created_on: formattedData };
 
-        const isValid = ValidateForm();
+        const isValid = ValidateForm(customer);
 
         if (!isValid) {
             Swal.fire({
@@ -231,13 +241,30 @@ const CreateCustomer = () => {
                     text: "Customer Added Successfully!",
                     confirmButtonText: "OK",
                 });
+                navigate('/customers')
             } else {
                 console.error("Error adding design:", response.statusText);
+                Swal.fire({
+                    icon: "warning",
+                    text: "Error adding design:",
+                    confirmButtonText: "OK",
+                });
             }
         } catch (error) {
             console.error("Error:", error.message);
+            Swal.fire({
+                icon: "warning",
+                text: error.message,
+                confirmButtonText: "OK",
+            });
         }
     };
+
+    const setTrailData = (date) => {
+        if (!date) return ''
+        const stringDate = date.toLocaleDateString('en-GB')
+        onChangeInput('trail_pack_given_on', stringDate)
+    }
 
     useEffect(() => {
         if (uploadImgStatus) {
@@ -281,7 +308,7 @@ const CreateCustomer = () => {
                     <CreateNew onSubmit={onSubmitForm}>
                         <Row>
                             <InputContainer>
-                                <LabelTag>First Name :</LabelTag>
+                                <LabelTag>First Name</LabelTag>
                                 <InputTag
                                     style={{
                                         border:
@@ -292,12 +319,12 @@ const CreateCustomer = () => {
                                     type="text"
                                     value={customerDetails.first_name}
                                     onChange={(e) => onChangeInput("first_name", e.target.value)}
-                                    // placeholder="Enter First Name"
+                                // placeholder="Enter First Name"
                                 />
                             </InputContainer>
 
                             <InputContainer>
-                                <LabelTag>Last Name :</LabelTag>
+                                <LabelTag>Last Name</LabelTag>
                                 <InputTag
                                     style={{
                                         border:
@@ -308,14 +335,14 @@ const CreateCustomer = () => {
                                     type="text"
                                     value={customerDetails.last_name}
                                     onChange={(e) => onChangeInput("last_name", e.target.value)}
-                                    // placeholder="Enter Last Name"
+                                // placeholder="Enter Last Name"
                                 />
                             </InputContainer>
                         </Row>
 
                         <Row>
                             <InputContainer>
-                                <LabelTag>Cultivation :</LabelTag>
+                                <LabelTag>Cultivation</LabelTag>
 
                                 <CustomDropdownContainer ref={cultivationRef}>
                                     <CustomDropDown
@@ -381,7 +408,7 @@ const CreateCustomer = () => {
                             </InputContainer>
 
                             <InputContainer>
-                                <LabelTag>Mobile Number :</LabelTag>
+                                <LabelTag>Mobile Number</LabelTag>
                                 <InputTag
                                     style={{
                                         border:
@@ -394,14 +421,14 @@ const CreateCustomer = () => {
                                     onChange={(e) =>
                                         onChangeInput("mobile_number", e.target.value)
                                     }
-                                    // placeholder="Enter Mobile Number"
+                                // placeholder="Enter Mobile Number"
                                 />
                             </InputContainer>
                         </Row>
 
                         <Row>
                             <InputContainer>
-                                <LabelTag>Place :</LabelTag>
+                                <LabelTag>Place</LabelTag>
                                 <InputTag
                                     style={{
                                         border:
@@ -412,12 +439,12 @@ const CreateCustomer = () => {
                                     type="text"
                                     value={customerDetails.place}
                                     onChange={(e) => onChangeInput("place", e.target.value)}
-                                    // placeholder="Enter Place"
+                                // placeholder="Enter Place"
                                 />
                             </InputContainer>
 
                             <InputContainer>
-                                <LabelTag>Same for WhatsApp :</LabelTag>
+                                <LabelTag>Same for WhatsApp</LabelTag>
                                 <RadioCon>
                                     <Custom>
                                         <InputTag
@@ -425,10 +452,7 @@ const CreateCustomer = () => {
                                             style={{ height: "70%", width: "90%", margin: "0" }}
                                             name="whatsapp"
                                             type="radio"
-                                            checked={
-                                                customerDetails.same_for_whatsapp ===
-                                                "true"
-                                            }
+                                            checked={customerDetails.same_for_whatsapp === "true"}
                                             onChange={() =>
                                                 onChangeInput("same_for_whatsapp", "true")
                                             }
@@ -446,15 +470,9 @@ const CreateCustomer = () => {
                                             style={{ height: "70%", width: "90%", margin: "0" }}
                                             name="whatsapp"
                                             type="radio"
-                                            checked={
-                                                customerDetails.same_for_whatsapp ===
-                                                "false"
-                                            }
+                                            checked={customerDetails.same_for_whatsapp === "false"}
                                             onChange={() =>
-                                                onChangeInput(
-                                                    "same_for_whatsapp",
-                                                    "false"
-                                                )
+                                                onChangeInput("same_for_whatsapp", "false")
                                             }
                                         />
                                         <LabelTwo
@@ -470,7 +488,7 @@ const CreateCustomer = () => {
 
                         <Row>
                             <InputContainer>
-                                <LabelTag>City :</LabelTag>
+                                <LabelTag>City</LabelTag>
                                 <InputTag
                                     style={{
                                         border:
@@ -481,13 +499,13 @@ const CreateCustomer = () => {
                                     type="text"
                                     value={customerDetails.city}
                                     onChange={(e) => onChangeInput("city", e.target.value)}
-                                    // placeholder="Enter City"
+                                // placeholder="Enter City"
                                 />
                             </InputContainer>
 
                             {/* {customerDetails.is_this_same_as_whatsapp_number === 'false' && */}
                             <InputContainer>
-                                <LabelTag>WhatsApp Number :</LabelTag>
+                                <LabelTag>WhatsApp Number</LabelTag>
                                 <InputTag
                                     style={{
                                         border:
@@ -500,8 +518,10 @@ const CreateCustomer = () => {
                                     onChange={(e) =>
                                         onChangeInput("whatsapp_number", e.target.value)
                                     }
-                                    readOnly = {customerDetails.same_for_whatsapp === 'true' ? true : false}
-                                    // placeholder="Enter WhatsApp Number"
+                                    readOnly={
+                                        customerDetails.same_for_whatsapp === "true" ? true : false
+                                    }
+                                // placeholder="Enter WhatsApp Number"
                                 />
                             </InputContainer>
                             {/* } */}
@@ -509,25 +529,25 @@ const CreateCustomer = () => {
 
                         <Row>
                             <InputContainer>
-                                <LabelTag>District :</LabelTag>
+                                <LabelTag>District</LabelTag>
                                 <InputTag
                                     style={{
                                         border:
-                                            trySubmit & (customerDetails.zilla === "")
+                                            trySubmit & (customerDetails.district === "")
                                                 ? "2px solid red"
                                                 : "",
                                     }}
                                     type="text"
                                     value={customerDetails.district}
                                     onChange={(e) => onChangeInput("district", e.target.value)}
-                                    // placeholder="Enter District"
+                                // placeholder="Enter District"
                                 />
                             </InputContainer>
 
                             <InputContainer
                                 style={{ flexDirection: "row", alignItems: "center" }}
                             >
-                                <LabelTag>Own Land :</LabelTag>
+                                <LabelTag>Own Land</LabelTag>
                                 <RadioCon>
                                     <Custom>
                                         <InputTag
@@ -567,7 +587,7 @@ const CreateCustomer = () => {
 
                         <Row>
                             <InputContainer>
-                                <LabelTag>State :</LabelTag>
+                                <LabelTag>State</LabelTag>
 
                                 <CustomDropdownContainer ref={StateRef}>
                                     <CustomDropDown
@@ -614,7 +634,7 @@ const CreateCustomer = () => {
                             <InputContainer
                                 style={{ flexDirection: "row", alignItems: "center" }}
                             >
-                                <LabelTag> Existing Customer :</LabelTag>
+                                <LabelTag>Existing Customer</LabelTag>
                                 <RadioCon>
                                     <Custom>
                                         <InputTag
@@ -654,7 +674,7 @@ const CreateCustomer = () => {
 
                         <Row>
                             <InputContainer>
-                                <LabelTag>PinCode :</LabelTag>
+                                <LabelTag>Pin Code</LabelTag>
                                 <InputTag
                                     style={{
                                         border:
@@ -665,30 +685,57 @@ const CreateCustomer = () => {
                                     type="number"
                                     value={customerDetails.pincode}
                                     onChange={(e) => onChangeInput("pincode", e.target.value)}
-                                    // placeholder="Enter Pincode"
+                                // placeholder="Enter Pincode"
                                 />
                             </InputContainer>
 
                             <InputContainer
-                                style={{ flexDirection: "row", alignItems: "center" }}
+                                style={{ flexDirection: "row", alignItems: "center", justifyContent: 'space-between' }}
                             >
+
                                 <LabelTag>Trail Pack :</LabelTag>
-                                <Switch>
-                                    <input
-                                        type="checkbox"
-                                        checked={customerDetails.trail_pack}
-                                        onClick={(e) =>
-                                            onChangeInput("trail_pack", e.target.checked)
-                                        }
-                                    />
-                                    <span className="slider"></span>
-                                </Switch>
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '70%' }}>
+                                    <Switch>
+                                        <input
+                                            type="checkbox"
+                                            checked={customerDetails.trail_pack}
+                                            onChange={(e) => {
+                                                onChangeInput("trail_pack", e.target.checked);
+                                                if (!e.target.checked) {
+                                                    setSelectedDate(false);
+                                                }
+                                            }}
+                                        />
+                                        <span className="slider"></span>
+                                    </Switch>
+
+                                    {
+                                        customerDetails.trail_pack &&
+                                        <DatePickerWrapper>
+                                            <DatePicker
+                                                selected={selectedDate}
+                                                onChange={(date) => {
+                                                    setSelectedDate(date);
+                                                    setTrailData(date)
+                                                }}
+                                                dateFormat="dd/MM/yyyy"
+                                                placeholderText="Select a date"
+                                                style={{ color: '#000' }}
+                                            />
+                                        </DatePickerWrapper>
+                                    }
+                                </div>
+
+
+
+
                             </InputContainer>
+                            
                         </Row>
 
                         <Row style={{ flexGrow: "1", margin: "0" }}>
                             <InputContainer style={{ alignItems: "flex-start" }}>
-                                <LabelTag>Notes :</LabelTag>
+                                <LabelTag>Notes</LabelTag>
                                 <TextArea
                                     style={{
                                         border:
@@ -698,8 +745,11 @@ const CreateCustomer = () => {
                                     }}
                                     value={customerDetails.notes}
                                     onChange={(e) => onChangeInput("notes", e.target.value)}
-                                    // placeholder="Enter Notes"
+                                // placeholder="Enter Notes"
                                 />
+
+
+
                             </InputContainer>
 
                             <InputContainer
@@ -715,7 +765,7 @@ const CreateCustomer = () => {
                                     </LabelTag>
                                 ) : (
                                     <LabelTag
-                                        style={{ display: "flex", justifyContent: "flex-end"}}
+                                        style={{ display: "flex", justifyContent: "flex-end" }}
                                     >
                                         <LabelTag
                                             style={{
@@ -735,9 +785,8 @@ const CreateCustomer = () => {
                                                     customerDetails.last_name[0]
                                                 ).toUpperCase()
                                                 : ""} */}
-                                                <FaUserTie size={35}/>
+                                            <FaUserTie size={35} />
                                         </LabelTag>
-                                        
                                     </LabelTag>
                                 )}
 
@@ -750,7 +799,7 @@ const CreateCustomer = () => {
                                         background: "#EEF5FF",
                                         padding: "1rem",
                                         borderRadius: "1rem",
-                                        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'
+                                        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
                                     }}
                                 >
                                     <input

@@ -31,7 +31,6 @@ export const Label = styled.h1`
 export const DashBoard = styled.div`
     height: 95%;
     width: 100%;
-    border: 1px solid #ccc;
     border-radius: 1rem;
     padding: 1.5rem;
     display: flex;
@@ -47,11 +46,11 @@ export const TilesContainer = styled.div`
     justify-content: space-between;
 `
 export const Tile = styled.div`
-    background: #E1D1D1;
+    background: #4361ee;
     width: 20%;
     height: 100%;
     border-radius: 1rem;
-    color: #000;
+    color: #FFF;
     padding: 1rem;
     display: flex;
     flex-direction: column;
@@ -68,7 +67,7 @@ export const Count = styled.span`
     margin-top: 0.1rem;
     font-size: 1.8rem;
     font-weight: 600;
-    color: #000;
+    color: #FFF;
     text-align: right;
     padding: 0;
     height: fit-content;

@@ -15,7 +15,7 @@ const breakpoints = {
 export const MainContainer = styled.div`
     height: 100vh;
     width: 100vw;
-    background-color: #FFF;
+    background: #86B6F6;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,7 +39,7 @@ export const InnerContainer = styled.div`
     height: 100%;
     width: 100%;
     padding: 0px;
-    background-color: #FFF;
+    background: transparent;
     position: relative;
 
     @media (max-width: ${breakpoints.laptop}) {
@@ -202,25 +202,29 @@ export const StyledSlider = styled(Slider)`
     border-radius: 8px;
     padding: 0;
     margin: 0;
+    display: flex;
+    align-items: center;
+    /* border: 1px solid red; */
 `;
 
 export const SliderItem = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 42rem;
-    width: 100%; 
+    /* height: 42rem; */
+    /* height: 90% ; */
+    height: fit-content;
+    width: 95%; 
     background-color: #000;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
     border-radius: 1.5rem;
     overflow: hidden;
 `;
 export const SlideImage = styled.img`
     width: 100%;
-    height: 100%;
+    height: 100%  !important;
     object-fit: cover; 
 `;
-
 
 
 
@@ -238,18 +242,18 @@ export const LabelText = styled.label`
     font-size: 0.75rem;
     color: #000;
     font-weight: 700;
-    position: relative;
-    top: 0.5rem;
-    margin: 0 0 0 7px;
+    /* position: relative; */
+    /* top: 0.5rem; */
+    /* margin: 0 0 0 7px; */
     padding: 0 3px;
-    background: #FFFFFF;
+    background: transparent;
     width: fit-content;
 `;
 
 const InputStyles = css`
     padding: 11px 10px;
     font-size: 0.75rem;
-    border: 2px #000 solid;
+    border: 2px solid #000 !important;
     border-radius: 5px;
     background: #FFFFFF;
 

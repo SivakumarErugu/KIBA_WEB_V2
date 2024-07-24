@@ -143,7 +143,6 @@ export const IDTag = styled.h1`
     top: 2%;
     margin: 0;
     transform: translate(-50%);
-    /* border: 1px solid red; */
 `
 export const BackBtn = styled.button`
     height: 100%;
@@ -278,3 +277,28 @@ export const Switch = styled.label`
     background-color: #fff;
   }
 `;
+
+export const DatePickerWrapper  = styled.div`
+    .react-datepicker-wrapper {
+    width: 70%;
+    }
+
+    .react-datepicker__input-container input {
+    width: 100%;
+    font-size: 16px;
+    padding: 0.3rem;
+    margin: 0;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    cursor: pointer;
+    }
+`
+export const CreatedDate = styled.span`
+    color: #000;
+    position: absolute;
+    right: 2%;
+    top: 1%;
+    padding: 0;
+    margin: 0;
+`

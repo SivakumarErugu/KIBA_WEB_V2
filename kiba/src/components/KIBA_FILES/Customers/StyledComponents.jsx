@@ -96,7 +96,7 @@ export const CreateNewBtn = styled.button`
     width: 10rem;
     height: 100%;
     padding: 0.5rem;
-    background: #6A1039;
+    background: #176B87;
     color: #FFF;
     margin: 0rem 0rem 0rem 0rem;
     border: none;

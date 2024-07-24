@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import DatePicker from 'react-datepicker';
 
 export const AlertText = styled.span`
     color: #70e000;
@@ -268,3 +269,20 @@ export const Switch = styled.label`
         background-color: #fff;
     }
 `;
+
+export const DatePickerWrapper  = styled.div`
+    .react-datepicker-wrapper {
+    width: 70%;
+    }
+
+    .react-datepicker__input-container input {
+    width: 100%;
+    font-size: 16px;
+    padding: 0.3rem;
+    margin: 0;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    cursor: pointer;
+    }
+`

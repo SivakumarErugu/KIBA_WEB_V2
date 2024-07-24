@@ -8,6 +8,7 @@ function App() {
   const [customersTab, setCustomersTab] = useState('All Customers');
   const [admin, setAdmin] = useState({});
   const [isUserAuthenticated, setUserAuthenticated] = useState(true);
+  const [isHeaderPopupOn,setHeaderPopupOn] = useState(false)
   const [isPortrait, setIsPortrait] = useState(window.innerHeight > window.innerWidth);
 
   const apiUrl = import.meta.env.VITE_API_URL;
@@ -58,6 +59,10 @@ function App() {
     setUserAuthenticated(true);
   };
 
+  const ToggleHeaderPopup = (status) => {
+    setHeaderPopupOn(status);
+  }
+
   return (
     <KibaContext.Provider
       value={{
@@ -65,21 +70,27 @@ function App() {
         customersTab,
         admin,
         isUserAuthenticated,
+        isHeaderPopupOn,
+
         setActiveTab: onChangeActiveTab,
         setCustomersTab: onChangeCustomerTab,
         setAdmin: handleAdmin,
         login: handleUserAuthenticate,
+        setHeaderPopup: ToggleHeaderPopup
       }}
     >
-      {isPortrait ? (
-        <div className="portrait-message">
-          Please open in desktop mode.
-        </div>
-      ) : (
         <RouterProvider router={router} />
-      )}
     </KibaContext.Provider>
   );
 }
 
 export default App;
+
+
+// {isPortrait ? (
+//   <div className="portrait-message">
+//     Please open in desktop mode.
+//   </div>
+// ) : (
+//   <RouterProvider router={router} />
+// )}

@@ -10,6 +10,8 @@ import CreateCustomer from './components/KIBA_FILES/CreateCustomer/CreateCustome
 import Settings from './components/KIBA_FILES/Settings/Settings'
 import CustomerDetailedView from './components/KIBA_FILES/CreateCustomer/CustomerDetailedView'
 import Dummy from './components/KIBA_FILES/DummyFolder/Dummy'
+import ManageAdminCredentials from './components/KIBA_FILES/ManageAdminCredentials/ManageAdminCredentials'
+import ManageExecutiveCredentials from './components/KIBA_FILES/ManageExecutiveCredentials/ManageExecutiveCredentials'
 
 const router = createBrowserRouter(
     [
@@ -52,6 +54,14 @@ const router = createBrowserRouter(
                 {
                     path: '/customer/:id',
                     element: <CustomerDetailedView />
+                },
+                {
+                    path: '/manage-admin-credentials',
+                    element: <ManageAdminCredentials />
+                },
+                {
+                    path: '/manage-executive-credentials',
+                    element: <ManageExecutiveCredentials />
                 }
             ]
         }

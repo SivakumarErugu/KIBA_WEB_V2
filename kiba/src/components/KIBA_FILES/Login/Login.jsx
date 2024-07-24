@@ -33,7 +33,10 @@ import {
 const Login = () => {
     const navigate = useNavigate();
     const cookies = new Cookies();
-    const [credentials, setCredentials] = useState({});
+    const [credentials, setCredentials] = useState({
+        email: '',
+        password: '',
+    });
     const [showPassword, setShowPassword] = useState(false);
 
     // useEffect(() => {
@@ -146,13 +149,13 @@ const Login = () => {
                                     <Heading>Login</Heading>
                                     <Ptag>Login to access your admin account</Ptag>
                                     <Form onSubmit={handleLogin}>
-                                        <CoolInput className="coolinput">
+                                        <CoolInput>
                                             <LabelText htmlFor="email" className="text">Email:</LabelText>
-                                            <TextInput type="text" id="email" placeholder="Enter email" name="email" className="input" onChange={(e) => onChangeInputs(e.target.value, 'email')} />
+                                            <TextInput type="email" id="email" placeholder="Enter email" name="email" className="input" value={credentials.email} onChange={(e) => onChangeInputs(e.target.value.toLowerCase(), 'email')} />
                                         </CoolInput>
-                                        <CoolInput className="coolinput">
+                                        <CoolInput>
                                             <LabelText htmlFor="password" className="text">Password:</LabelText>
-                                            <TextInput type={showPassword ? 'text' : 'password'} id="password" placeholder="Enter Password" name="password" className="input" onChange={(e) => onChangeInputs(e.target.value, 'password')} />
+                                            <TextInput type={showPassword ? 'text' : 'password'} id="password" placeholder="Enter Password" name="password" className="input" value={credentials.password} onChange={(e) => onChangeInputs(e.target.value.toLowerCase(), 'password')} />
                                             <EyeIconContainer>
                                                 {showPassword ?
                                                     <FaRegEye style={{ color: 'black' }} onClick={() => setShowPassword(false)} /> :
@@ -172,15 +175,29 @@ const Login = () => {
 
 
                             <StyledSlider {...settings}>
-                                <SliderItem style={{ height: '100%', width: '100%' }}>
-                                    <SlideImage src="https://res.cloudinary.com/dca9sij3n/image/upload/v1719660552/xeqrdakvwyaq6h4hukmy.png" alt="Image 1" />
+
+                                <SliderItem>
+                                    <SlideImage src="https://res.cloudinary.com/dca9sij3n/image/upload/v1721728972/KIBA/icxfcykhrubodyr2pbxi.png" alt="Image 1" />
                                 </SliderItem>
                                 <SliderItem>
-                                    <SlideImage src="https://res.cloudinary.com/dca9sij3n/image/upload/v1719982613/iap6sj7rvy1pytccgkwv.jpg" alt="Image 2" />
+                                    <SlideImage src="https://res.cloudinary.com/dca9sij3n/image/upload/v1721728972/KIBA/osv3t5fj9j7a7pcddaei.png" alt="Image 2" />
                                 </SliderItem>
                                 <SliderItem>
-                                    <SlideImage src="/path/to/your/image3.jpg" alt="Image 3" />
+                                    <SlideImage src="https://res.cloudinary.com/dca9sij3n/image/upload/v1721728971/KIBA/uojy4swdeuvhrkvejyox.jpg" alt="Image 3" />
                                 </SliderItem>
+                                <SliderItem>
+                                    <SlideImage src="https://res.cloudinary.com/dca9sij3n/image/upload/v1721728971/KIBA/aa2zzvwmey27d3plnazk.jpg" alt="Image 4" />
+                                </SliderItem>
+                                <SliderItem>
+                                    <SlideImage src="https://res.cloudinary.com/dca9sij3n/image/upload/v1721728923/KIBA/ojclcd60fdt23k9xnybk.jpg" alt="Image 5" />
+                                </SliderItem>
+                                <SliderItem>
+                                    <SlideImage src="https://res.cloudinary.com/dca9sij3n/image/upload/v1721728923/KIBA/g3cyeegvl6z955a0pfxp.jpg" alt="Image 6" />
+                                </SliderItem>
+                                <SliderItem>
+                                    <SlideImage src="https://res.cloudinary.com/dca9sij3n/image/upload/v1721729389/KIBA/cf9q4me17skw7xgrvmwe.png" alt="Image 7" />
+                                </SliderItem>
+
                             </StyledSlider>
 
                         </InnerContainer>

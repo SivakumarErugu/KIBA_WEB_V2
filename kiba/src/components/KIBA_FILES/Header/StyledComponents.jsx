@@ -21,10 +21,12 @@ export const CustomProfile = styled.div`
     /* border: 1px solid #ccc; */
     /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
     border-radius: 10px;
-    /* border: 1px solid #ccc; */
+    /* border: 1px solid red; */
+    position: relative;
 `
 export const ProfileIcon = styled.div`
-    background: #E1D1D1; 
+    background: #4361ee; 
+    color: #FFF;
     border-radius: 50%;
     height: 2.9rem;
     width: 2.9rem;
@@ -34,6 +36,8 @@ export const ProfileIcon = styled.div`
     background-size: cover;
     border: 1px solid #ccc;
     background-position: center;
+    /* position: relative; */
+    cursor: pointer;
 
 `
 export const SpanTag = styled.span`
@@ -44,4 +48,34 @@ export const SpanTag = styled.span`
 `
 export const Span = styled.span`
     font-size: 1.5rem;
+`
+export const PopUp = styled.div`
+    position: absolute;
+    height: 300%;
+    width: 500%;
+    background: #fff;
+    top: 110%;
+    right: 0;
+    z-index: 1000;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.2);
+    /* row-gap: 0.8rem; */
+`
+
+export const PopUpItem = styled.span`
+    background: #176B87;
+    color: #FFF;
+    height: 2rem;
+    width: 100%;
+    padding: 0;
+    border-radius: 0.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-bottom: 0.8rem;
 `

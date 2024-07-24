@@ -97,7 +97,7 @@ const Dashboard = () => {
         legend: {
             position: 'bottom',  // Position legend to the right
             labels: {
-                boxWidth: 10,  // Width of the legend box
+                boxWidth: 20,  // Width of the legend box
                 
             },
         },

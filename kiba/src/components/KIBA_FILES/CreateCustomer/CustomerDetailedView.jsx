@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 
 import SideNav from '../SideNav/SideNav'
 import Header from '../Header/Header'
@@ -35,7 +37,9 @@ import {
     TextArea,
     Title,
     UploadBtn,
-    Switch
+    Switch,
+    DatePickerWrapper,
+    CreatedDate
 } from './StyledComponents'
 
 
@@ -127,6 +131,24 @@ const CustomerDetailedView = () => {
 
         getCustomerData()
     }, [])
+
+    // Convert 'dd/MM/yyyy' string to Date object
+    const parseDateString = (dateString) =>
+        dateString ? new Date(dateString.split('/').reverse().join('-')) : null;
+
+    // Convert Date object to 'dd/MM/yyyy' string
+    const formatDateToString = (date) =>
+        date?.toLocaleDateString('en-GB') || '';
+
+    // Initialize state with parsed date
+    const [selectedDate, setSelectedDate] = useState(() =>
+        parseDateString(customerDetails.trail_pack_given_on)
+    );
+
+    // Update selectedDate when customerDetails changes
+    useEffect(() => {
+        setSelectedDate(parseDateString(customerDetails.trail_pack_given_on));
+    }, [customerDetails.trail_pack_given_on]);
 
     const onChangeInput = (key, value) => {
 
@@ -249,6 +271,11 @@ const CustomerDetailedView = () => {
         }
     };
 
+    const setTrailData = (date) => {
+        setSelectedDate(date);
+        onChangeInput('trail_pack_given_on', formatDateToString(date));
+    }
+
     useEffect(() => {
         if (uploadImgStatus) {
             const timer = setTimeout(() => {
@@ -293,6 +320,7 @@ const CustomerDetailedView = () => {
                         :
                         <>
                             <IDTag>Customer ID: {customerDetails.ID}</IDTag>
+                            <CreatedDate>{customerDetails.created_on}</CreatedDate>
 
                             {customerDetails ?
                                 <CreateNew onSubmit={onSubmitForm}>
@@ -300,7 +328,7 @@ const CustomerDetailedView = () => {
                                     <Row>
 
                                         <InputContainer>
-                                            <LabelTag>First Name :</LabelTag>
+                                            <LabelTag>First Name</LabelTag>
                                             <InputTag style={{ border: trySubmit & customerDetails.first_name === '' ? '2px solid red' : '' }}
                                                 type='text' value={customerDetails.first_name}
                                                 onChange={(e) => onChangeInput('first_name', e.target.value)}
@@ -309,7 +337,7 @@ const CustomerDetailedView = () => {
                                         </InputContainer>
 
                                         <InputContainer>
-                                            <LabelTag>Last Name :</LabelTag>
+                                            <LabelTag>Last Name</LabelTag>
                                             <InputTag style={{ border: trySubmit & customerDetails.last_name === '' ? '2px solid red' : '' }}
                                                 type='text' value={customerDetails.last_name}
                                                 onChange={(e) => onChangeInput('last_name', e.target.value)}
@@ -322,7 +350,7 @@ const CustomerDetailedView = () => {
                                     <Row>
 
                                         <InputContainer>
-                                            <LabelTag>Cultivation :</LabelTag>
+                                            <LabelTag>Cultivation</LabelTag>
 
                                             <CustomDropdownContainer ref={cultivationRef}>
                                                 <CustomDropDown style={{ border: trySubmit & customerDetails.cultivation === '' ? '2px solid red' : '' }}
@@ -365,7 +393,7 @@ const CustomerDetailedView = () => {
                                         </InputContainer>
 
                                         <InputContainer>
-                                            <LabelTag>Mobile Number :</LabelTag>
+                                            <LabelTag>Mobile Number</LabelTag>
                                             <InputTag style={{ border: trySubmit & customerDetails.mobile_number === '' ? '2px solid red' : '' }}
                                                 type='number' value={customerDetails.mobile_number}
                                                 onChange={(e) => onChangeInput('mobile_number', e.target.value)}
@@ -378,7 +406,7 @@ const CustomerDetailedView = () => {
                                     <Row>
 
                                         <InputContainer>
-                                            <LabelTag>Place :</LabelTag>
+                                            <LabelTag>Place</LabelTag>
                                             <InputTag style={{ border: trySubmit & customerDetails.place === '' ? '2px solid red' : '' }}
                                                 type='text' value={customerDetails.place}
                                                 onChange={(e) => onChangeInput('place', e.target.value)}
@@ -387,7 +415,7 @@ const CustomerDetailedView = () => {
                                         </InputContainer>
 
                                         <InputContainer>
-                                            <LabelTag>Same for WhatsApp :</LabelTag>
+                                            <LabelTag>Same for WhatsApp</LabelTag>
                                             <RadioCon>
                                                 <Custom>
                                                     <InputTag id='Yes' name='whatsapp' type='radio'
@@ -396,7 +424,7 @@ const CustomerDetailedView = () => {
                                                     <LabelTwo style={{ fontSize: '1rem', color: '#495057' }} htmlFor='Yes'>Yes</LabelTwo>
                                                 </Custom>
                                                 <Custom>
-                                                    <InputTag id='No'  name='whatsapp' type='radio'
+                                                    <InputTag id='No' name='whatsapp' type='radio'
                                                         checked={customerDetails.same_for_whatsapp === 'false'}
                                                         onChange={() => onChangeInput('same_for_whatsapp', 'false')} />
                                                     <LabelTwo style={{ fontSize: '1rem', color: '#495057' }} htmlFor='No'>No</LabelTwo>
@@ -409,7 +437,7 @@ const CustomerDetailedView = () => {
                                     <Row>
 
                                         <InputContainer>
-                                            <LabelTag>City :</LabelTag>
+                                            <LabelTag>City</LabelTag>
                                             <InputTag style={{ border: trySubmit & customerDetails.city === '' ? '2px solid red' : '' }}
                                                 type='text' value={customerDetails.city}
                                                 onChange={(e) => onChangeInput('city', e.target.value)}
@@ -419,14 +447,14 @@ const CustomerDetailedView = () => {
 
                                         {/* {customerDetails.is_this_same_as_whatsapp_number === 'false' && */}
                                         <InputContainer>
-                                            <LabelTag>WhatsApp Number :</LabelTag>
+                                            <LabelTag>WhatsApp Number</LabelTag>
                                             <InputTag style={{ border: trySubmit & customerDetails.whatsapp_number === '' ? '2px solid red' : '' }}
                                                 type='number' value={customerDetails.whatsapp_number}
                                                 onChange={(e) => onChangeInput('whatsapp_number', e.target.value)}
                                                 placeholder='Enter WhatsApp Number'
-                                                readOnly = {customerDetails.same_for_whatsapp === 'true' ? true : false}
-                                                />
-                                                
+                                                readOnly={customerDetails.same_for_whatsapp === 'true' ? true : false}
+                                            />
+
                                         </InputContainer>
                                         {/* } */}
 
@@ -435,7 +463,7 @@ const CustomerDetailedView = () => {
                                     <Row>
 
                                         <InputContainer>
-                                            <LabelTag>District :</LabelTag>
+                                            <LabelTag>District</LabelTag>
                                             <InputTag style={{ border: trySubmit & customerDetails.zilla === '' ? '2px solid red' : '' }}
                                                 type='text' value={customerDetails.district}
                                                 onChange={(e) => onChangeInput('district', e.target.value)}
@@ -444,7 +472,7 @@ const CustomerDetailedView = () => {
                                         </InputContainer>
 
                                         <InputContainer style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                            <LabelTag>Own Land ?</LabelTag>
+                                            <LabelTag>Own Land</LabelTag>
                                             <RadioCon>
                                                 <Custom>
                                                     <InputTag id='Yes' name='ownland' type='radio'
@@ -468,7 +496,7 @@ const CustomerDetailedView = () => {
                                     <Row>
 
                                         <InputContainer>
-                                            <LabelTag>State :</LabelTag>
+                                            <LabelTag>State</LabelTag>
 
                                             <CustomDropdownContainer ref={StateRef}>
                                                 <CustomDropDown style={{ border: trySubmit & customerDetails.state === '' ? '2px solid red' : '' }}
@@ -496,7 +524,7 @@ const CustomerDetailedView = () => {
                                         </InputContainer>
 
                                         <InputContainer style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                            <LabelTag> Existing Customer ?</LabelTag>
+                                            <LabelTag> Existing Customer</LabelTag>
                                             <RadioCon>
                                                 <Custom>
                                                     <InputTag id='Yes' name='Customer' type='radio'
@@ -520,7 +548,7 @@ const CustomerDetailedView = () => {
                                     <Row>
 
                                         <InputContainer>
-                                            <LabelTag>PinCode :</LabelTag>
+                                            <LabelTag>Pin Code</LabelTag>
                                             <InputTag style={{ border: trySubmit & customerDetails.pincode === '' ? '2px solid red' : '' }}
                                                 type='number' value={customerDetails.pincode}
                                                 onChange={(e) => onChangeInput('pincode', e.target.value)}
@@ -528,14 +556,42 @@ const CustomerDetailedView = () => {
                                             />
                                         </InputContainer>
 
-                                        <InputContainer style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                            <LabelTag>Trail Pack ?</LabelTag>
-                                            <Switch >
-                                                <input type="checkbox"
-                                                    checked={customerDetails.trail_pack}
-                                                    onClick={(e) => onChangeInput('trail_pack', e.target.checked)} />
-                                                <span className="slider"></span>
-                                            </Switch>
+                                        <InputContainer
+                                            style={{ flexDirection: "row", alignItems: "center", justifyContent: 'space-between' }}
+                                        >
+
+                                            <LabelTag>Trail Pack :</LabelTag>
+                                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '70%' }}>
+                                                <Switch>
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={customerDetails.trail_pack}
+                                                        onChange={(e) => {
+                                                            onChangeInput("trail_pack", e.target.checked);
+                                                            if (!e.target.checked) {
+                                                                setSelectedDate(false);
+                                                            }
+                                                        }}
+                                                    />
+                                                    <span className="slider"></span>
+                                                </Switch>
+
+                                                {
+                                                    customerDetails.trail_pack &&
+                                                    <DatePickerWrapper>
+                                                        <DatePicker
+                                                            selected={selectedDate}
+                                                            onChange={setTrailData}
+                                                            dateFormat="dd/MM/yyyy"
+                                                            placeholderText="Select a date"
+                                                            style={{ color: '#000' }}
+                                                        />
+                                                    </DatePickerWrapper>
+                                                }
+                                            </div>
+
+
+
                                         </InputContainer>
 
                                     </Row>
@@ -543,7 +599,7 @@ const CustomerDetailedView = () => {
                                     <Row style={{ flexGrow: '1', margin: '0' }}>
 
                                         <InputContainer style={{ alignItems: 'flex-start' }}>
-                                            <LabelTag>Notes :</LabelTag>
+                                            <LabelTag>Notes</LabelTag>
                                             <TextArea style={{ border: trySubmit & customerDetails.notes === '' ? '2px solid red' : '' }}
                                                 value={customerDetails.notes}
                                                 onChange={(e) => onChangeInput('notes', e.target.value)}
