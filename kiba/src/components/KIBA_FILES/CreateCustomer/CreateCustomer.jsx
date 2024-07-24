@@ -785,7 +785,7 @@ const CreateCustomer = () => {
                                         borderRadius: "1rem",
                                         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
                                         border:
-                                            trySubmit & (customerDetails.notes === "")
+                                            trySubmit & (customerDetails.image === "")
                                                 ? "2px solid red"
                                                 : ""
                                     }}
@@ -810,7 +810,7 @@ const CreateCustomer = () => {
                         {uploadImgStatus && <AlertText>{uploadImgStatus}</AlertText>}
                     </CreateNew>
                 </CustomContainer>
-                
+
             </InnerContainer>
         </MainContainer>
     );

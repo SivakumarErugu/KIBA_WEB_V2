@@ -647,7 +647,7 @@ const CustomerDetailedView = () => {
                                                     borderRadius: "1rem",
                                                     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
                                                     border:
-                                                        trySubmit & (customerDetails.notes === "")
+                                                        trySubmit & (customerDetails.image === "")
                                                             ? "2px solid red"
                                                             : ""
                                                 }}
