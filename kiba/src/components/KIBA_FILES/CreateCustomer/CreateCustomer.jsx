@@ -703,7 +703,15 @@ const CreateCustomer = () => {
 
                                     {
                                         customerDetails.trail_pack &&
-                                        <DatePickerWrapper>
+                                        <DatePickerWrapper
+                                            style={{
+                                                color: '#000',
+                                                border:
+                                                    trySubmit & (customerDetails.trail_pack && customerDetails.trail_pack_given_on === "")
+                                                        ? "2px solid red"
+                                                        : ""
+                                            }}
+                                            >
                                             <DatePicker
                                                 selected={selectedDate}
                                                 onChange={(date) => {
@@ -712,7 +720,9 @@ const CreateCustomer = () => {
                                                 }}
                                                 dateFormat="dd/MM/yyyy"
                                                 placeholderText="Select a date"
-                                                style={{ color: '#000' }}
+                                                style={{
+                                                    color: '#000'
+                                                }}
                                             />
                                         </DatePickerWrapper>
                                     }
@@ -722,7 +732,7 @@ const CreateCustomer = () => {
 
 
                             </InputContainer>
-                            
+
                         </Row>
 
                         <Row style={{ flexGrow: "1", margin: "0" }}>
@@ -766,7 +776,7 @@ const CreateCustomer = () => {
                                                 display: "flex",
                                                 alignItems: "center",
                                                 justifyContent: "center",
-                                                margin: "0",                                                
+                                                margin: "0",
                                             }}
                                         >
                                             <FaUserTie size={35} />

@@ -574,7 +574,15 @@ const CustomerDetailedView = () => {
 
                                                 {
                                                     customerDetails.trail_pack &&
-                                                    <DatePickerWrapper>
+                                                    <DatePickerWrapper
+                                                        style={{
+                                                            color: '#000',
+                                                            border:
+                                                                trySubmit & (customerDetails.trail_pack && customerDetails.trail_pack_given_on === "")
+                                                                    ? "2px solid red"
+                                                                    : ""
+                                                        }}
+                                                    >
                                                         <DatePicker
                                                             selected={selectedDate}
                                                             onChange={setTrailData}

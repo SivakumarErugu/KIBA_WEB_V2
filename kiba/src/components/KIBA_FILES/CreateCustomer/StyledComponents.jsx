@@ -272,8 +272,10 @@ export const Switch = styled.label`
 `;
 
 export const DatePickerWrapper  = styled.div`
+    border-radius: 1rem;
     .react-datepicker-wrapper {
-    width: 70%;
+    /* width: 70%; */
+    width: fit-content;
     }
 
     .react-datepicker__input-container input {
