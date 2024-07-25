@@ -6,8 +6,6 @@ export const HeaderContainer = styled.div`
     display: flex;
     justify-content: flex-end;
     align-items: center;
-
-    /* border: 1px solid red; */
 `
 export const CustomProfile = styled.div`
     width: 5%;
@@ -15,13 +13,8 @@ export const CustomProfile = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    /* justify-content: space-between; */
     color: #000;
-    padding: 0.5rem;
-    /* border: 1px solid #ccc; */
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
     border-radius: 10px;
-    /* border: 1px solid red; */
     position: relative;
 `
 export const ProfileIcon = styled.div`
@@ -30,29 +23,36 @@ export const ProfileIcon = styled.div`
     border-radius: 50%;
     height: 2.9rem;
     width: 2.9rem;
+    height: 100%;
+    width: 90%;
     display: flex;
     align-items: center;
     justify-content: center;
     background-size: cover;
     border: 1px solid #ccc;
     background-position: center;
-    /* position: relative; */
     cursor: pointer;
+
 
 `
 export const SpanTag = styled.span`
     font-size: 1.2rem;
     background: #ccc;
-    padding: 0rem 0.4rem 0rem 0.4rem;
+    padding: 0 0.4rem;
     border-radius: 0.3rem;
-`
+
+    @media screen and (max-width: 1024px) {
+        font-size: 0.5rem;
+    }
+`;
+
 export const Span = styled.span`
     font-size: 1.5rem;
 `
 export const PopUp = styled.div`
     position: absolute;
-    height: 300%;
-    width: 500%;
+    height: 11rem;
+    width: 15rem;
     background: #fff;
     top: 110%;
     right: 0;
@@ -63,7 +63,6 @@ export const PopUp = styled.div`
     flex-direction: column;
     justify-content: space-between;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.2);
-    /* row-gap: 0.8rem; */
 `
 
 export const PopUpItem = styled.span`

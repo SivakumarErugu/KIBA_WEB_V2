@@ -36,6 +36,8 @@ export const MainContainer = styled.div`
 
 export const InnerContainer = styled.div`
     display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100%;
     width: 100%;
     padding: 0px;

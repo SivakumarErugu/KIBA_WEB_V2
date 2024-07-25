@@ -26,7 +26,7 @@ export const Label = styled.h1`
     font-size: 1.5rem;
     color: #000;
     padding: 0px;
-    margin: 0px;
+    margin: 1rem;
 `
 export const DashBoard = styled.div`
     height: 95%;
@@ -56,12 +56,16 @@ export const Tile = styled.div`
     flex-direction: column;
 `
 export const Title = styled.span`
-width: 100%;
-    font-size: 1.rem;
+    width: 100%;
+    font-size: 1.2rem;
     margin: 0px;
     font-weight: 550;
     padding: 0;
     text-align: right;
+
+    @media screen and (max-width:1080px){
+        font-size: 0.7rem;
+    }
 `
 export const Count = styled.span`
     margin-top: 0.1rem;
@@ -84,3 +88,24 @@ export const ChartContainer = styled.div`
     text-align: center;
     padding: 0.5rem;
 `
+export const Icon = styled.div`
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+
+    @media only screen and (min-width: 1366px) {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    @media only screen and (max-width: 1366px) {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    @media only screen and (max-width: 1080px) {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+`;

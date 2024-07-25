@@ -41,7 +41,8 @@ import {
     TdTag,
     ThTag,
     TrTag,
-    DivX
+    DivX,
+    DivY
 } from './StyledComponents'
 
 
@@ -411,7 +412,6 @@ const Customers = () => {
             const result = await response.text();
             getCustomersData()
             setAlertText('Customer Deleted Successfully')
-            // alert('Customer Deleted Successfully');
         } catch (error) {
             console.error('Error deleting customer:', error);
             alert('Failed to delete Customer');
@@ -475,10 +475,6 @@ const Customers = () => {
             {value => {
                 const { customersTab, setCustomersTab } = value
 
-                const onTabChange = (e) => {
-                    setCustomersTab(e.target.id)
-                }
-
                 return (
                     <MainContainer>
                         <SideNav />
@@ -497,28 +493,14 @@ const Customers = () => {
                                     </Count>
 
 
-                                    {/* <New>
-                                        <Link to='/create-customer'>
-                                            <CreeteNewBtn>
-                                                <BsPlusCircleDotted size={23} />
-                                                New Customer
-                                            </CreeteNewBtn>
-                                        </Link>
-
-                                    </New> */}
-
                                 </CreateNewContainer>
-
-                                {/* <Tabs>
-                                    <Tab active={customersTab === 'All Customers'} id='All Customers' onClick={onTabChange}>All Customers</Tab>
-                                </Tabs> */}
 
                                 <SearchActionsBar>
                                     <DivX >
                                         <SearchBar>
-                                            <RiSearch2Line size={30} style={{ color: '#667085' }} />
+                                            <RiSearch2Line size={25} style={{ color: '#667085',height:'100%',marginLeft:'0.5rem'}} />
                                             <CustomInput type='text'
-                                                placeholder='Search Customers'
+                                                placeholder='Search'
                                                 value={SearchText}
                                                 onChange={(e) => setSearchText(e.target.value)}
                                             />
@@ -545,7 +527,7 @@ const Customers = () => {
                                                 </ColumnText>
                                             }
 
-                                            <FilterBtn onClick={() => setFilterActive(!isFilterActive)} ref={FilterDropdownRef}> <IoFilter size={20} />
+                                            <FilterBtn onClick={() => setFilterActive(!isFilterActive)} ref={FilterDropdownRef}> <IoFilter size={20}/>
                                                 {isFilterActive && customersData?.[0] && (
                                                     <FilterDropdown>
                                                         {Object.keys(customersData[0]).map(key => snakeToNormal(key)).map(each => (
@@ -559,7 +541,7 @@ const Customers = () => {
                                         </Actions>
                                     </DivX>
 
-                                    <div style={{ padding: '0', height: '100%', display: 'flex', alignItems: 'center' }}>
+                                    <div style={{ padding: '0', height: '3rem', display: 'flex', alignItems: 'center' }}>
                                         <Link to='/create-customer' style={{ margin: '0', padding: '0', display: 'flex', height: '100%', outline: 'none', border: 'none' }}>
                                             <CreateNewBtn>
                                                 <BsPlusCircleDotted size={23} />
@@ -586,7 +568,7 @@ const Customers = () => {
                                     </div>
                                     :
 
-                                    <div style={{ height: '30%', flexGrow: '1', display: 'flex', justifyContent: 'center' }}>
+                                    <DivY >
                                         {customersData.length !== 0 ?
                                             <TableTag>
                                                 <thead style={{ width: '100%' }}>
@@ -649,7 +631,7 @@ const Customers = () => {
                                                                     {highlightText(each.cultivation, SearchText)}
                                                                 </Link>
                                                             </TdTag>
-                                                            <TdTag style={{ position: 'absolute', right: '0', width: 'fit-content' }}>
+                                                            <TdTag style={{ position: 'absolute', right: '0.5%', width: 'fit-content' }}>
                                                                 <DeleteBtn
                                                                     onClick={(e) => {
                                                                         e.preventDefault();
@@ -670,14 +652,14 @@ const Customers = () => {
                                             :
                                             <CustomSpan style={{ display: 'flex', alignSelf: 'center' }}>No Records to display</CustomSpan>
                                         }
-                                    </div>
+                                    </DivY>
 
                                 }
 
                                 {customersData.length !== 0 &&
                                     <PaginationContainer>
                                         <PaginationBtn onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}> <MdOutlineArrowBackIosNew size={23} /> </PaginationBtn>
-                                        <span style={{ color: '#e5383b' }}>{currentPage}/{totalPages}</span>
+                                        <span style={{ color: '#22223b' }}>{currentPage}/{totalPages}</span>
                                         <PaginationBtn onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}> <MdOutlineArrowForwardIos size={23} /></PaginationBtn>
                                     </PaginationContainer>
 

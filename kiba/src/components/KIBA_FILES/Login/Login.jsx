@@ -26,6 +26,7 @@ import {
     CoolInput,
     LabelText,
     TextInput,
+    ForgotPasswordText
 } from './StyledComponents';
 
 
@@ -37,6 +38,7 @@ const Login = () => {
         password: '',
     });
     const [showPassword, setShowPassword] = useState(false);
+    const [CorrectEmail, setCorrectEmail] = useState(false)
 
     useEffect(() => {
         const savedToken = cookies.get('KIBAJWTToken'); // Use universal-cookie to get the cookie
@@ -57,10 +59,24 @@ const Login = () => {
     };
 
     const onChangeInputs = (value, key) => {
+        if (key === 'email') {
+            if (validateEmail(value)) {
+                setCorrectEmail(false)
+            } else {
+                setCorrectEmail(true)
+            }
+        }
+
         setCredentials(prev => ({
             ...prev,
             [key]: value
         }));
+    }
+
+    const validateEmail = (email) => {
+        // Regular expression for validating an email
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailPattern.test(email);
     }
 
     const handleLogin = async (e) => {
@@ -74,6 +90,16 @@ const Login = () => {
                 icon: 'warning',
                 title: 'Missing Credentials',
                 text: 'Please fill in all the required fields before proceeding.',
+                confirmButtonText: 'OK'
+            });
+            return;
+        }
+
+        if (CorrectEmail) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Incorrect Mail ID',
+                text: 'Please Enter Correct Email',
                 confirmButtonText: 'OK'
             });
             return;
@@ -120,9 +146,9 @@ const Login = () => {
                 const { admin } = value;
 
                 return (
-                    <MainContainer>
+                    <MainContainer style={{ background: 'url(../../backgroundImage.jpg) no-repeat center center fixed', backgroundSize: 'cover' }}>
                         <InnerContainer>
-                            <ImgTag src="https://res.cloudinary.com/dca9sij3n/image/upload/v1719813835/rcip7lurlae11xlrgnio.png" alt="Image" />
+                            <ImgTag src="../../kiba-logo-1.png" alt="Image" />
 
                             <LoginContainer>
                                 <CustomContainer>
@@ -131,8 +157,12 @@ const Login = () => {
                                     <Form onSubmit={handleLogin}>
                                         <CoolInput>
                                             <LabelText htmlFor="email" className="text">Email:</LabelText>
-                                            <TextInput type="email" id="email" placeholder="Enter email" name="email" className="input" value={credentials.email} onChange={(e) => onChangeInputs(e.target.value.toLowerCase(), 'email')} />
+                                            <TextInput type="email"
+                                                style={{ border: CorrectEmail ? '2px solid red' : '' }}
+                                                required id="email"
+                                                placeholder="Enter email" name="email" className="input" value={credentials.email} onChange={(e) => onChangeInputs(e.target.value.toLowerCase(), 'email')} />
                                         </CoolInput>
+
                                         <CoolInput>
                                             <LabelText htmlFor="password" className="text">Password:</LabelText>
                                             <TextInput type={showPassword ? 'text' : 'password'} id="password" placeholder="Enter Password" name="password" className="input" value={credentials.password} onChange={(e) => onChangeInputs(e.target.value.toLowerCase(), 'password')} />
@@ -143,42 +173,46 @@ const Login = () => {
                                                 }
                                             </EyeIconContainer>
                                         </CoolInput>
+
                                         <RememberContainer>
-                                            <p style={{ fontSize: '0.7rem', color: 'red' }}>
-                                                <Link style={{ color: 'red' }} to='/change-password'>Forget Password</Link>
-                                            </p>
+                                            <Link to='/change-password'>
+                                                <ForgotPasswordText >
+                                                    Forget password
+                                                </ForgotPasswordText>
+                                            </Link>
                                         </RememberContainer>
+
                                         <Btn type="submit">Login</Btn>
                                     </Form>
                                 </CustomContainer>
                             </LoginContainer>
 
 
-                            <StyledSlider {...settings}>
+                            {/* <StyledSlider {...settings}>
 
                                 <SliderItem>
-                                    <SlideImage src="https://res.cloudinary.com/dca9sij3n/image/upload/v1721728972/KIBA/icxfcykhrubodyr2pbxi.png" alt="Image 1" />
+                                    <SlideImage src="../../1.png" alt="Image 1" />
                                 </SliderItem>
                                 <SliderItem>
-                                    <SlideImage src="https://res.cloudinary.com/dca9sij3n/image/upload/v1721728972/KIBA/osv3t5fj9j7a7pcddaei.png" alt="Image 2" />
+                                    <SlideImage src="../../2.jpg" alt="Image 2" />
                                 </SliderItem>
                                 <SliderItem>
-                                    <SlideImage src="https://res.cloudinary.com/dca9sij3n/image/upload/v1721728971/KIBA/uojy4swdeuvhrkvejyox.jpg" alt="Image 3" />
+                                    <SlideImage src="../../3.png" alt="Image 3" />
                                 </SliderItem>
                                 <SliderItem>
-                                    <SlideImage src="https://res.cloudinary.com/dca9sij3n/image/upload/v1721728971/KIBA/aa2zzvwmey27d3plnazk.jpg" alt="Image 4" />
+                                    <SlideImage src="../../5.png" alt="Image 4" />
                                 </SliderItem>
                                 <SliderItem>
-                                    <SlideImage src="https://res.cloudinary.com/dca9sij3n/image/upload/v1721728923/KIBA/ojclcd60fdt23k9xnybk.jpg" alt="Image 5" />
+                                    <SlideImage src="../../7.jpg" alt="Image 5" />
                                 </SliderItem>
                                 <SliderItem>
-                                    <SlideImage src="https://res.cloudinary.com/dca9sij3n/image/upload/v1721728923/KIBA/g3cyeegvl6z955a0pfxp.jpg" alt="Image 6" />
+                                    <SlideImage src="../../8.jpg" alt="Image 6" />
                                 </SliderItem>
                                 <SliderItem>
-                                    <SlideImage src="https://res.cloudinary.com/dca9sij3n/image/upload/v1721729389/KIBA/cf9q4me17skw7xgrvmwe.png" alt="Image 7" />
+                                    <SlideImage src="../../9.jpg" alt="Image 7" />
                                 </SliderItem>
 
-                            </StyledSlider>
+                            </StyledSlider> */}
 
                         </InnerContainer>
                     </MainContainer>

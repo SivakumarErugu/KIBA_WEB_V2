@@ -10,7 +10,8 @@ import {
     MainContainer,
     Tile,
     TilesContainer,
-    Title
+    Title,
+    Icon
 } from './StyledComponents'
 
 import SideNav from '../SideNav/SideNav'
@@ -28,7 +29,7 @@ Chart.register(ArcElement, Tooltip, Legend);
 const Dashboard = () => {
     const [loader, setLoader] = useState(true)
     const [customers, setCustomersData] = useState([])
-    const [freeSamples,setFreeSamples] = useState(0)
+    const [freeSamples, setFreeSamples] = useState(0)
     const [cultivations, setCultivations] = useState({
         shrimp: 0,
         fish: 0,
@@ -94,16 +95,16 @@ const Dashboard = () => {
     const options = {
         responsive: true,
         plugins: {
-        legend: {
-            position: 'bottom',  // Position legend to the right
-            labels: {
-                boxWidth: 20,  // Width of the legend box
-                
+            legend: {
+                position: 'bottom',  // Position legend to the right
+                labels: {
+                    boxWidth: 20,  // Width of the legend box
+
+                },
             },
-        },
             tooltip: {
                 callbacks: {
-                    label: function(tooltipItem) {
+                    label: function (tooltipItem) {
                         const dataset = tooltipItem.dataset;
                         const total = dataset.data.reduce((acc, value) => acc + value, 0);
                         const value = dataset.data[tooltipItem.dataIndex];
@@ -128,20 +129,23 @@ const Dashboard = () => {
                     <DashBoard>
                         <TilesContainer>
                             <Tile>
-                                <FaUsers size={45} />
+                                <Icon>
+                                    <FaUsers style={{height:'100%',width:'100%'}}  />
+                                </Icon>
                                 <Title>Total Customers</Title>
                                 <Count>{customers.length}</Count>
                             </Tile>
                             <Tile>
-                                <GrTest size={44} />
-                                
+                                <Icon>
+                                    <GrTest style={{height:'100%',width:'100%'}}/>
+                                </Icon>
                                 <Title>Free Samples</Title>
                                 <Count>{freeSamples}</Count>
                             </Tile>
                         </TilesContainer>
 
                         <ChartContainer>
-                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', width: '80%'}}>
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', width: '80%' }}>
                                 <Doughnut data={data} options={options} />
                             </div>
                         </ChartContainer>

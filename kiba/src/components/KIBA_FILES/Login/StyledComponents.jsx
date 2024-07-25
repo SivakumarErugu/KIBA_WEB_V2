@@ -13,6 +13,7 @@ export const MainContainer = styled.div`
 export const InnerContainer = styled.div`
     display: flex;
     align-items: center;
+    justify-content: center;
     height: 100%;
     width: 100%;
     padding: 0px;
@@ -59,9 +60,15 @@ export const RememberContainer = styled.div`
 `
 
 export const Btn = styled.button`
+    width: 100%;
     background: #1e88e5;
     color: #fff;
     border-radius: 5px;
+    margin-top: 1rem;
+
+    @media screen and (max-width:1080px) {
+        width: 150%;
+    }
 `
 export const EyeIconContainer = styled.div`
     display: flex;
@@ -97,7 +104,6 @@ export const SliderItem = styled.div`
     height: fit-content;
     width: 95%; 
     background-color: #000;
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
     border-radius: 1.5rem;
     overflow: hidden;
 `;
@@ -112,10 +118,13 @@ export const CoolInput = styled.div`
     flex-direction: column;
     width: fit-content;
     position: static;
-    min-width: 240px;
     width: 100%;
     margin-top: 1rem;
     position: relative;
+
+    @media screen and (max-width:1080px) {
+        width: 150%;
+    }
 `;
 
 export const LabelText = styled.label`
@@ -123,7 +132,7 @@ export const LabelText = styled.label`
     color: #000;
     font-weight: 700;
     padding: 0 3px;
-    background: #86B6F6;
+    background: transparent;
     width: fit-content;
 `;
 
@@ -148,3 +157,18 @@ export const SlideItem = styled.div`
     width: 100%;
     height: 100%;
 `;
+
+export const ForgotPasswordText = styled.span`
+    font-size: 0.75rem;
+    text-decoration: underline;
+    color: blue;
+    font-weight: 700;
+    margin-top: 0.30rem;
+
+    @media screen and (max-width: 1080px){
+        font-size: 0.75rem;
+    }
+    @media screen and (min-width: 1566px){
+        font-size: 1rem;
+    }
+`

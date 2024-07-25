@@ -155,7 +155,7 @@ const ChangePassword = () => {
     }, [message])
 
     return (
-        <MainContainer>
+        <MainContainer style={{ background: 'url(../../backgroundImage.jpg) no-repeat center center fixed', backgroundSize: 'cover' }}>
             <InnerContainer>
                 <ImgTag
                     src="https://res.cloudinary.com/dca9sij3n/image/upload/v1719813835/rcip7lurlae11xlrgnio.png"
@@ -279,31 +279,31 @@ const ChangePassword = () => {
                     </CustomContainer>
                 </LoginContainer>
 
-                <StyledSlider {...settings}>
+                {/* <StyledSlider {...settings}>
 
                     <SliderItem>
-                        <SlideImage src="https://res.cloudinary.com/dca9sij3n/image/upload/v1721728972/KIBA/icxfcykhrubodyr2pbxi.png" alt="Image 1" />
+                        <SlideImage src="../../1.png" alt="Image 1" />
                     </SliderItem>
                     <SliderItem>
-                        <SlideImage src="https://res.cloudinary.com/dca9sij3n/image/upload/v1721728972/KIBA/osv3t5fj9j7a7pcddaei.png" alt="Image 2" />
+                        <SlideImage src="../../2.jpg" alt="Image 2" />
                     </SliderItem>
                     <SliderItem>
-                        <SlideImage src="https://res.cloudinary.com/dca9sij3n/image/upload/v1721728971/KIBA/uojy4swdeuvhrkvejyox.jpg" alt="Image 3" />
+                        <SlideImage src="../../3.png" alt="Image 3" />
                     </SliderItem>
                     <SliderItem>
-                        <SlideImage src="https://res.cloudinary.com/dca9sij3n/image/upload/v1721728971/KIBA/aa2zzvwmey27d3plnazk.jpg" alt="Image 4" />
+                        <SlideImage src="../../5.png" alt="Image 4" />
                     </SliderItem>
                     <SliderItem>
-                        <SlideImage src="https://res.cloudinary.com/dca9sij3n/image/upload/v1721728923/KIBA/ojclcd60fdt23k9xnybk.jpg" alt="Image 5" />
+                        <SlideImage src="../../7.jpg" alt="Image 5" />
                     </SliderItem>
                     <SliderItem>
-                        <SlideImage src="https://res.cloudinary.com/dca9sij3n/image/upload/v1721728923/KIBA/g3cyeegvl6z955a0pfxp.jpg" alt="Image 6" />
+                        <SlideImage src="../../8.jpg" alt="Image 6" />
                     </SliderItem>
                     <SliderItem>
-                        <SlideImage src="https://res.cloudinary.com/dca9sij3n/image/upload/v1721729389/KIBA/cf9q4me17skw7xgrvmwe.png" alt="Image 7" />
+                        <SlideImage src="../../9.jpg" alt="Image 7" />
                     </SliderItem>
 
-                </StyledSlider>
+                </StyledSlider> */}
 
 
             </InnerContainer>

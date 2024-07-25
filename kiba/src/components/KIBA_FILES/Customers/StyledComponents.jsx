@@ -484,15 +484,17 @@ export const SpanTag = styled.sup`
 // TableTag styling
 export const TableTag = styled.table`
   border: 2px solid #ccc;
-  height: fit-content;
+  height: 100%;
+  /* min-height: fit-content; */
   max-height: 100%;
+  width: 100%;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   padding: 0.4rem;
   border-radius: 1rem;
-  margin-top: 0.4rem;
   background: #EEF5FF;
+  overflow-y: auto;
 
   @media (max-width: ${breakpoints.tablet}) {
     height: auto;
@@ -536,6 +538,8 @@ export const TdTag = styled.td`
 export const ThTag = styled.th`
   width: 23.5%;
   text-align: left;
+  position: sticky;
+  top: 0;
 `;
 
 // TrTag styling
@@ -548,6 +552,10 @@ export const TrTag = styled.tr`
   margin: 2px 0px 2px 0px;
   border-bottom: 1px solid #ccc;
   background: #EEF5FF;
+  overflow-y: auto;
+    &:hover {
+        background-color: #e5e5e5;
+    }
 
   @media (max-width: ${breakpoints.mobile}) {
     flex-direction: column;
@@ -558,11 +566,16 @@ export const TrTag = styled.tr`
 export const DivX =styled.div`
   display: flex;
   align-items: center;
-  height: 100%;
-  width: 80%;
+  height: 3rem;
+  width: 70%;
   border: 2px solid #ccc;
   border-radius: 0.5rem;
   background: #fff;
   padding: 0rem 0.3rem 0rem 0.3rem;
 
+`
+
+export const DivY = styled.div`
+  height: 82%;
+  margin-top: 0.5rem;
 `

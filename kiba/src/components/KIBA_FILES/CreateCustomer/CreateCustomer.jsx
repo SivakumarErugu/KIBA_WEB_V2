@@ -38,6 +38,7 @@ import {
     UploadBtn,
     Switch,
     DatePickerWrapper,
+    Icon
 } from "./CreateCustomerStyles";
 
 const indianStates = [
@@ -181,12 +182,9 @@ const CreateCustomer = () => {
             }
 
             const data = await res.json();
-            // console.log("Image uploaded successfully:", data);
             setUploadImgStatus("Image uploaded successfully!");
             const url = data.url;
-            // console.log("this is", url);
             onChangeInput("image", url);
-            // Handle success or update UI
         } catch (error) {
             console.error("Error uploading image:", error);
             // Handle error or show error message
@@ -195,7 +193,32 @@ const CreateCustomer = () => {
 
     const ValidateForm = (customer) => {
         let error = false;
-        error = Object.values(customer).every((each) => each !== "");
+
+        if (
+            customer.first_name === '' ||
+            customer.last_name === '' ||
+            customer.mobile_number === '' ||
+            (!customer.same_for_whatsapp && customer.whatsapp_number === '') ||
+            customer.own_land === '' ||
+            customer.cultivation === '' ||
+            customer.state === '' ||
+            customer.district === '' ||
+            customer.city === '' ||
+            customer.pincode === '' ||
+            customer.place === '' ||
+            customer.customer === '' ||
+            customer.created_on === '' ||
+            (customer.trail_pack && customer.trail_pack_given_on === '')
+        ) {
+            error = true;
+        } else if (customer.mobile_number.length !== 10) {
+            error = true;
+        } else if (!customer.same_for_whatsapp && customer.whatsapp_number.length !== 10) {
+            error = true;
+        } else if (String(customer.pincode).length !== 6) {
+            error = true;
+        }
+
         return error;
     };
 
@@ -207,10 +230,10 @@ const CreateCustomer = () => {
 
         const isValid = ValidateForm(customer);
 
-        if (!isValid) {
+        if (isValid) {
             Swal.fire({
                 icon: "warning",
-                text: "Please fill in all the required fields.",
+                text: "Fill required details Correctly!",
                 confirmButtonText: "OK",
             });
             return;
@@ -235,12 +258,12 @@ const CreateCustomer = () => {
                     text: "Customer Added Successfully!",
                     confirmButtonText: "OK",
                 });
-                navigate('/customers')
+                navigate('/customers');
             } else {
                 console.error("Error adding design:", response.statusText);
                 Swal.fire({
                     icon: "warning",
-                    text: "Error adding design:",
+                    text: "Error adding customer: " + response.statusText,
                     confirmButtonText: "OK",
                 });
             }
@@ -273,6 +296,8 @@ const CreateCustomer = () => {
     const onBack = () => {
         navigate(-1);
     };
+
+
 
 
     return (
@@ -353,12 +378,16 @@ const CreateCustomer = () => {
                                                 : "Select  Cultivation"}
                                         </Span>
 
-                                        <FaAngleDown
-                                            style={{
-                                                transform: `rotate(${isCultivationActive ? "180deg" : "0deg"
-                                                    })`,
-                                            }}
-                                        />
+                                        <Icon>
+                                            <FaAngleDown
+                                                style={{
+                                                    transform: `rotate(${isCultivationActive ? "180deg" : "0deg"
+                                                        })`,
+                                                    height: '100%',
+                                                    width: '100%'
+                                                }}
+                                            />
+                                        </Icon>
                                     </CustomDropDown>
 
                                     {isCultivationActive && (
@@ -405,7 +434,7 @@ const CreateCustomer = () => {
                                 <InputTag
                                     style={{
                                         border:
-                                            trySubmit & (customerDetails.mobile_number === "")
+                                            trySubmit & (customerDetails.mobile_number === "" || customerDetails.mobile_number.length !== 10)
                                                 ? "2px solid red"
                                                 : "",
                                     }}
@@ -501,7 +530,7 @@ const CreateCustomer = () => {
                                 <InputTag
                                     style={{
                                         border:
-                                            trySubmit & (customerDetails.whatsapp_number === "")
+                                            trySubmit & (customerDetails.whatsapp_number === "" || customerDetails.whatsapp_number.length !== 10)
                                                 ? "2px solid red"
                                                 : "",
                                     }}
@@ -596,13 +625,16 @@ const CreateCustomer = () => {
                                                 ? customerDetails.state
                                                 : "Select State"}
                                         </Span>
-
-                                        <FaAngleDown
-                                            style={{
-                                                transform: `rotate(${isStateActive ? "180deg" : "0deg"
-                                                    })`,
-                                            }}
-                                        />
+                                        <Icon>
+                                            <FaAngleDown
+                                                style={{
+                                                    transform: `rotate(${isStateActive ? "180deg" : "0deg"
+                                                        })`,
+                                                    height: '100%',
+                                                    width: '100%'
+                                                }}
+                                            />
+                                        </Icon>
                                     </CustomDropDown>
 
                                     {isStateActive && (
@@ -670,7 +702,7 @@ const CreateCustomer = () => {
                                 <InputTag
                                     style={{
                                         border:
-                                            trySubmit & (customerDetails.pincode === "")
+                                            trySubmit & (customerDetails.pincode === "" || customerDetails.pincode.length !== 6)
                                                 ? "2px solid red"
                                                 : "",
                                     }}
@@ -711,7 +743,7 @@ const CreateCustomer = () => {
                                                         ? "2px solid red"
                                                         : ""
                                             }}
-                                            >
+                                        >
                                             <DatePicker
                                                 selected={selectedDate}
                                                 onChange={(date) => {

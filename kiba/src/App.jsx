@@ -1,17 +1,32 @@
 import { useState, useEffect } from 'react';
 import { RouterProvider } from 'react-router-dom';
+
+
 import KibaContext from './context/KibaContext';
 import router from './Router';
+
 
 function App() {
   const [activeTab, setActiveTab] = useState('Dashboard');
   const [customersTab, setCustomersTab] = useState('All Customers');
   const [admin, setAdmin] = useState({});
   const [isUserAuthenticated, setUserAuthenticated] = useState(true);
-  const [isHeaderPopupOn,setHeaderPopupOn] = useState(false)
-  const [isPortrait, setIsPortrait] = useState(window.innerHeight > window.innerWidth);
+  const [isHeaderPopupOn, setHeaderPopupOn] = useState(false)
+
+
+  const PathText = location.pathname.split('/')
 
   const apiUrl = import.meta.env.VITE_API_URL;
+
+  useEffect(() => {
+    if (PathText[1] === 'dashboard') {
+      setActiveTab('Dashboard')
+    } else if(PathText[1] === 'customers' || PathText[1] === 'customer') {
+      setActiveTab('Customers')
+    } else {
+      setActiveTab('')
+    }
+  },[])
 
   // GETTING THE ADMIN DATA
   useEffect(() => {
@@ -79,7 +94,7 @@ function App() {
         setHeaderPopup: ToggleHeaderPopup
       }}
     >
-        <RouterProvider router={router} />
+      <RouterProvider router={router} />
     </KibaContext.Provider>
   );
 }

@@ -108,6 +108,7 @@ export const BackBtn = styled.button`
     border: none; 
     outline: none;
     background: transparent;
+    margin-right: 1rem;
 
     &:focus {
         outline: none; /* Ensure no outline on focus */

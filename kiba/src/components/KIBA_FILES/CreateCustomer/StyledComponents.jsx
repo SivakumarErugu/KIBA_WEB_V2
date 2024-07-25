@@ -297,3 +297,19 @@ export const CreatedDate = styled.span`
     padding: 0;
     margin: 0;
 `
+
+export const Icon = styled.div`
+    width: 1.3rem;
+    height: 1.3rem;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #495057;
+
+    @media only screen and (min-width: 1366px) {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+`;

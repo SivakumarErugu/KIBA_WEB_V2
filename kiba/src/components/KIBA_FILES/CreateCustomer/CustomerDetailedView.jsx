@@ -39,7 +39,8 @@ import {
     UploadBtn,
     Switch,
     DatePickerWrapper,
-    CreatedDate
+    CreatedDate,
+    Icon
 } from './StyledComponents'
 
 
@@ -353,7 +354,9 @@ const CustomerDetailedView = () => {
                                                     onClick={() => setCultivationActive(!isCultivationActive)}>
                                                     <Span>{customerDetails.cultivation ? customerDetails.cultivation : 'Select  Cultivation'}</Span>
 
-                                                    <FaAngleDown style={{ transform: `rotate(${isCultivationActive ? '180deg' : '0deg'})` }} />
+                                                    <Icon>
+                                                        <FaAngleDown style={{ transform: `rotate(${isCultivationActive ? '180deg' : '0deg'})`, height: '100%', width: '100%' }} />
+                                                    </Icon>
                                                 </CustomDropDown>
 
                                                 {isCultivationActive && (
@@ -499,7 +502,9 @@ const CustomerDetailedView = () => {
                                                     onClick={() => setStateActive(!isStateActive)}>
                                                     <Span>{customerDetails.state ? customerDetails.state : 'Select state'}</Span>
 
-                                                    <FaAngleDown style={{ transform: `rotate(${isStateActive ? '180deg' : '0deg'})` }} />
+                                                    <Icon>
+                                                        <FaAngleDown style={{ transform: `rotate(${isStateActive ? '180deg' : '0deg'})`, height: '100%', width: '100%' }} />
+                                                    </Icon>
                                                 </CustomDropDown>
 
                                                 {isStateActive && (

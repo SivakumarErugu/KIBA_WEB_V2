@@ -74,9 +74,8 @@ const Header = () => {
     return (
         <HeaderContainer>
             <CustomProfile>
-                <ProfileIcon ref={popUpRef} >
-                    <Span onClick={onClickProfile}>K</Span>
-
+                <ProfileIcon ref={popUpRef} onClick={onClickProfile}>
+                    <Span >K</Span>
                 </ProfileIcon>
 
                 {isHeaderPopupOn && (

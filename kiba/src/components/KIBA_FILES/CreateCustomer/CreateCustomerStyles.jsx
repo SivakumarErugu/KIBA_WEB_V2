@@ -287,3 +287,20 @@ export const DatePickerWrapper  = styled.div`
     cursor: pointer;
     }
 `
+
+export const Icon = styled.div`
+    width: 1.3rem;
+    height: 1.3rem;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #495057;
+    /* border: 1px solid red; */
+
+    @media only screen and (min-width: 1366px) {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+`;
