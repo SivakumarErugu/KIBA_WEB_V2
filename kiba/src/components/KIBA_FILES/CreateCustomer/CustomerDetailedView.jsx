@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import Cookies from 'universal-cookie';
 
 import SideNav from '../SideNav/SideNav'
 import Header from '../Header/Header'
@@ -79,6 +80,7 @@ const indianStates = [
 ];
 
 const CustomerDetailedView = () => {
+    const cookies = new Cookies();
     const { id } = useParams();
     const navigate = useNavigate();
     const [customerDetails, setCustomerDetails] = useState({})
@@ -117,16 +119,34 @@ const CustomerDetailedView = () => {
 
     useEffect(() => {
         setLoader(true)
+        const savedToken = cookies.get('KIBAJWTToken');
+
         const getCustomerData = async () => {
+            try {
             const url = `${apiUrl}/customer/${id}`;
             const options = {
                 method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${savedToken}`, // Include authorization if required
+                    'Content-Type': 'application/json'
+                }
+            };
+            const response = await fetch(url, options);
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Error: ${response.status} - ${errorText}`);
             }
-            const response = await fetch(url, options)
-            const data = await response.json()
-            setCustomerDetails(data)
-            setLocalImage(data.image)
-            setLoader(false)
+
+            const data = await response.json();
+            setCustomerDetails(data);
+            setLocalImage(data.image);
+        } catch (error) {
+            console.error('Error fetching customer data:', error.message);
+            // Optionally set an error state here
+        } finally {
+            setLoader(false);
+        }
         }
 
         getCustomerData()
@@ -216,33 +236,38 @@ const CustomerDetailedView = () => {
         return Object.values(customerDetails).every(each => each !== '');
     };
 
+    //UPDATE CUSTOMER
     const onSubmitForm = async (e) => {
         e.preventDefault();
-        setTrySubmit(true)
-
-        const isValid = ValidateForm();
-
+        setTrySubmit(true);
+    
+        const isValid = ValidateForm(); // Ensure this function returns true if valid
+    
         if (!isValid) {
             Swal.fire({
                 icon: 'warning',
                 text: 'Please fill in all the required fields.',
                 confirmButtonText: 'OK'
             });
+            setTrySubmit(false); // Reset submission flag
             return;
         }
-
-        const url = `${apiUrl}/customer/${id}`;
-
+    
+        const savedToken = cookies.get('KIBAJWTToken'); // Retrieve token from cookies if required
+        const url = `${apiUrl}/customer/${id}`; // Make sure `id` is defined and valid
+    
         const options = {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${savedToken}`, // Add Bearer token if needed
             },
-            body: JSON.stringify(customerDetails)
+            body: JSON.stringify(customerDetails), // Ensure `customerDetails` is correctly defined
         };
-
+    
         try {
             const response = await fetch(url, options);
+    
             if (response.ok) {
                 console.log('Customer Updated Successfully!');
                 Swal.fire({
@@ -251,10 +276,11 @@ const CustomerDetailedView = () => {
                     confirmButtonText: 'OK'
                 });
             } else {
-                console.error('Error updating customer:', response.statusText);
+                const errorText = await response.text(); // Retrieve detailed error message
+                console.error('Error updating customer:', errorText);
                 Swal.fire({
                     icon: 'error',
-                    text: 'Failed to update customer. Please try again later.',
+                    text: `Failed to update customer: ${errorText}`,
                     confirmButtonText: 'OK'
                 });
             }
@@ -265,8 +291,11 @@ const CustomerDetailedView = () => {
                 text: 'An unexpected error occurred. Please try again later.',
                 confirmButtonText: 'OK'
             });
+        } finally {
+            setTrySubmit(false); // Reset submission flag
         }
     };
+    
 
     const setTrailData = (date) => {
         setSelectedDate(date);

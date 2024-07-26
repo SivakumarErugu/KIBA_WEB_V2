@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
 // COMPONENT IMPORTS
 import SideNav from '../SideNav/SideNav'
@@ -275,6 +276,7 @@ const Data = [
 ]
 
 const Customers = () => {
+    const cookies = new Cookies();
     const FilterDropdownRef = useRef(null)
     const [customersData, setCustomersData] = useState(Data)
     const [SearchText, setSearchText] = useState('')
@@ -294,21 +296,33 @@ const Customers = () => {
     }, [])
 
     const getCustomersData = async () => {
-        setLoader(true)
+        const savedToken = cookies.get('KIBAJWTToken');
+        setLoader(true);
         try {
-            const url = `${apiUrl}/customers`;
+            const url = `${apiUrl}/customers`;    
             const options = {
                 method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${savedToken}`,
+                    'Content-Type': 'application/json' // Optional: ensure the content type is set to JSON
+                }
+            };
+    
+            const response = await fetch(url, options);
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
             }
-
-            const response = await fetch(url, options)
-            const data = await response.json()
-            setCustomersData(data)
-            setLoader(false)
-        } catch {
-            console.log('Error fetching Customers Data')
+    
+            const data = await response.json();
+            setCustomersData(data);
+        } catch (error) {
+            console.log('Error fetching Customers Data:', error.message);
+        } finally {
+            setLoader(false);
         }
-    }
+    };
+    
 
     // DROPDOWN OUTSIDE CLICK CONTROL
     useEffect(() => {
@@ -394,30 +408,38 @@ const Customers = () => {
 
 
     const onClickSingleDelete = async (ID) => {
+        const savedToken = cookies.get('KIBAJWTToken');
         try {
             const url = `${apiUrl}/Customer/${ID}`;
             const options = {
                 method: 'DELETE',
                 headers: {
+                    'Authorization': `Bearer ${savedToken}`,
                     'Content-Type': 'application/json',
                 }
             };
-
+    
             const response = await fetch(url, options);
+    
             if (!response.ok) {
                 const errorText = await response.text();
                 throw new Error(`Error: ${response.status} - ${errorText}`);
             }
-
+    
+            // Assuming the API returns a status or message in text format
             const result = await response.text();
-            getCustomersData()
-            setAlertText('Customer Deleted Successfully')
+            
+            // Refresh the data
+            await getCustomersData();
+    
+            // Notify the user
+            setAlertText('Customer Deleted Successfully');
         } catch (error) {
             console.error('Error deleting customer:', error);
-            alert('Failed to delete Customer');
+            setAlertText('Failed to delete Customer'); // Use setAlertText to show error message
         }
     };
-
+    
 
     // Use effect to hide the alert after 3 seconds
     useEffect(() => {
@@ -432,33 +454,41 @@ const Customers = () => {
     }, [alertText]);
 
     const onClickMultipleDelete = async () => {
+        const savedToken = cookies.get('KIBAJWTToken');
         try {
-            const idsToDelete = selectedRecords; // Example array of customer IDs to delete
-
-            const url = `${apiUrl}/Delete/Multiple`;
+            const idsToDelete = selectedRecords; // Array of customer IDs to delete
+    
+            const url = `${apiUrl}/Customers/Delete/Multiple`; // Ensure this endpoint matches your server's route
             const options = {
                 method: 'DELETE',
                 headers: {
+                    'Authorization': `Bearer ${savedToken}`,
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ ids: idsToDelete })
             };
-
+    
             const response = await fetch(url, options);
+    
             if (!response.ok) {
                 const errorText = await response.text();
                 throw new Error(`Error: ${response.status} - ${errorText}`);
             }
-
-            const result = await response.text();
+    
+            // If the server returns JSON, parse it. If not, keep text response.
+            const result = await response.text(); 
+    
+            // Notify the user
             alert('Customers Deleted Successfully');
-            getCustomersData(); // Assuming this function retrieves updated customer data
+    
+            // Refresh the customer data
+            await getCustomersData();
         } catch (error) {
             console.error('Error deleting customers:', error);
             alert('Failed to delete customers');
         }
     };
-
+    
     const onSelectRecord = (ID) => {
         let newSelectedRecords
         if (selectedRecords.includes(ID)) {

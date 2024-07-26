@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Cookies from 'universal-cookie';
 
 import {
     ChartContainer,
@@ -27,6 +28,7 @@ Chart.register(ArcElement, Tooltip, Legend);
 
 
 const Dashboard = () => {
+    const cookies = new Cookies();
     const [loader, setLoader] = useState(true)
     const [customers, setCustomersData] = useState([])
     const [freeSamples, setFreeSamples] = useState(0)
@@ -44,10 +46,15 @@ const Dashboard = () => {
     }, []);
 
     const getCustomersData = async () => {
+        const savedToken = cookies.get('KIBAJWTToken');
         setLoader(true);
         try {
             const url = `${apiUrl}/customers`;
-            const response = await fetch(url);
+            const response = await fetch(url, {
+                headers: {
+                    'Authorization': `Bearer ${savedToken}`
+                }
+            });
 
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);

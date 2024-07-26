@@ -24,8 +24,27 @@ export const LoginContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 48%;
     height: 100%;
+
+    @media screen and (max-width: 320px){
+        width: 100%;
+    }
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        width: 100%;
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        width: 100%;
+    }
+
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        width: 50%;
+    }
+
+    @media screen and (min-width: 1025px) {
+        width: 40%;
+    }
 `
 export const CustomContainer = styled.div`
     display: flex;
@@ -35,6 +54,30 @@ export const CustomContainer = styled.div`
     width: 80%;
     height: 100%;
     padding: 5rem;
+
+    @media screen and (max-width: 320px){
+        width: 100%;
+        padding: 0;
+    }
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        width: 100%;
+        padding: 0;
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        width: 90%;
+        padding: 2rem;
+    }
+
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        width: 100%;
+        padding: 0;
+    }
+    @media screen and (min-width: 1025px) {
+        width: 90%;
+        padding: 4rem;
+    }
 `
 
 export const Heading = styled.h1`
@@ -42,6 +85,33 @@ export const Heading = styled.h1`
     color: #000;
     margin: 1rem 1rem 0rem 0rem;
     align-self: self-start;
+    z-index: 100;
+
+    @media screen and (max-width: 320px){
+        font-size: 1.5rem;
+        width: 100%;
+        margin-top: 5rem;
+        text-align: left;
+    }
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        font-size: 1.8rem;
+        width: 100%;
+        margin-top: 5rem;
+        text-align: left;
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        font-size: 2rem;
+        width: 100%;
+        margin-top: 8rem;
+        text-align: left;
+    }
+    @media screen and (min-width: 1025px) {
+        font-size: 2.2rem;
+        width: 100%;
+        text-align: left;
+    }
 `
 export const Form = styled.form`
     display: flex;
@@ -52,6 +122,26 @@ export const Ptag = styled.p`
     margin: 0;
     align-self: self-start;
     margin: 1rem 1rem 1rem 0rem;
+    text-align: left;
+
+    @media screen and (max-width: 320px){
+        font-size: 0.9rem;
+        width: 100%;
+    }
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        font-size: 1rem;
+        width: 100%;
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        font-size: 1.1rem;
+        width: 100%;
+    }
+    @media screen and (min-width: 1025px) {
+        font-size: 1.2rem;
+        width: 100%;
+    }
 `
 export const RememberContainer = styled.div`
     display: flex;
@@ -65,10 +155,6 @@ export const Btn = styled.button`
     color: #fff;
     border-radius: 5px;
     margin-top: 1rem;
-
-    @media screen and (max-width:1080px) {
-        width: 150%;
-    }
 `
 export const EyeIconContainer = styled.div`
     display: flex;
@@ -83,6 +169,43 @@ export const ImgTag = styled.img`
     position: absolute;
     top: 0.5rem;
     left: 0.5rem;
+
+    @media screen and (max-width: 320px){
+        width: 12rem;
+        height: 9rem;
+        top: 0.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        width: 17rem;
+        height: 10rem;
+        top: 0.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        width: 19rem;
+        height: 12rem;
+        top: 0.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        width: 8rem;
+        height: 6rem;
+        top: 0.8rem;
+        left: 0.8rem;
+    }
+    @media screen and (min-width: 1025px) {
+        width: 9rem;
+        height: 7rem;
+        top: 0.8rem;
+        left: 0.8rem;
+    }
 `
 
 
@@ -116,15 +239,9 @@ export const SlideImage = styled.img`
 export const CoolInput = styled.div`
     display: flex;
     flex-direction: column;
-    width: fit-content;
-    position: static;
     width: 100%;
     margin-top: 1rem;
     position: relative;
-
-    @media screen and (max-width:1080px) {
-        width: 150%;
-    }
 `;
 
 export const LabelText = styled.label`
@@ -133,10 +250,15 @@ export const LabelText = styled.label`
     font-weight: 700;
     padding: 0 3px;
     background: transparent;
-    width: fit-content;
+    width: 100%;
+
+    @media screen and (min-width: 1025px) {
+        font-size: 0.85rem;
+    }
 `;
 
-const InputStyles = css`
+export const TextInput = styled.input`
+    width: 100%;
     padding: 11px 10px;
     font-size: 0.75rem;
     border: 2px #000 solid;
@@ -146,10 +268,6 @@ const InputStyles = css`
     &:focus {
         outline: none;
     }
-`;
-
-export const TextInput = styled.input`
-    ${InputStyles}
 `;
 
 
@@ -169,6 +287,8 @@ export const ForgotPasswordText = styled.span`
         font-size: 0.75rem;
     }
     @media screen and (min-width: 1566px){
-        font-size: 1rem;
+        font-size: 0.80rem;
+        font-weight: 0;
     }
+
 `

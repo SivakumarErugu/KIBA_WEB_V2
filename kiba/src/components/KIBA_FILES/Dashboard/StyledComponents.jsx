@@ -57,24 +57,36 @@ export const Tile = styled.div`
 `
 export const Title = styled.span`
     width: 100%;
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin: 0px;
     font-weight: 550;
     padding: 0;
     text-align: right;
 
-    @media screen and (max-width:1080px){
+    @media only screen and (min-width:1080px){
+        font-size: 1rem;
+    }
+    @media screen and (min-width:768px) and (max-width:1024px) {
         font-size: 0.7rem;
+    }
+    @media screen and (min-width:350px)and (max-width:600px){
+        font-size: 0.4rem;
     }
 `
 export const Count = styled.span`
     margin-top: 0.1rem;
-    font-size: 1.8rem;
-    font-weight: 600;
     color: #FFF;
     text-align: right;
     padding: 0;
     height: fit-content;
+    font-size: 1rem;
+
+    @media screen and (min-width:1080px) {
+        font-size: 1.8rem;
+    }
+    @media screen and (min-width:768px) and (max-width:1024px) {
+        font-size: 1.3rem;
+    }
 `
 export const ChartContainer = styled.div`
     height: 65%;

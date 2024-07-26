@@ -21,7 +21,7 @@ function App() {
   useEffect(() => {
     if (PathText[1] === 'dashboard') {
       setActiveTab('Dashboard')
-    } else if(PathText[1] === 'customers' || PathText[1] === 'customer') {
+    } else if(PathText[1] === 'customers' || PathText[1] === 'customer' || PathText[1] === 'create-customer') {
       setActiveTab('Customers')
     } else {
       setActiveTab('')

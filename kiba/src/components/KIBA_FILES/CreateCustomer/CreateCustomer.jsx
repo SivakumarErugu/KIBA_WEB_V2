@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import Cookies from 'universal-cookie';
 
 import SideNav from "../SideNav/SideNav";
 import Header from "../Header/Header";
@@ -73,6 +74,7 @@ const indianStates = [
 ];
 
 const CreateCustomer = () => {
+    const cookies = new Cookies();
     const navigate = useNavigate();
 
     const [customerDetails, setCustomerDetails] = useState({
@@ -224,33 +226,39 @@ const CreateCustomer = () => {
 
     const onSubmitForm = async (e) => {
         e.preventDefault();
-
-        setTrySubmit(true);
+        const savedToken = cookies.get('KIBAJWTToken'); // Retrieve the saved token from cookies
+    
+        setTrySubmit(true); // Set flag indicating form submission attempt
+    
+        // Ensure `formattedData` is defined correctly in your component
         let customer = { ...customerDetails, created_on: formattedData };
-
-        const isValid = ValidateForm(customer);
-
-        if (isValid) {
+    
+        // Validate form data
+        const isValid = !ValidateForm(customer);
+    
+        if (!isValid) {
             Swal.fire({
                 icon: "warning",
-                text: "Fill required details Correctly!",
+                text: "Fill required details correctly!",
                 confirmButtonText: "OK",
             });
             return;
         }
-
+    
         const url = `${apiUrl}/new/customer`;
-
+    
         const options = {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${savedToken}`, // Add Bearer token
             },
             body: JSON.stringify(customer),
         };
-
+    
         try {
             const response = await fetch(url, options);
+    
             if (response.ok) {
                 console.log("Customer Added Successfully!");
                 Swal.fire({
@@ -258,9 +266,12 @@ const CreateCustomer = () => {
                     text: "Customer Added Successfully!",
                     confirmButtonText: "OK",
                 });
-                navigate('/customers');
+                navigate('/customers'); // Redirect upon successful submission
+    
+                // Optionally, reset the form or customer details
+                // resetForm(); // If you have a resetForm function
             } else {
-                console.error("Error adding design:", response.statusText);
+                console.error("Error adding customer:", response.statusText);
                 Swal.fire({
                     icon: "warning",
                     text: "Error adding customer: " + response.statusText,
@@ -271,11 +282,12 @@ const CreateCustomer = () => {
             console.error("Error:", error.message);
             Swal.fire({
                 icon: "warning",
-                text: error.message,
+                text: "Error: " + error.message,
                 confirmButtonText: "OK",
             });
         }
     };
+    
 
     const setTrailData = (date) => {
         if (!date) return ''

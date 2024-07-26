@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Cookies from 'universal-cookie';
 
 // ICON IMPORTS
 import { FaRegEye } from "react-icons/fa";
@@ -26,9 +27,11 @@ import {
     CoolInput,
     LabelText,
     TextInput,
+    PopUpText
 } from "./StyledComponents";
 
 const ChangePassword = () => {
+    const cookies = new Cookies();
     const [credentials, setCredentials] = useState({
         email: "sivakumar.erugu@nowitservices.com",
         password: "",
@@ -41,7 +44,9 @@ const ChangePassword = () => {
     const [isOtpActive, setOtpActive] = useState(false);
     const [isPasswordActive, setpasswordActive] = useState(false)
     const [message, setMessage] = useState('');
+    const [msgColor, setMsgColor] = useState('')
     const [otp, setOtp] = useState('')
+    const apiUrl = import.meta.env.VITE_API_URL;
 
 
     const settings = {
@@ -60,10 +65,12 @@ const ChangePassword = () => {
         const apiUrl = import.meta.env.VITE_API_URL;
         // Prepare the URL and request options
         const url = `${apiUrl}/admin/update`;
+        const savedToken = cookies.get('KIBAJWTToken');
 
         const options = {
             method: "PUT",
             headers: {
+                'Authorization': `Bearer ${savedToken}`,
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({ password: newPassword }), // Send only the new password
@@ -120,27 +127,30 @@ const ChangePassword = () => {
         e.preventDefault()
         const email = credentials.email
         try {
-            const response = await axios.post('http://13.127.156.81:3000/send-otp', { email });
+            const response = await axios.post(`${apiUrl}/send-otp`, { email });
             setMessage(response.data.message)
+            setMsgColor('green')
             setGetOtpActive(false)
             setOtpActive(true)
         } catch (error) {
             setMessage('Failed to send OTP')
+            setMsgColor('red')
         }
     };
-
 
 
     const handleVerifyOtp = async (e) => {
         e.preventDefault()
         const email = credentials.email
         try {
-            const response = await axios.post('http://13.127.156.81:3000/verify-otp', { email, otp });
+            const response = await axios.post(`${apiUrl}/verify-otp`, { email, otp });
             setMessage(response.data.message);
             setOtpActive(false)
+            setMsgColor('green')
             setpasswordActive(true)
         } catch (error) {
             setMessage('Invalid OTP');
+            setMsgColor('red')
         }
     };
 
@@ -155,10 +165,10 @@ const ChangePassword = () => {
     }, [message])
 
     return (
-        <MainContainer style={{ background: 'url(../../backgroundImage.jpg) no-repeat center center fixed', backgroundSize: 'cover' }}>
+        <MainContainer style={{ background: 'url(../../BlueDark2.png) no-repeat center center fixed', backgroundSize: 'cover' }}>
             <InnerContainer>
                 <ImgTag
-                    src="https://res.cloudinary.com/dca9sij3n/image/upload/v1719813835/rcip7lurlae11xlrgnio.png"
+                    src="../../kiba-logo-1.png"
                     alt="Image description"
                 />
                 <LoginContainer>
@@ -231,19 +241,18 @@ const ChangePassword = () => {
                                     </CoolInput>
 
                                     <CoolInput>
-                                        <LabelText htmlFor="input">Confirm Password:</LabelText>
+                                        <LabelText htmlFor="confirmPassword">Confirm Password:</LabelText>
 
                                         <TextInput
                                             type={showPassword2 ? "text" : "password"}
-                                            placeholder="Enter Password"
-                                            name="input"
-                                            value={
-                                                credentials.confirmPassword &&
-                                                credentials.confirmPassword
-                                            }
-                                            onChange={(e) =>
-                                                onChangeInputs(e.target.value, "confirmPassword")
-                                            }
+                                            placeholder="Confirm Password"
+                                            name="confirmPassword"
+                                            value={credentials.confirmPassword || ''}
+                                            onChange={(e) => onChangeInputs(e.target.value, "confirmPassword")}
+                                            readOnly={credentials.password === ''}
+                                            style={{
+                                                border: credentials.confirmPassword && credentials.confirmPassword !== credentials.password ? '2px solid red' : ''
+                                            }}
                                         />
                                         <EyeIconContainer>
                                             {showPassword2 ? (
@@ -275,7 +284,7 @@ const ChangePassword = () => {
                         </Form>
                         <Line></Line>
 
-                        <span style={{ color: 'red' }}>{message}</span>
+                        <PopUpText style={{ color: `${msgColor}` }} >{message}</PopUpText>
                     </CustomContainer>
                 </LoginContainer>
 

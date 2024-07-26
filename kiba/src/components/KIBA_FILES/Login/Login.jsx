@@ -146,7 +146,7 @@ const Login = () => {
                 const { admin } = value;
 
                 return (
-                    <MainContainer style={{ background: 'url(../../backgroundImage.jpg) no-repeat center center fixed', backgroundSize: 'cover' }}>
+                    <MainContainer style={{ background: 'url(../../BlueDark2.png) no-repeat center center fixed', backgroundSize: 'cover' }}>
                         <InnerContainer>
                             <ImgTag src="../../kiba-logo-1.png" alt="Image" />
 

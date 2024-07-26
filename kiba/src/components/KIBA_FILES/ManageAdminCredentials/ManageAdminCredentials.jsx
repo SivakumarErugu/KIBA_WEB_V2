@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
 import {
     ProfileCon, InnerContainer, CustomContainer, CustomProfile, Title, FieldContainer, LabelTag, H1Tag, InputTag, Btn, BackBtn, CustomPart, Title2, SaveBtn,
@@ -21,6 +22,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import Swal from 'sweetalert2';
 
 const ManageAdminCredentials = () => {
+    const cookies = new Cookies();
     const navigate = useNavigate()
     const [loader, setLoader] = useState(false)
     const [Profile, setProfile] = useState({})
@@ -31,12 +33,17 @@ const ManageAdminCredentials = () => {
 
     // GETTING THE ADMIN DATA
     useEffect(() => {
+        const savedToken = cookies.get('KIBAJWTToken');
         setLoader(true)
         const getAdminData = async () => {
             try {
                 const url = `${apiUrl}/admin`;
                 const options = {
                     method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${savedToken}`,
+                        'Content-Type': 'application/json',
+                    },
                 }
 
                 const response = await fetch(url, options)
@@ -55,11 +62,13 @@ const ManageAdminCredentials = () => {
     const onChangeAdminCredentials = async (id, newPassword, e) => {
         e.preventDefault();
 
+        const savedToken = cookies.get('KIBAJWTToken');
         // Prepare the URL and request options
         const url = `${apiUrl}/admin/update`;
         const options = {
             method: 'PUT',
             headers: {
+                'Authorization': `Bearer ${savedToken}`,
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ password: newPassword })  // Send only the new password
@@ -121,7 +130,7 @@ const ManageAdminCredentials = () => {
                                 </div>
 
                                 {loader ?
-                                    <CustomProfile style={{alignItems:'center',justifyContent:'center'}}>
+                                    <CustomProfile style={{ alignItems: 'center', justifyContent: 'center' }}>
                                         <DotSpinner>
                                             <DotSpinnerDot />
                                             <DotSpinnerDot />
@@ -154,7 +163,7 @@ const ManageAdminCredentials = () => {
 
                                                     <FieldContainer>
                                                         <LabelTag>Email :</LabelTag>
-                                                        <InputTag type='text' placeholder='Enter Email' value={Profile.email} readOnly/>
+                                                        <InputTag type='text' placeholder='Enter Email' value={Profile.email} readOnly />
                                                     </FieldContainer>
 
                                                     <FieldContainer >

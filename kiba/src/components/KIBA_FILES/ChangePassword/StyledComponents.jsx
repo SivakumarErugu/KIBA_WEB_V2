@@ -20,18 +20,6 @@ export const MainContainer = styled.div`
     justify-content: center;
     align-items: center;
     padding: 2rem;
-
-    @media (max-width: ${breakpoints.laptop}) {
-        padding: 1.5rem;
-    }
-
-    @media (max-width: ${breakpoints.tablet}) {
-        padding: 1rem;
-    }
-
-    @media (max-width: ${breakpoints.mobileL}) {
-        padding: 0.5rem;
-    }
 `;
 
 export const InnerContainer = styled.div`
@@ -43,22 +31,32 @@ export const InnerContainer = styled.div`
     padding: 0px;
     background: transparent;
     position: relative;
-
-    @media (max-width: ${breakpoints.laptop}) {
-        flex-direction: column;
-    }
 `;
 
 export const LoginContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 48%;
     height: 100%;
 
-    @media (max-width: ${breakpoints.laptop}) {
+    @media screen and (max-width: 320px){
         width: 100%;
-        height: auto;
+    }
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        width: 100%;
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        width: 100%;
+    }
+
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        width: 50%;
+    }
+
+    @media screen and (min-width: 1025px) {
+        width: 40%;
     }
 `;
 
@@ -70,18 +68,30 @@ export const CustomContainer = styled.div`
     width: 80%;
     height: 100%;
     padding: 5rem;
+    position: relative;
 
-    @media (max-width: ${breakpoints.laptop}) {
-        padding: 3rem;
+    @media screen and (max-width: 320px){
+        width: 100%;
+        padding: 0;
     }
 
-    @media (max-width: ${breakpoints.tablet}) {
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        width: 100%;
+        padding: 0;
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        width: 90%;
         padding: 2rem;
     }
 
-    @media (max-width: ${breakpoints.mobileL}) {
-        padding: 1.5rem;
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        width: 100%;
+        padding: 0;
+    }
+    @media screen and (min-width: 1025px) {
         width: 90%;
+        padding: 4rem;
     }
 `;
 
@@ -103,16 +113,34 @@ export const CardContainer = styled.div`
 export const Heading = styled.h1`
     font-size: 2rem;
     color: #000;
-    margin: 1rem 1rem 2rem 0rem;
+    margin: 1rem 1rem 0rem 0rem;
     align-self: self-start;
+    z-index: 100;
 
-    @media (max-width: ${breakpoints.tablet}) {
-        font-size: 1.75rem;
+    @media screen and (max-width: 320px){
+        font-size: 1.1rem;
+        width: 100%;
+        margin-top: 5rem;
+        text-align: left;
     }
 
-    @media (max-width: ${breakpoints.mobileL}) {
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        font-size: 1.4rem;
+        width: 100%;
+        margin-top: 5rem;
+        text-align: left;
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
         font-size: 1.5rem;
-        margin: 1rem 0.5rem;
+        width: 100%;
+        margin-top: 8rem;
+        text-align: left;
+    }
+    @media screen and (min-width: 1025px) {
+        font-size: 2rem;
+        width: 100%;
+        text-align: left;
     }
 `;
 
@@ -189,11 +217,41 @@ export const ImgTag = styled.img`
     top: 0.5rem;
     left: 0.5rem;
 
-    @media (max-width: ${breakpoints.mobileL}) {
-        width: 5rem;
-        height: 4rem;
-        top: 0.3rem;
-        left: 0.3rem;
+    @media screen and (max-width: 320px){
+        width: 12rem;
+        height: 9rem;
+        top: 0.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        width: 17rem;
+        height: 10rem;
+        top: 0.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        width: 19rem;
+        height: 12rem;
+        top: 0.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        width: 8rem;
+        height: 6rem;
+        top: 0.8rem;
+        left: 0.8rem;
+    }
+    @media screen and (min-width: 1025px) {
+        width: 9rem;
+        height: 7rem;
+        top: 0.8rem;
+        left: 0.8rem;
     }
 `;
 
@@ -233,10 +291,8 @@ export const SlideImage = styled.img`
 export const CoolInput = styled.div`
     display: flex;
     flex-direction: column;
-    width: fit-content;
-    position: static;
-    min-width: 240px;
     width: 100%;
+    margin-top: 1rem;
     position: relative;
 `;
 
@@ -244,18 +300,20 @@ export const LabelText = styled.label`
     font-size: 0.75rem;
     color: #000;
     font-weight: 700;
-    /* position: relative; */
-    /* top: 0.5rem; */
-    /* margin: 0 0 0 7px; */
     padding: 0 3px;
     background: transparent;
-    width: fit-content;
+    width: 100%;
+
+    @media screen and (min-width: 1025px) {
+        font-size: 0.85rem;
+    }
 `;
 
-const InputStyles = css`
+export const TextInput = styled.input`
+    width: 100%;
     padding: 11px 10px;
     font-size: 0.75rem;
-    border: 2px solid #000 !important;
+    border: 2px #000 solid;
     border-radius: 5px;
     background: #FFFFFF;
 
@@ -264,12 +322,15 @@ const InputStyles = css`
     }
 `;
 
-export const TextInput = styled.input`
-    ${InputStyles}
-`;
-
 
 export const SlideItem = styled.div`
     width: 100%;
     height: 100%;
 `;
+export const PopUpText = styled.span`
+    font-size: 1rem;
+    position: absolute;
+    top: 10%;
+    color: green;
+    font-weight: 600;
+`

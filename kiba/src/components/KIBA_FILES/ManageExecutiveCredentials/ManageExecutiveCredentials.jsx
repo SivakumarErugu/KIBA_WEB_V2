@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
 import {
     ProfileCon, InnerContainer, CustomContainer, CustomProfile, Title, FieldContainer, LabelTag, H1Tag, InputTag, Btn, BackBtn, CustomPart, Title2, SaveBtn,
@@ -21,6 +22,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import Swal from 'sweetalert2';
 
 const ManageExecutiveCredentials = () => {
+    const cookies = new Cookies();
     const navigate = useNavigate()
     const [loader, setLoader] = useState(false)
     
@@ -34,17 +36,24 @@ const ManageExecutiveCredentials = () => {
 
     // GETTING THE Executive DATA FROM ADMIN TABLE
     useEffect(() => {
+        const savedToken = cookies.get('KIBAJWTToken');
+        setLoader(true)
         const getAdminData = async () => {
             try {
                 const url = `${apiUrl}/admin`;
                 const options = {
                     method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${savedToken}`,
+                        'Content-Type': 'application/json',
+                    },
                 }
 
                 const response = await fetch(url, options)
                 const data = await response.json()
                 const newData = data.filter(each => each.role == 'Executive')
                 setExecutiveCredentials(newData[0])
+                setLoader(false)
             } catch {
                 console.log('Error fetching Admin Data')
             }
@@ -56,12 +65,14 @@ const ManageExecutiveCredentials = () => {
     // SAVE EXECUTIVE CREDENTIALS API
     const onSaveExecutiveCredentials = async (id, executiveId, newPassword, e) => {
         e.preventDefault();
+        const savedToken = cookies.get('KIBAJWTToken');
 
         // Prepare the URL and request options
         const url = `${apiUrl}/executive/${id}`;
         const options = {
             method: 'PUT',
             headers: {
+                'Authorization': `Bearer ${savedToken}`,
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ executive_id: executiveId, password: newPassword })  // Send only the new password
@@ -181,7 +192,7 @@ const ManageExecutiveCredentials = () => {
                                                             placeholder='Enter Password'
                                                             value={executiveCredentials.password}
                                                             onChange={(e) => onChangeInput('password', e.target.value)}
-                                                            readOnly={!showExecutivePassword}
+                                                            readOnly={!isChangeCredentialsActive}
                                                         />
 
                                                         <EyeIconContainer>
