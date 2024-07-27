@@ -12,7 +12,8 @@ import {
     Tile,
     TilesContainer,
     Title,
-    Icon
+    Icon,
+    DivX
 } from './StyledComponents'
 
 import SideNav from '../SideNav/SideNav'
@@ -137,14 +138,14 @@ const Dashboard = () => {
                         <TilesContainer>
                             <Tile>
                                 <Icon>
-                                    <FaUsers style={{height:'100%',width:'100%'}}  />
+                                    <FaUsers style={{height:'95%',width:'95%'}}  />
                                 </Icon>
                                 <Title>Total Customers</Title>
                                 <Count>{customers.length}</Count>
                             </Tile>
                             <Tile>
                                 <Icon>
-                                    <GrTest style={{height:'100%',width:'100%'}}/>
+                                    <GrTest style={{height:'90%',width:'90%'}}/>
                                 </Icon>
                                 <Title>Free Samples</Title>
                                 <Count>{freeSamples}</Count>
@@ -152,9 +153,9 @@ const Dashboard = () => {
                         </TilesContainer>
 
                         <ChartContainer>
-                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', width: '80%' }}>
+                            <DivX>
                                 <Doughnut data={data} options={options} />
-                            </div>
+                            </DivX>
                         </ChartContainer>
 
 

@@ -6,9 +6,31 @@ export const HeaderContainer = styled.div`
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    border: 1px solid red;
+
+    @media screen and (max-width: 320px){
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        
+    }
+
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        
+    }
+
+    @media screen and (min-width: 1025px) {
+        
+    }
 `
 export const CustomProfile = styled.div`
-    width: 5%;
+    /* width: 5%; */
     height: 100%;
     display: flex;
     align-items: center;
@@ -23,8 +45,6 @@ export const ProfileIcon = styled.div`
     border-radius: 50%;
     height: 2.9rem;
     width: 2.9rem;
-    height: 100%;
-    width: 90%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -32,6 +52,29 @@ export const ProfileIcon = styled.div`
     border: 1px solid #ccc;
     background-position: center;
     cursor: pointer;
+    border: 1px solid red;
+
+    @media screen and (max-width: 320px){
+        height: 2.5rem !important;
+        width: 2.5rem !important;
+        margin-right: 0.2rem;
+    }
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        
+    }
+
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        
+    }
+
+    @media screen and (min-width: 1025px) {
+        
+    }
 
 
 `
@@ -48,6 +91,26 @@ export const SpanTag = styled.span`
 
 export const Span = styled.span`
     font-size: 1.5rem;
+
+    @media screen and (max-width: 320px){
+        font-size: 1rem;
+    }
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        
+    }
+
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        
+    }
+
+    @media screen and (min-width: 1025px) {
+        
+    }
 `
 export const PopUp = styled.div`
     position: absolute;
@@ -77,4 +140,124 @@ export const PopUpItem = styled.span`
     justify-content: center;
     cursor: pointer;
     margin-bottom: 0.8rem;
+`
+
+export const HamburgerDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    /* border: 1px solid red; */
+
+    @media screen and (max-width: 320px){
+        width: 2.5rem;
+        height: 2rem;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+    }
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        width: 3.5rem;
+        height: 3.5rem;
+        margin-top: 0.5rem;
+    }
+
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        display: none;
+    }
+
+    @media screen and (min-width: 1025px) {
+        display: none;
+    }
+`
+export const HamburgerButton = styled.button`
+    width: 35px;
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 2;
+    border: none !important;
+    outline: none !important;
+    border: 1px solid green !important;
+
+    @media screen and (max-width: 320px){
+        width: 100%;
+        height: 100%;
+        padding: 0;
+    }
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        
+    }
+
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        
+    }
+
+    @media screen and (min-width: 1025px) {
+        
+    }
+`
+
+export const Menu = styled.div`
+    display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
+    flex-direction: column;
+    align-items: flex-end;
+    background: #333;
+    position: absolute;
+    top: 35px;
+    left: -0;
+    width: 200px;
+    transform: ${({ isOpen }) =>
+        isOpen ? 'translateX(0)' : 'translateX(-100%)'};
+    transition: transform 0.3s ease-in-out;  
+    z-index: 1;
+    border-radius: 0rem 1rem 1rem 0rem;
+
+    a {
+    padding: 15px;
+    color: white;
+    text-decoration: none;
+    text-align: right;
+    width: 100%;
+
+    &:hover {
+    background: #444;
+    }
+}
+
+    @media screen and (max-width: 320px){
+        
+    }
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        
+    }
+
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        
+    }
+
+    @media screen and (min-width: 1025px) {
+        
+    }
 `

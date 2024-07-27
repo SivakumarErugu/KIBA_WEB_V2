@@ -43,7 +43,10 @@ import {
     ThTag,
     TrTag,
     DivX,
-    DivY
+    DivY,
+    Span,
+    TdTagCheckbox,
+    TdTagDelete
 } from './StyledComponents'
 
 
@@ -516,19 +519,19 @@ const Customers = () => {
                             <Header />
 
                             <CustomContainer>
-                                <CreateNewContainer>
-                                    <Count>
+                                {/* <CreateNewContainer> */}
+                                    {/* <Count> */}
                                         <Label>Customers<SpanTag>{customersData.length}</SpanTag></Label>
 
-                                    </Count>
+                                    {/* </Count> */}
 
 
-                                </CreateNewContainer>
+                                {/* </CreateNewContainer> */}
 
                                 <SearchActionsBar>
                                     <DivX >
                                         <SearchBar>
-                                            <RiSearch2Line size={25} style={{ color: '#667085',height:'100%',marginLeft:'0.5rem'}} />
+                                            <RiSearch2Line size={25} style={{ color: '#667085',height:'100%',}} />
                                             <CustomInput type='text'
                                                 placeholder='Search'
                                                 value={SearchText}
@@ -571,15 +574,15 @@ const Customers = () => {
                                         </Actions>
                                     </DivX>
 
-                                    <div style={{ padding: '0', height: '3rem', display: 'flex', alignItems: 'center' }}>
-                                        <Link to='/create-customer' style={{ margin: '0', padding: '0', display: 'flex', height: '100%', outline: 'none', border: 'none' }}>
+                                    {/* <div style={{ padding: '0', height: '3rem', display: 'flex', alignItems: 'center' }}> */}
+                                        <Link to='/create-customer'>
                                             <CreateNewBtn>
                                                 <BsPlusCircleDotted size={23} />
-                                                New Customer
+                                                <Span>New Customer</Span>
                                             </CreateNewBtn>
                                         </Link>
 
-                                    </div>
+                                    {/* </div> */}
 
                                 </SearchActionsBar>
 
@@ -603,7 +606,7 @@ const Customers = () => {
                                             <TableTag>
                                                 <thead style={{ width: '100%' }}>
                                                     <TrTag style={{ width: '100%', borderBottom: '2px solid #353535' }}>
-                                                        <ThTag style={{ width: '2%' }}></ThTag>
+                                                        <TdTagCheckbox ></TdTagCheckbox>
                                                         {/* <Checkbox type='checkbox' style={{ border: '1px solid red' }} /> */}
                                                         <ThTag style={{ paddingLeft: '0.5rem' }}>First Name</ThTag>
                                                         <ThTag>Customer ID</ThTag>
@@ -615,14 +618,14 @@ const Customers = () => {
                                                 <tbody>
                                                     {filteredCustomers().map((each, index) => (
                                                         <TrTag key={index} style={{ position: 'relative' }}>
-                                                            <TdTag style={{ width: '2%' }}>
+                                                            <TdTagCheckbox>
                                                                 <Checkbox
                                                                     type='checkbox'
                                                                     checked={selectedRecords.includes(each.ID)}
                                                                     style={{ border: '1px solid red' }}
                                                                     onChange={() => onSelectRecord(each.ID)}
                                                                 />
-                                                            </TdTag>
+                                                            </TdTagCheckbox>
 
                                                             <TdTag style={{ display: 'flex', alignItems: 'center' }}>
                                                                 <Link style={{ color: '#000', display: 'flex', alignItems: 'center' }} to={`/customer/${each.ID}`}>
@@ -661,7 +664,7 @@ const Customers = () => {
                                                                     {highlightText(each.cultivation, SearchText)}
                                                                 </Link>
                                                             </TdTag>
-                                                            <TdTag style={{ position: 'absolute', right: '0.5%', width: 'fit-content' }}>
+                                                            <TdTagDelete >
                                                                 <DeleteBtn
                                                                     onClick={(e) => {
                                                                         e.preventDefault();
@@ -669,9 +672,9 @@ const Customers = () => {
                                                                         onClickSingleDelete(each.ID);
                                                                     }}
                                                                 >
-                                                                    <MdDelete size={20} />
+                                                                    <MdDelete/>
                                                                 </DeleteBtn>
-                                                            </TdTag>
+                                                            </TdTagDelete>
                                                         </TrTag>
 
                                                     ))}

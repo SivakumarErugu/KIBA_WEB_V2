@@ -26,14 +26,26 @@ export const Actions = styled.div`
     align-items: center;
     width: 40%;
     justify-content: flex-end;
+    border: 1px solid red !important;
 
-    @media (max-width: ${breakpoints.tablet}) {
-        width: 50%;
+    @media screen and (max-width: 320px){
+      display: none;
     }
 
-    @media (max-width: ${breakpoints.mobile}) {
-        width: 100%;
-        justify-content: center;
+    @media screen and (min-width: 321px) and (max-width:480px) {
+      display: none;
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        
+    }
+
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        
+    }
+
+    @media screen and (min-width: 1025px) {
+        
     }
 `;
 
@@ -54,6 +66,27 @@ export const Checkbox = styled.input`
   width: 1rem;
   height: 1rem;
   border: 1px solid red !important;
+
+  @media screen and (max-width: 320px){
+    display: none;
+
+  }
+
+  @media screen and (min-width: 321px) and (max-width:480px) {
+    display: none;
+  }
+
+  @media screen and (min-width: 481px) and (max-width:768px) {
+      
+  }
+
+  @media screen and (min-width: 769px) and (max-width:1024px) {
+      
+  }
+
+  @media screen and (min-width: 1025px) {
+      
+  }
 `;
 
 // ColumnText styling
@@ -80,11 +113,7 @@ export const Count = styled.div`
 export const CreateNewContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
-
-    @media (max-width: ${breakpoints.mobile}) {
-        flex-direction: column;
-        align-items: center;
-    }
+    border: 1px solid red;
 `;
 
 // CreeteNewBtn styling
@@ -97,10 +126,34 @@ export const CreateNewBtn = styled.button`
     padding: 0.5rem;
     background: #176B87;
     color: #FFF;
-    margin: 0rem 0rem 0rem 0rem;
+    margin: 0rem;
     border: none;
     outline: none;
     cursor: pointer;
+
+    @media screen and (max-width: 320px){
+      width: 2rem;
+      height: 2rem;
+      justify-content: center;
+    }
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+      width: 2rem;
+      height: 2rem;
+      justify-content: center;
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        
+    }
+
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        
+    }
+
+    @media screen and (min-width: 1025px) {
+        
+    }
 `;
 
 // CustomContainer styling
@@ -109,6 +162,8 @@ export const CustomContainer = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
+    padding: 0.5rem;
+    border: 1px solid red;
 `;
 
 // CustomInput styling
@@ -124,12 +179,26 @@ export const CustomInput = styled.input`
   outline: none;
   overflow: hidden;
 
-  @media (max-width: ${breakpoints.tablet}) {
-    width: 90%;
+  @media screen and (max-width: 320px){
+    font-size: 0.9rem;
+    margin-left: 0.3rem;
   }
 
-  @media (max-width: ${breakpoints.mobile}) {
-    width: 100%;
+  @media screen and (min-width: 321px) and (max-width:480px) {
+    font-size: 0.9rem;
+    margin-left: 0.3rem;
+  }
+
+  @media screen and (min-width: 481px) and (max-width:768px) {
+      
+  }
+
+  @media screen and (min-width: 769px) and (max-width:1024px) {
+      
+  }
+
+  @media screen and (min-width: 1025px) {
+      
   }
 `;
 
@@ -162,6 +231,28 @@ export const DeleteBtn = styled.button`
   cursor: pointer;
   outline: none;
   border: none;
+
+  @media screen and (max-width: 320px){
+    height: 1rem;
+    width: 1rem;
+  }
+
+  @media screen and (min-width: 321px) and (max-width:480px) {
+    height: 1rem;
+    width: 1rem;
+  }
+
+  @media screen and (min-width: 481px) and (max-width:768px) {
+      
+  }
+
+  @media screen and (min-width: 769px) and (max-width:1024px) {
+      
+  }
+
+  @media screen and (min-width: 1025px) {
+      
+  }
 `;
 
 // DotSpinner styling
@@ -277,10 +368,36 @@ export const FilterBtn = styled.button`
   width: fit-content;
   padding: 0.4rem;
   margin: 0rem 0.2rem 0rem 0.3rem;
-  font-size: 1rem;
+  /* font-size: 1rem; */
   border: 1px solid #ccc;
   position: relative;
   z-index: 10;
+
+  border: 1px solid red ;
+
+  @media screen and (max-width: 320px){
+    height: 30%;
+    padding: 0.1rem;
+    margin: 0rem 0rem 0rem 0.2rem;
+  }
+
+  @media screen and (min-width: 321px) and (max-width:480px) {
+    height: 30%;
+    padding: 0.1rem;
+    margin: 0rem 0rem 0rem 0.2rem;
+  }
+
+  @media screen and (min-width: 481px) and (max-width:768px) {
+      
+  }
+
+  @media screen and (min-width: 769px) and (max-width:1024px) {
+      
+  }
+
+  @media screen and (min-width: 1025px) {
+      
+  }
 `;
 
 // FilterDropdown styling
@@ -335,6 +452,30 @@ export const ImgTag = styled.img`
   max-height: 2rem;
   border-radius: 50%;
   margin: 0.4rem 0.4rem 0.4rem 0.4rem;
+
+  @media screen and (max-width: 320px){
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 0.1rem;
+  }
+
+  @media screen and (min-width: 321px) and (max-width:480px) {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 0.1rem;
+  }
+
+  @media screen and (min-width: 481px) and (max-width:768px) {
+      
+  }
+
+  @media screen and (min-width: 769px) and (max-width:1024px) {
+      
+  }
+
+  @media screen and (min-width: 1025px) {
+      
+  }
 `;
 
 // InnerContainer styling
@@ -345,14 +486,27 @@ export const InnerContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   background: #B4D4FF;
-  padding: 1rem;
+  /* padding: 1rem; */
+  border: 1px solid red;
 
-  @media (max-width: ${breakpoints.desktop}) {
-    width: 90%;
+  @media screen and (max-width: 320px){
+    width: 100%;
   }
 
-  @media (max-width: ${breakpoints.tablet}) {
+  @media screen and (min-width: 321px) and (max-width:480px) {
     width: 100%;
+  }
+
+  @media screen and (min-width: 481px) and (max-width:768px) {
+      
+  }
+
+  @media screen and (min-width: 769px) and (max-width:1024px) {
+      
+  }
+
+  @media screen and (min-width: 1025px) {
+      
   }
 `;
 
@@ -364,10 +518,35 @@ export const Label = styled.h1`
   margin: 0px;
   text-align: center;
   display: flex;
+  /* border: 1px solid red; */
 
-  @media (max-width: ${breakpoints.mobile}) {
-    font-size: 1.2rem;
+  @media screen and (max-width: 320px){
+    width: fit-content;
+    height: fit-content;
+    font-size: 1rem;
+    margin-left: 0.2rem;
   }
+
+  @media screen and (min-width: 321px) and (max-width:480px) {
+    width: fit-content;
+    height: fit-content;
+    font-size: 1rem;
+    margin-left: 0.2rem;
+  }
+
+  @media screen and (min-width: 481px) and (max-width:768px) {
+      
+  }
+
+  @media screen and (min-width: 769px) and (max-width:1024px) {
+      
+  }
+
+  @media screen and (min-width: 1025px) {
+      
+  }
+
+
 `;
 
 // MainContainer styling
@@ -377,10 +556,6 @@ export const MainContainer = styled.div`
   display: flex;
   background: #B4D4FF;
 
-  @media (max-width: ${breakpoints.mobile}) {
-    flex-direction: column;
-    align-items: center;
-  }
 `;
 
 // New styling
@@ -401,14 +576,30 @@ export const PaginationContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 6%;
   width: 100%;
   margin-top: 1rem;
   padding: 0rem 0.5rem 0rem 0.5rem;
-  /* border: 1px solid red; */
+  border: 1px solid red;
 
-  @media (max-width: ${breakpoints.mobile}) {
-    flex-direction: column;
-    align-items: center;
+  @media screen and (max-width: 320px){
+    margin-top: 0.5rem;
+  }
+
+  @media screen and (min-width: 321px) and (max-width:480px) {
+    margin-top: 0.5rem;
+  }
+
+  @media screen and (min-width: 481px) and (max-width:768px) {
+      
+  }
+
+  @media screen and (min-width: 769px) and (max-width:1024px) {
+      
+  }
+
+  @media screen and (min-width: 1025px) {
+      
   }
 `;
 
@@ -439,12 +630,9 @@ export const SearchActionsBar = styled.div`
   width: 100%;
   margin-top: 0.4rem;
   border-radius: 0.7rem;
+  /* border: 1px solid red; */
 
-  @media (max-width: ${breakpoints.tablet}) {
-    flex-direction: column;
-    align-items: center;
-    height: auto;
-  }
+
 `;
 
 // SearchBar styling
@@ -460,8 +648,26 @@ export const SearchBar = styled.div`
   
   overflow: hidden;
 
-  @media (max-width: ${breakpoints.mobile}) {
+  @media screen and (max-width: 320px){
+    height: 100%;
     width: 100%;
+  }
+
+  @media screen and (min-width: 321px) and (max-width:480px) {
+    height: 100%;
+    width: 100%;
+  }
+
+  @media screen and (min-width: 481px) and (max-width:768px) {
+      
+  }
+
+  @media screen and (min-width: 769px) and (max-width:1024px) {
+      
+  }
+
+  @media screen and (min-width: 1025px) {
+      
   }
 `;
 
@@ -479,6 +685,32 @@ export const SpanTag = styled.sup`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: 320px){
+    height: 0.9rem;
+    width: 0.9rem;
+    font-size: 0.6rem;
+    padding: 0rem;
+  }
+
+  @media screen and (min-width: 321px) and (max-width:480px) {
+    height: 0.9rem;
+    width: 0.9rem;
+    font-size: 0.6rem;
+    padding: 0rem;
+  }
+
+  @media screen and (min-width: 481px) and (max-width:768px) {
+      
+  }
+
+  @media screen and (min-width: 769px) and (max-width:1024px) {
+      
+  }
+
+  @media screen and (min-width: 1025px) {
+      
+  }
 `;
 
 // TableTag styling
@@ -496,9 +728,24 @@ export const TableTag = styled.table`
   background: #EEF5FF;
   overflow-y: auto;
 
-  @media (max-width: ${breakpoints.tablet}) {
-    height: auto;
-    padding: 0.2rem;
+  @media screen and (max-width: 320px){
+    border-radius: 0.7rem;
+  }
+
+  @media screen and (min-width: 321px) and (max-width:480px) {
+    order-radius: 0.7rem;
+  }
+
+  @media screen and (min-width: 481px) and (max-width:768px) {
+      
+  }
+
+  @media screen and (min-width: 769px) and (max-width:1024px) {
+      
+  }
+
+  @media screen and (min-width: 1025px) {
+      
   }
 `;
 
@@ -532,14 +779,65 @@ export const TdTag = styled.td`
   width: 23.5%;
   display: flex;
   align-items: center;
+  /* border: 1px solid red; */
+
+  @media screen and (max-width: 320px){
+    width: 3.9rem;
+    font-size: 0.4rem;
+    /* margin: 0rem 0.2rem 0rem 0.1rem; */
+    overflow: hidden;
+    padding: 0.1rem;
+  }
+
+  @media screen and (min-width: 321px) and (max-width:480px) {
+    width: 3.9rem;
+    font-size: 0.4rem;
+    /* margin: 0rem 0.2rem 0rem 0.1rem; */
+    overflow: hidden;
+    padding: 0.1rem;
+  }
+
+  @media screen and (min-width: 481px) and (max-width:768px) {
+      
+  }
+
+  @media screen and (min-width: 769px) and (max-width:1024px) {
+      
+  }
+
+  @media screen and (min-width: 1025px) {
+    width: 23.5%;
+  }
 `;
 
 // ThTag styling
 export const ThTag = styled.th`
   width: 23.5%;
   text-align: left;
-  position: sticky;
-  top: 0;
+  /* border: 1px solid red; */
+
+  @media screen and (max-width: 320px){
+    width: 3.9rem;
+    font-size: 0.5rem;
+
+  }
+
+  @media screen and (min-width: 321px) and (max-width:480px) {
+    width: 3.9rem;
+    font-size: 0.5rem;
+  }
+
+  @media screen and (min-width: 481px) and (max-width:768px) {
+      
+  }
+
+  @media screen and (min-width: 769px) and (max-width:1024px) {
+      
+  }
+
+  @media screen and (min-width: 1025px) {
+      
+  }
 `;
 
 // TrTag styling
@@ -553,13 +851,29 @@ export const TrTag = styled.tr`
   border-bottom: 1px solid #ccc;
   background: #EEF5FF;
   overflow-y: auto;
+  /* border: 1px solid red; */
     &:hover {
         background-color: #e5e5e5;
     }
 
-  @media (max-width: ${breakpoints.mobile}) {
-    flex-direction: column;
-    align-items: flex-start;
+  @media screen and (max-width: 320px){
+    
+  }
+
+  @media screen and (min-width: 321px) and (max-width:480px) {
+      
+  }
+
+  @media screen and (min-width: 481px) and (max-width:768px) {
+      
+  }
+
+  @media screen and (min-width: 769px) and (max-width:1024px) {
+      
+  }
+
+  @media screen and (min-width: 1025px) {
+      
   }
 `;
 
@@ -572,10 +886,136 @@ export const DivX =styled.div`
   border-radius: 0.5rem;
   background: #fff;
   padding: 0rem 0.3rem 0rem 0.3rem;
+  /* border: 1px solid red !important; */
+
+  @media screen and (max-width: 320px){
+    height: 2rem;
+    width: 11.5rem;
+    padding: 0rem 0rem 0rem 0.1rem;
+    margin-left: 0.2rem;
+  }
+
+  @media screen and (min-width: 321px) and (max-width:480px) {
+    height: 2rem;
+    width: 11.5rem;
+    padding: 0rem 0rem 0rem 0.1rem;
+    margin-left: 0.2rem;
+  }
+
+  @media screen and (min-width: 481px) and (max-width:768px) {
+      
+  }
+
+  @media screen and (min-width: 769px) and (max-width:1024px) {
+      
+  }
+
+  @media screen and (min-width: 1025px) {
+      
+  }
 
 `
 
 export const DivY = styled.div`
   height: 82%;
   margin-top: 0.5rem;
+  /* border: 1px solid red; */
+
+  @media screen and (max-width: 320px){
+    
+  }
+
+  @media screen and (min-width: 321px) and (max-width:480px) {
+      
+  }
+
+  @media screen and (min-width: 481px) and (max-width:768px) {
+      
+  }
+
+  @media screen and (min-width: 769px) and (max-width:1024px) {
+      
+  }
+
+  @media screen and (min-width: 1025px) {
+      
+  }
+
+
+`
+
+export const Span = styled.span`
+  @media screen and (max-width: 320px){
+    display: none;
+  }
+
+  @media screen and (min-width: 321px) and (max-width:480px) {
+    display: none;
+  }
+
+  @media screen and (min-width: 481px) and (max-width:768px) {
+      
+  }
+
+  @media screen and (min-width: 769px) and (max-width:1024px) {
+      
+  }
+
+  @media screen and (min-width: 1025px) {
+      
+  }
+`
+export const TdTagCheckbox = styled.td`
+  width: 2%;
+  display: flex;
+  align-items: center;
+
+  @media screen and (max-width: 320px){
+    display: none;
+  }
+
+  @media screen and (min-width: 321px) and (max-width:480px) {
+      
+  }
+
+  @media screen and (min-width: 481px) and (max-width:768px) {
+      
+  }
+
+  @media screen and (min-width: 769px) and (max-width:1024px) {
+      
+  }
+
+  @media screen and (min-width: 1025px) {
+      
+  }
+`
+export const TdTagDelete = styled.td`
+  right: 0.3%;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  /* border: 1px solid red; */
+
+
+  @media screen and (max-width: 320px){
+    right: 0.5%;
+    width: fit-content;
+  }
+
+  @media screen and (min-width: 321px) and (max-width:480px) {
+      
+  }
+
+  @media screen and (min-width: 481px) and (max-width:768px) {
+      
+  }
+
+  @media screen and (min-width: 769px) and (max-width:1024px) {
+      
+  }
+
+  @media screen and (min-width: 1025px) {
+    right: 0.3%;
+  }
 `

@@ -12,9 +12,13 @@ import {
     SpanTag,
     PopUp,
     PopUpItem,
+    HamburgerDiv,
+    HamburgerButton,
+    Menu
 } from "./StyledComponents";
 
 import { Link, useNavigate } from "react-router-dom";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const Header = () => {
     const { isHeaderPopupOn, setHeaderPopup } = useContext(KibaContext)
@@ -22,6 +26,7 @@ const Header = () => {
     const navigate = useNavigate();
     const cookies = new Cookies();
     const popUpRef = useRef(null)
+    const [isOpen, setIsOpen] = useState(false);
 
     // DROPDOWN OUTSIDE CLICK CONTROL
     useEffect(() => {
@@ -62,7 +67,7 @@ const Header = () => {
         });
     };
 
-    
+
     const onClickProfile = () => {
         setPopUp(!popUp)
         setHeaderPopup(!popUp);
@@ -73,6 +78,21 @@ const Header = () => {
 
     return (
         <HeaderContainer>
+
+            <HamburgerDiv>
+
+                <HamburgerButton onClick={() => setIsOpen(!isOpen)}>
+                    <GiHamburgerMenu size={30} />
+                </HamburgerButton>
+
+                <Menu isOpen={isOpen}>
+                    <a href="/dashboard">Dashboard</a>
+                    <a href="/customers">Customers</a>
+                </Menu>
+
+            </HamburgerDiv>
+
+
             <CustomProfile>
                 <ProfileIcon ref={popUpRef} onClick={onClickProfile}>
                     <Span >K</Span>
@@ -81,14 +101,15 @@ const Header = () => {
                 {isHeaderPopupOn && (
                     <PopUp>
                         <div>
-                            <Link style={{color:'#000'}} to='/manage-admin-credentials'><PopUpItem>Manage Admin</PopUpItem></Link>
-                            <Link style={{color:'#000'}} to='/manage-executive-credentials'> <PopUpItem>Manage Executive</PopUpItem> </Link>
+                            <Link style={{ color: '#000' }} to='/manage-admin-credentials'><PopUpItem>Manage Admin</PopUpItem></Link>
+                            <Link style={{ color: '#000' }} to='/manage-executive-credentials'> <PopUpItem>Manage Executive</PopUpItem> </Link>
                         </div>
 
                         <PopUpItem onClick={handleLogout} style={{ margin: '0' }}>Log Out</PopUpItem>
                     </PopUp>
                 )}
             </CustomProfile>
+            
         </HeaderContainer>
     );
 

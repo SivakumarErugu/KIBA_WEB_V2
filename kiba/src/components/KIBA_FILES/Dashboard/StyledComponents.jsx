@@ -1,3 +1,4 @@
+
 import styled from "styled-components";
 
 export const MainContainer = styled.div`
@@ -8,25 +9,85 @@ export const MainContainer = styled.div`
 `
 export const InnerContainer = styled.div`
     width: 83%;
+    flex-grow: 1;
     height: 100%;
     display: flex;
     flex-direction: column;
     background: #B4D4FF;
     padding: 1rem;
+
+    @media screen and (max-width: 320px){
+        padding: 0;
+    }
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        padding: 0.3rem;
+    }
+
+    @media screen and (min-width: 481px) {
+        padding: 0.3rem;
+    }
+
+    @media screen and (min-width: 769px) {
+        padding: 1rem;
+    }
 `
 
 export const DashboardContainer = styled.div`
     height: 93%;
+    flex-grow: 1;
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+
+    @media screen and (max-width: 320px){
+        margin-top: 1.5rem;
+        padding: 0.3rem;
+    }
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        margin-top: 1.5rem;
+        padding: 0.3rem;
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        margin-top: 1.5rem;
+        padding: 0.3rem;
+    }
+
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        margin-top: 1.8rem;
+        padding: 0.3rem;
+    }
 `
 export const Label = styled.h1`
     font-size: 1.5rem;
     color: #000;
     padding: 0px;
-    margin: 1rem;
+
+    @media screen and (max-width: 320px){
+        font-size: 1rem;
+        margin: 0rem 0rem 0.3rem 0.5rem;
+    }
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        font-size: 1rem;
+        margin: 0rem 0rem 0.3rem 0.5rem;
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        font-size: 1.2rem;
+        margin: 0rem 0rem 0.3rem 0.5rem;
+    }
+
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        font-size: 1.2rem;
+        margin: 0rem 0rem 0.3rem 0.5rem;
+    }
+
+    @media screen and (min-width: 1025px) {
+        font-size: 1.5rem;
+    }
 `
 export const DashBoard = styled.div`
     height: 95%;
@@ -37,13 +98,58 @@ export const DashBoard = styled.div`
     flex-direction: column;
     justify-content: space-between;
     background: #EEF5FF;
+
+    @media screen and (max-width: 320px){
+        height: 93%;
+        padding: 0.5rem;
+    }
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        height: 96%;
+        padding: 0.5rem;
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        height: 95%;
+        padding: 0.5rem;
+    }
+
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        height: 95%;
+        padding: 0.5rem;
+    }
+
+    @media screen and (min-width: 1025px) {
+        height: 95%;
+        padding: 0.5rem;
+    }
+
 `
 export const TilesContainer = styled.div`
-    height: 25%;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media screen and (max-width: 320px){
+        align-items: flex-start;
+    }
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        align-items: flex-start;
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        align-items: flex-start;
+    }
+
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        align-items: flex-start;
+    }
+
+    @media screen and (min-width: 1025px) {
+        align-items: flex-start;
+    }
 `
 export const Tile = styled.div`
     background: #4361ee;
@@ -54,6 +160,36 @@ export const Tile = styled.div`
     padding: 1rem;
     display: flex;
     flex-direction: column;
+
+    @media screen and (max-width: 320px){
+        width: 6.5rem;
+        height: 6rem;
+        padding: 0.4rem;
+    }
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        width: 7rem;
+        height: 7rem;
+        padding: 0.4rem;
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        width: 9rem;
+        height: 7rem;
+        padding: 0.4rem;
+    }
+
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        width: 11rem;
+        height: 7rem;
+        padding: 0.4rem;
+    }
+
+    @media screen and (min-width: 1025px) {
+        width: 14rem;
+        height: 8rem;
+        padding: 0.4rem;
+    }
 `
 export const Title = styled.span`
     width: 100%;
@@ -63,14 +199,29 @@ export const Title = styled.span`
     padding: 0;
     text-align: right;
 
-    @media only screen and (min-width:1080px){
-        font-size: 1rem;
-    }
-    @media screen and (min-width:768px) and (max-width:1024px) {
+    @media screen and (max-width: 320px){
         font-size: 0.7rem;
+        margin-top: 0.6rem;
     }
-    @media screen and (min-width:350px)and (max-width:600px){
-        font-size: 0.4rem;
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        font-size: 0.7rem;
+        margin-top: 0.6rem;
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        font-size: 0.9rem;
+        margin-top: 0.6rem;
+    }
+
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        font-size: 1rem;
+        margin-top: 0.5rem;
+    }
+
+    @media screen and (min-width: 1025px) {
+        font-size: 1.3rem;
+        margin-top: 0.2rem;
     }
 `
 export const Count = styled.span`
@@ -81,15 +232,37 @@ export const Count = styled.span`
     height: fit-content;
     font-size: 1rem;
 
-    @media screen and (min-width:1080px) {
-        font-size: 1.8rem;
+    @media screen and (max-width: 320px){
+        font-size: 1rem;
+        font-weight: 600;
+        margin-top: 0.3rem;
     }
-    @media screen and (min-width:768px) and (max-width:1024px) {
-        font-size: 1.3rem;
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-top: 0.5rem;
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin: 0.3rem 0.3rem 0rem 0rem;
+    }
+
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin: 0.1rem 0.3rem 0.5rem 0rem;
+    }
+
+    @media screen and (min-width: 1025px) {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 0.1rem 0.3rem 0.5rem 0rem;
     }
 `
 export const ChartContainer = styled.div`
-    height: 65%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -99,25 +272,81 @@ export const ChartContainer = styled.div`
     border-radius: 1rem;
     text-align: center;
     padding: 0.5rem;
+    overflow: hidden;
+
+    @media screen and (max-width: 320px){
+        height: 60%;
+        padding: 0.1rem;
+    }
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        height: 62%;
+        padding: 0.1rem;
+    }
+
+    @media screen and (min-width: 481px) {
+        height: 65%;
+    }
 `
 export const Icon = styled.div`
     width: 2rem;
     height: 2rem;
     padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    @media only screen and (min-width: 1366px) {
-        width: 3rem;
-        height: 3rem;
-    }
-
-    @media only screen and (max-width: 1366px) {
-        width: 2rem;
-        height: 2rem;
-    }
-
-    @media only screen and (max-width: 1080px) {
+    @media screen and (max-width: 320px){
         width: 1.5rem;
         height: 1.5rem;
     }
 
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        width: 2.2rem;
+        height: 2.2rem;
+    }
+
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        width: 2.4rem;
+        height: 2.4rem;
+    }
+
+    @media screen and (min-width: 1025px) {
+        width: 2.9rem;
+        height: 2.9rem;
+    }
+
 `;
+
+export const DivX = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 80%;
+
+    @media screen and (max-width: 320px){
+        width: 100%;
+    }
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        width: 100%;
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        width: 90%;
+    }
+
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        width: 90%;
+    }
+
+    @media screen and (min-width: 1025px) {
+        width: 90%;
+    }
+`
