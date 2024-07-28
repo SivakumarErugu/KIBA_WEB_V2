@@ -105,6 +105,7 @@ export const CreateNewBtn = styled.button`
       width: 2rem;
       height: 2rem;
       justify-content: center;
+      margin: 0;
     }
 
     @media screen and (min-width: 321px) and (max-width:480px) {
@@ -596,7 +597,7 @@ export const PaginationBtn = styled.button`
 // SearchActionsBar styling
 export const SearchActionsBar = styled.div`
   display: flex;
-  align-items: center;
+  align-items: center !important;
   justify-content: space-between;
   /* height: 7%; */
   height: 6vh;

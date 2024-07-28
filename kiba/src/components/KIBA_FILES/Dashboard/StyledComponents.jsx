@@ -9,8 +9,8 @@ export const MainContainer = styled.div`
 `
 export const InnerContainer = styled.div`
     width: 83%;
-    flex-grow: 1;
-    height: 100%;
+    /* flex-grow: 1; */
+    height: 100vh;
     /* height: 90vh; */
     display: flex;
     flex-direction: column;

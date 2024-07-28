@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
 // COMPONENT IMPORTS
@@ -280,6 +280,7 @@ const Data = [
 ]
 
 const Customers = () => {
+    const navigate = useNavigate()
     const cookies = new Cookies();
     const FilterDropdownRef = useRef(null)
     const [customersData, setCustomersData] = useState(Data)
@@ -311,13 +312,13 @@ const Customers = () => {
                     'Content-Type': 'application/json' // Optional: ensure the content type is set to JSON
                 }
             };
-    
+
             const response = await fetch(url, options);
-    
+
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-    
+
             const data = await response.json();
             setCustomersData(data);
         } catch (error) {
@@ -503,6 +504,10 @@ const Customers = () => {
         setSelectedRecords(newSelectedRecords)
     }
 
+    const onClickCreateNew = () => {
+        navigate('/create-customer')
+    }
+
     return (
         <KibaContext.Consumer>
             {value => {
@@ -519,14 +524,7 @@ const Customers = () => {
                             <Header />
 
                             <CustomContainer>
-                                {/* <CreateNewContainer> */}
-                                {/* <Count> */}
                                 <Label>Customers<SpanTag>{customersData.length}</SpanTag></Label>
-
-                                {/* </Count> */}
-
-
-                                {/* </CreateNewContainer> */}
 
                                 <SearchActionsBar>
                                     <DivX >
@@ -542,7 +540,7 @@ const Customers = () => {
                                         <Actions>
 
                                             {selectedRecords.length >= 2 &&
-                                                <MulDeleteBtn 
+                                                <MulDeleteBtn
                                                     onClick={(e) => {
                                                         e.preventDefault();
                                                         e.stopPropagation();
@@ -574,15 +572,10 @@ const Customers = () => {
                                         </Actions>
                                     </DivX>
 
-                                    {/* <div style={{ padding: '0', height: '3rem', display: 'flex', alignItems: 'center' }}> */}
-                                    <Link to='/create-customer' style={{height:'100%'}}>
-                                        <CreateNewBtn>
-                                            <BsPlusCircleDotted size={23} />
-                                            <Span>New Customer</Span>
-                                        </CreateNewBtn>
-                                    </Link>
-
-                                    {/* </div> */}
+                                    <CreateNewBtn type='button' onClick={onClickCreateNew}>
+                                        <BsPlusCircleDotted size={23} />
+                                        <Span>New Customer</Span>
+                                    </CreateNewBtn>
 
                                 </SearchActionsBar>
 
