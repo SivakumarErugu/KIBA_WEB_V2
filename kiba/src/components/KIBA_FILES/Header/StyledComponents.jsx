@@ -6,7 +6,6 @@ export const HeaderContainer = styled.div`
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    border: 1px solid red;
 
     @media screen and (max-width: 320px){
         justify-content: space-between;
@@ -54,7 +53,6 @@ export const ProfileIcon = styled.div`
     border: 1px solid #ccc;
     background-position: center;
     cursor: pointer;
-    border: 1px solid red;
 
     @media screen and (max-width: 320px){
         height: 2.5rem !important;

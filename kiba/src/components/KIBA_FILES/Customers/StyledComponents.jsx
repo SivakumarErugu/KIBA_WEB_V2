@@ -141,7 +141,7 @@ export const CustomContainer = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    padding: 0.5rem 0.5rem 0.3rem 0.5rem;
 `;
 
 // CustomInput styling
@@ -422,7 +422,6 @@ export const HighlightText = styled.span`
 
 // ImgTag styling
 export const ImgTag = styled.img`
-  
   max-width: 2rem;
   max-height: 2rem;
   border-radius: 50%;
@@ -572,7 +571,7 @@ export const PaginationContainer = styled.div`
   }
 
   @media screen and (min-width: 1025px) {
-    margin-top: 0.5rem;
+    margin-top: 1rem;
   }
 `;
 

@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 import { IoIosArrowBack } from "react-icons/io";
 import { FaAngleDown } from "react-icons/fa6";
 import { FaUserTie } from "react-icons/fa";
+import { MdFileUpload } from "react-icons/md";
 
 import {
     AlertText,
@@ -41,7 +42,13 @@ import {
     Switch,
     DatePickerWrapper,
     CreatedDate,
-    Icon
+    Icon,
+    DivX,
+    DivSlider,
+    ImgLabelTag,
+    UploadDiv,
+    ImageUploadTAg,
+    ImgLabel
 } from './StyledComponents'
 
 
@@ -326,10 +333,12 @@ const CustomerDetailedView = () => {
                 <Header />
 
                 <CustomContainer>
-                    <div style={{ display: 'flex', alignItems: 'center', padding: '0', marginBottom: '0.5rem', height: '2rem', }}>
+                    <DivX style={{ display: 'flex', alignItems: 'center', padding: '0', marginBottom: '0.5rem', height: '2rem', }}>
                         <BackBtn onClick={onBack}><IoIosArrowBack size={28} /></BackBtn>
                         <Title >Customer Details</Title>
-                    </div>
+                    </DivX>
+                    <IDTag>Customer ID: {customerDetails.ID}</IDTag>
+                    <CreatedDate>{customerDetails.created_on}</CreatedDate>
                     {loader ?
                         <CreateNew>
                             <DotSpinner>
@@ -345,8 +354,8 @@ const CustomerDetailedView = () => {
                         </CreateNew>
                         :
                         <>
-                            <IDTag>Customer ID: {customerDetails.ID}</IDTag>
-                            <CreatedDate>{customerDetails.created_on}</CreatedDate>
+                            {/* <IDTag>Customer ID: {customerDetails.ID}</IDTag> */}
+                            {/* <CreatedDate>{customerDetails.created_on}</CreatedDate> */}
 
                             {customerDetails ?
                                 <CreateNew onSubmit={onSubmitForm}>
@@ -389,7 +398,7 @@ const CustomerDetailedView = () => {
                                                 </CustomDropDown>
 
                                                 {isCultivationActive && (
-                                                    <CustomDropDownOptions style={{ width: '67.5%' }}>
+                                                    <CustomDropDownOptions >
                                                         <CustomOption onClick={() => {
                                                             onChangeInput('cultivation', 'Shrimps')
                                                             setCultivationActive(!isCultivationActive)
@@ -447,12 +456,14 @@ const CustomerDetailedView = () => {
                                             <RadioCon>
                                                 <Custom>
                                                     <InputTag id='Yes' name='whatsapp' type='radio'
+                                                        style={{ height: "70%", width: "90%", margin: "0" }}
                                                         checked={customerDetails.same_for_whatsapp === 'true'}
                                                         onChange={() => onChangeInput('same_for_whatsapp', 'true')} />
                                                     <LabelTwo style={{ fontSize: '1rem', color: '#495057' }} htmlFor='Yes'>Yes</LabelTwo>
                                                 </Custom>
                                                 <Custom>
                                                     <InputTag id='No' name='whatsapp' type='radio'
+                                                        style={{ height: "70%", width: "90%", margin: "0" }}
                                                         checked={customerDetails.same_for_whatsapp === 'false'}
                                                         onChange={() => onChangeInput('same_for_whatsapp', 'false')} />
                                                     <LabelTwo style={{ fontSize: '1rem', color: '#495057' }} htmlFor='No'>No</LabelTwo>
@@ -473,7 +484,6 @@ const CustomerDetailedView = () => {
                                             />
                                         </InputContainer>
 
-                                        {/* {customerDetails.is_this_same_as_whatsapp_number === 'false' && */}
                                         <InputContainer>
                                             <LabelTag>WhatsApp Number</LabelTag>
                                             <InputTag style={{ border: trySubmit & customerDetails.whatsapp_number === '' ? '2px solid red' : '' }}
@@ -499,11 +509,12 @@ const CustomerDetailedView = () => {
                                             />
                                         </InputContainer>
 
-                                        <InputContainer style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                        <InputContainer >
                                             <LabelTag>Own Land</LabelTag>
                                             <RadioCon>
                                                 <Custom>
                                                     <InputTag id='Yes' name='ownland' type='radio'
+                                                    style={{ height: "70%", width: "90%", margin: "0" }}
                                                         checked={customerDetails.own_land === 'true'}
                                                         onChange={() => onChangeInput('own_land', 'true')}
                                                     />
@@ -511,6 +522,7 @@ const CustomerDetailedView = () => {
                                                 </Custom>
                                                 <Custom>
                                                     <InputTag id='No' name='ownland' type='radio'
+                                                    style={{ height: "70%", width: "90%", margin: "0" }}
                                                         checked={customerDetails.own_land === 'false'}
                                                         onChange={() => onChangeInput('own_land', 'false')} />
                                                     <LabelTwo style={{ fontSize: '1rem', color: '#495057' }} id='No'>No</LabelTwo>
@@ -537,7 +549,7 @@ const CustomerDetailedView = () => {
                                                 </CustomDropDown>
 
                                                 {isStateActive && (
-                                                    <CustomDropDownOptions style={{ width: '67.5%' }}>
+                                                    <CustomDropDownOptions >
                                                         {indianStates.map(state => (
                                                             <CustomOption key={state} onClick={() => {
                                                                 onChangeInput('state', state)
@@ -553,11 +565,12 @@ const CustomerDetailedView = () => {
 
                                         </InputContainer>
 
-                                        <InputContainer style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                        <InputContainer >
                                             <LabelTag> Existing Customer</LabelTag>
                                             <RadioCon>
                                                 <Custom>
                                                     <InputTag id='Yes' name='Customer' type='radio'
+                                                    style={{ height: "70%", width: "90%", margin: "0" }}
                                                         checked={customerDetails.customer === 'true'}
                                                         onChange={() => onChangeInput('customer', 'true')}
                                                     />
@@ -565,6 +578,7 @@ const CustomerDetailedView = () => {
                                                 </Custom>
                                                 <Custom>
                                                     <InputTag id='No' name='Customer' type='radio'
+                                                    style={{ height: "70%", width: "90%", margin: "0" }}
                                                         checked={customerDetails.customer === 'false'}
                                                         onChange={() => onChangeInput('customer', 'false')} />
                                                     <LabelTwo style={{ fontSize: '1rem', color: '#495057' }} id='No'>No</LabelTwo>
@@ -586,12 +600,10 @@ const CustomerDetailedView = () => {
                                             />
                                         </InputContainer>
 
-                                        <InputContainer
-                                            style={{ flexDirection: "row", alignItems: "center", justifyContent: 'space-between' }}
-                                        >
+                                        <InputContainer>
 
-                                            <LabelTag>Trail Pack :</LabelTag>
-                                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '70%' }}>
+                                            <LabelTag>Trail Pack </LabelTag>
+                                            <DivSlider>
                                                 <Switch>
                                                     <input
                                                         type="checkbox"
@@ -626,7 +638,7 @@ const CustomerDetailedView = () => {
                                                         />
                                                     </DatePickerWrapper>
                                                 }
-                                            </div>
+                                            </DivSlider>
 
 
 
@@ -653,57 +665,48 @@ const CustomerDetailedView = () => {
                                             }}
                                         >
                                             {localImage ? (
-                                                <LabelTag>
+                                                <ImgLabelTag>
                                                     <ImgTag src={localImage} />
-                                                </LabelTag>
+                                                </ImgLabelTag>
                                             ) : (
                                                 <LabelTag
-                                                    style={{ display: "flex", justifyContent: "flex-end" }}
+                                                    style={{ display: "flex", justifyContent: "flex-end",marginRight:'0.5rem',width:'30%' }}
                                                 >
-                                                    <LabelTag
+                                                    <ImgLabelTag
                                                         style={{
                                                             border: "1px solid #ccc",
                                                             borderRadius: "50%",
-                                                            height: "4rem",
-                                                            width: "4rem",
                                                             display: "flex",
                                                             alignItems: "center",
                                                             justifyContent: "center",
                                                             margin: "0",
                                                         }}
                                                     >
-                                                        <FaUserTie size={35} />
-                                                    </LabelTag>
+                                                        <FaUserTie />
+                                                    </ImgLabelTag>
 
                                                 </LabelTag>
                                             )}
 
-                                            <div
+                                            <UploadDiv
                                                 style={{
-                                                    width: "68%",
-                                                    display: "flex",
-                                                    alignItems: "center",
-                                                    justifyContent: "space-between",
-                                                    background: "#EEF5FF",
-                                                    padding: "1rem",
-                                                    borderRadius: "1rem",
-                                                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
                                                     border:
                                                         trySubmit & (customerDetails.image === "")
                                                             ? "2px solid red"
                                                             : ""
                                                 }}
                                             >
-                                                <input
+                                                <ImageUploadTAg
                                                     type="file"
                                                     accept="image/*"
                                                     onChange={handleFileChange}
                                                     style={{ color: "#000" }}
                                                 />
+                                                <ImgLabel htmlFor="uploadImg"> <MdFileUpload /> </ImgLabel>
                                                 <UploadBtn type="button" onClick={handleUpload}>
                                                     Upload
                                                 </UploadBtn>
-                                            </div>
+                                            </UploadDiv>
                                         </InputContainer>
 
 

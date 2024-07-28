@@ -34,8 +34,6 @@ export const SideNavContainer = styled.div`
     }
 `
 export const ImgTag = styled.img`
-    /* height: 13%; */
-    /* width: 50%; */
     top: 0.5rem;
     left: 0rem;
 
@@ -56,7 +54,6 @@ export const IconContainer = styled.ul`
     align-items: center;
     width: 100%;
     padding: 0;
-    border: 1px solid red;
 
     @media screen and (min-width: 769px) and (max-width:1024px) {
         margin-top: 2rem;
@@ -78,7 +75,6 @@ export const NavOption = styled.li`
     padding: 0rem 0.5rem;
     background: ${props => (props.active ? '#4361ee' : 'transparent')};
     cursor: pointer;
-    border: 1px solid red;
 
     &:hover {
         background: ${props => (props.active ? '#4361ee' : '#D9D9D9')};

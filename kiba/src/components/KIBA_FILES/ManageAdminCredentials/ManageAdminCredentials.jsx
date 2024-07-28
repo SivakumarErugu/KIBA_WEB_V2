@@ -4,7 +4,7 @@ import Cookies from 'universal-cookie';
 
 import {
     ProfileCon, InnerContainer, CustomContainer, CustomProfile, Title, FieldContainer, LabelTag, H1Tag, InputTag, Btn, BackBtn, CustomPart, Title2, SaveBtn,
-    EyeIconContainer
+    EyeIconContainer,TitleDiv
 } from './StyledComponents'
 
 import { DotSpinner, DotSpinnerDot } from '../Customers/StyledComponents'
@@ -124,10 +124,10 @@ const ManageAdminCredentials = () => {
                             <Header />
 
                             <CustomContainer>
-                                <div style={{ display: 'flex', alignItems: 'center', padding: '0', marginBottom: '0.5rem', height: '2rem', }}>
-                                    <BackBtn onClick={onBack}><IoIosArrowBack size={28} /></BackBtn>
+                                <TitleDiv >
+                                    <BackBtn onClick={onBack}><IoIosArrowBack /></BackBtn>
                                     <Title>Manage Admin Credentials</Title>
-                                </div>
+                                </TitleDiv>
 
                                 {loader ?
                                     <CustomProfile style={{ alignItems: 'center', justifyContent: 'center' }}>

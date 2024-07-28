@@ -38,18 +38,6 @@ const SideNav = () => {
 
                 return (
                     <>
-                        {/* <HamburgerDiv>
-
-                            <HamburgerButton onClick={() => setIsOpen(!isOpen)}>
-                                <GiHamburgerMenu size={30} />
-                            </HamburgerButton>
-
-                            <Menu isOpen={isOpen}>
-                                <a href="/dashboard">Dashboard</a>
-                                <a href="/customers">Customers</a>
-                            </Menu>
-
-                        </HamburgerDiv> */}
 
                         <SideNavContainer>
 

@@ -9,9 +9,11 @@ import Header from "../Header/Header";
 
 import Swal from "sweetalert2";
 
-import { IoIosArrowBack } from "react-icons/io";
+// import { IoIosArrowBack } from "react-icons/io";
+import { MdArrowBackIos } from "react-icons/md";
 import { FaAngleDown } from "react-icons/fa6";
 import { FaUserTie } from "react-icons/fa";
+import { MdFileUpload } from "react-icons/md";
 
 import {
     AlertText,
@@ -40,7 +42,11 @@ import {
     Switch,
     DatePickerWrapper,
     Icon,
-    DivX
+    DivX,
+    DivSlider,
+    UploadDiv,
+    ImageUploadTAg,ImgLabel,
+    ImgLabelTag
 } from "./CreateCustomerStyles";
 
 const indianStates = [
@@ -322,8 +328,8 @@ const CreateCustomer = () => {
 
                 <CustomContainer>
                     <DivX>
-                        <BackBtn onClick={onBack}>
-                            <IoIosArrowBack/>
+                        <BackBtn onClick={onBack} >
+                            <MdArrowBackIos  />
                         </BackBtn>
                         <Title>Create Customer</Title>
                     </DivX>
@@ -396,7 +402,7 @@ const CreateCustomer = () => {
                                     </CustomDropDown>
 
                                     {isCultivationActive && (
-                                        <CustomDropDownOptions style={{ width: "67.5%" }}>
+                                        <CustomDropDownOptions >
                                             <CustomOption
                                                 onClick={() => {
                                                     onChangeInput("cultivation", "Shrimps");
@@ -485,7 +491,6 @@ const CreateCustomer = () => {
                                             }
                                         />
                                         <LabelTwo
-                                            style={{ fontSize: "1rem", color: "#495057" }}
                                             htmlFor="Yes"
                                         >
                                             Yes
@@ -570,9 +575,7 @@ const CreateCustomer = () => {
                                 />
                             </InputContainer>
 
-                            <InputContainer
-                                style={{ flexDirection: "row", alignItems: "center" }}
-                            >
+                            <InputContainer>
                                 <LabelTag>Own Land</LabelTag>
                                 <RadioCon>
                                     <Custom>
@@ -643,7 +646,7 @@ const CreateCustomer = () => {
                                     </CustomDropDown>
 
                                     {isStateActive && (
-                                        <CustomDropDownOptions style={{ width: "67.5%" }}>
+                                        <CustomDropDownOptions >
                                             {indianStates.map((state) => (
                                                 <CustomOption
                                                     key={state}
@@ -660,9 +663,7 @@ const CreateCustomer = () => {
                                 </CustomDropdownContainer>
                             </InputContainer>
 
-                            <InputContainer
-                                style={{ flexDirection: "row", alignItems: "center" }}
-                            >
+                            <InputContainer>
                                 <LabelTag>Existing Customer</LabelTag>
                                 <RadioCon>
                                     <Custom>
@@ -718,12 +719,11 @@ const CreateCustomer = () => {
                                 />
                             </InputContainer>
 
-                            <InputContainer
-                                style={{ flexDirection: "row", alignItems: "center", justifyContent: 'space-between' }}
-                            >
+                            <InputContainer>
 
-                                <LabelTag>Trail Pack :</LabelTag>
-                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '70%' }}>
+                                <LabelTag>Trail Pack </LabelTag>
+
+                                <DivSlider>
                                     <Switch>
                                         <input
                                             type="checkbox"
@@ -758,12 +758,13 @@ const CreateCustomer = () => {
                                                 dateFormat="dd/MM/yyyy"
                                                 placeholderText="Select a date"
                                                 style={{
-                                                    color: '#000'
+                                                    color: '#000',
+                                                    margin:'0',
                                                 }}
                                             />
                                         </DatePickerWrapper>
                                     }
-                                </div>
+                                </DivSlider>
 
 
 
@@ -789,7 +790,7 @@ const CreateCustomer = () => {
 
                             </InputContainer>
 
-                            {/* <InputContainer
+                            <InputContainer
                                 style={{
                                     alignItems: "center",
                                     flexDirection: "row",
@@ -797,57 +798,50 @@ const CreateCustomer = () => {
                                 }}
                             >
                                 {localImage ? (
-                                    <LabelTag>
+                                    <ImgLabelTag>
                                         <ImgTag src={localImage} />
-                                    </LabelTag>
+                                    </ImgLabelTag>
                                 ) : (
                                     <LabelTag
                                         style={{ display: "flex", justifyContent: "flex-end" }}
                                     >
-                                        <LabelTag
+                                        <ImgLabelTag
                                             style={{
                                                 border: "1px solid #ccc",
                                                 borderRadius: "50%",
-                                                height: "4rem",
-                                                width: "4rem",
                                                 display: "flex",
                                                 alignItems: "center",
                                                 justifyContent: "center",
                                                 margin: "0",
                                             }}
                                         >
-                                            <FaUserTie size={35} />
-                                        </LabelTag>
+                                            <FaUserTie />
+                                        </ImgLabelTag>
                                     </LabelTag>
                                 )}
 
-                                <div
+                                <UploadDiv
                                     style={{
-                                        width: "68%",
-                                        display: "flex",
-                                        alignItems: "center",
-                                        justifyContent: "space-between",
-                                        background: "#EEF5FF",
-                                        padding: "1rem",
-                                        borderRadius: "1rem",
-                                        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
                                         border:
                                             trySubmit & (customerDetails.image === "")
                                                 ? "2px solid red"
                                                 : ""
                                     }}
                                 >
-                                    <input
+                                    <ImageUploadTAg
                                         type="file"
                                         accept="image/*"
                                         onChange={handleFileChange}
+                                        id="uploadImg"
                                         style={{ color: "#000" }}
                                     />
+                                    <ImgLabel htmlFor="uploadImg"> <MdFileUpload /> </ImgLabel>
                                     <UploadBtn type="button" onClick={handleUpload}>
                                         Upload
                                     </UploadBtn>
-                                </div>
-                            </InputContainer> */}
+                                </UploadDiv>
+
+                            </InputContainer>
 
                         </Row>
 
@@ -857,6 +851,7 @@ const CreateCustomer = () => {
 
                         {uploadImgStatus && <AlertText>{uploadImgStatus}</AlertText>}
                     </CreateNew>
+                    
                 </CustomContainer>
 
             </InnerContainer>
