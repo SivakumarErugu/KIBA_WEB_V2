@@ -39,7 +39,8 @@ import {
     UploadBtn,
     Switch,
     DatePickerWrapper,
-    Icon
+    Icon,
+    DivX
 } from "./CreateCustomerStyles";
 
 const indianStates = [
@@ -320,20 +321,12 @@ const CreateCustomer = () => {
                 <Header />
 
                 <CustomContainer>
-                    <div
-                        style={{
-                            display: "flex",
-                            alignItems: "center",
-                            padding: "0",
-                            marginBottom: "0.5rem",
-                            height: "2rem",
-                        }}
-                    >
+                    <DivX>
                         <BackBtn onClick={onBack}>
-                            <IoIosArrowBack size={28} />
+                            <IoIosArrowBack/>
                         </BackBtn>
                         <Title>Create Customer</Title>
-                    </div>
+                    </DivX>
 
                     <CreateNew onSubmit={onSubmitForm}>
                         <Row>
@@ -796,7 +789,7 @@ const CreateCustomer = () => {
 
                             </InputContainer>
 
-                            <InputContainer
+                            {/* <InputContainer
                                 style={{
                                     alignItems: "center",
                                     flexDirection: "row",
@@ -854,7 +847,8 @@ const CreateCustomer = () => {
                                         Upload
                                     </UploadBtn>
                                 </div>
-                            </InputContainer>
+                            </InputContainer> */}
+
                         </Row>
 
                         <SaveBtn style={{ alignSelf: "flex-end" }} type="submit">
@@ -866,6 +860,7 @@ const CreateCustomer = () => {
                 </CustomContainer>
 
             </InnerContainer>
+
         </MainContainer>
     );
 };

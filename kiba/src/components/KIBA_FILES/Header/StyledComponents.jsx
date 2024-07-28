@@ -14,11 +14,13 @@ export const HeaderContainer = styled.div`
     }
 
     @media screen and (min-width: 321px) and (max-width:480px) {
-        
+        justify-content: space-between;
+        align-items: center;
     }
 
     @media screen and (min-width: 481px) and (max-width:768px) {
-        
+        justify-content: space-between;
+        align-items: center;
     }
 
     @media screen and (min-width: 769px) and (max-width:1024px) {
@@ -61,19 +63,27 @@ export const ProfileIcon = styled.div`
     }
 
     @media screen and (min-width: 321px) and (max-width:480px) {
-        
+        height: 2.5rem !important;
+        width: 2.5rem !important;
+        margin-right: 0.2rem;
     }
 
     @media screen and (min-width: 481px) and (max-width:768px) {
-        
+        height: 2.5rem !important;
+        width: 2.5rem !important;
+        margin-right: 0.2rem;
     }
 
     @media screen and (min-width: 769px) and (max-width:1024px) {
-        
+        height: 2.5rem !important;
+        width: 2.5rem !important;
+        margin-right: 0.2rem;
     }
 
     @media screen and (min-width: 1025px) {
-        
+        height: 2.5rem !important;
+        width: 2.5rem !important;
+        margin-right: 0.5rem;
     }
 
 
@@ -147,7 +157,7 @@ export const HamburgerDiv = styled.div`
     flex-direction: column;
     align-items: center;
     position: relative;
-    /* border: 1px solid red; */
+    border: 1px solid red;
 
     @media screen and (max-width: 320px){
         width: 2.5rem;
@@ -158,13 +168,19 @@ export const HamburgerDiv = styled.div`
     }
 
     @media screen and (min-width: 321px) and (max-width:480px) {
-        
+        width: 2.5rem;
+        height: 2rem;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
     }
 
     @media screen and (min-width: 481px) and (max-width:768px) {
-        width: 3.5rem;
-        height: 3.5rem;
-        margin-top: 0.5rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
     }
 
     @media screen and (min-width: 769px) and (max-width:1024px) {

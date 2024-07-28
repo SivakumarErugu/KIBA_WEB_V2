@@ -46,7 +46,8 @@ import {
     DivY,
     Span,
     TdTagCheckbox,
-    TdTagDelete
+    TdTagDelete,
+    MulDeleteBtn
 } from './StyledComponents'
 
 
@@ -302,7 +303,7 @@ const Customers = () => {
         const savedToken = cookies.get('KIBAJWTToken');
         setLoader(true);
         try {
-            const url = `${apiUrl}/customers`;    
+            const url = `${apiUrl}/customers`;
             const options = {
                 method: 'GET',
                 headers: {
@@ -325,7 +326,6 @@ const Customers = () => {
             setLoader(false);
         }
     };
-    
 
     // DROPDOWN OUTSIDE CLICK CONTROL
     useEffect(() => {
@@ -421,20 +421,20 @@ const Customers = () => {
                     'Content-Type': 'application/json',
                 }
             };
-    
+
             const response = await fetch(url, options);
-    
+
             if (!response.ok) {
                 const errorText = await response.text();
                 throw new Error(`Error: ${response.status} - ${errorText}`);
             }
-    
+
             // Assuming the API returns a status or message in text format
             const result = await response.text();
-            
+
             // Refresh the data
             await getCustomersData();
-    
+
             // Notify the user
             setAlertText('Customer Deleted Successfully');
         } catch (error) {
@@ -442,7 +442,7 @@ const Customers = () => {
             setAlertText('Failed to delete Customer'); // Use setAlertText to show error message
         }
     };
-    
+
 
     // Use effect to hide the alert after 3 seconds
     useEffect(() => {
@@ -460,7 +460,7 @@ const Customers = () => {
         const savedToken = cookies.get('KIBAJWTToken');
         try {
             const idsToDelete = selectedRecords; // Array of customer IDs to delete
-    
+
             const url = `${apiUrl}/Customers/Delete/Multiple`; // Ensure this endpoint matches your server's route
             const options = {
                 method: 'DELETE',
@@ -470,20 +470,20 @@ const Customers = () => {
                 },
                 body: JSON.stringify({ ids: idsToDelete })
             };
-    
+
             const response = await fetch(url, options);
-    
+
             if (!response.ok) {
                 const errorText = await response.text();
                 throw new Error(`Error: ${response.status} - ${errorText}`);
             }
-    
+
             // If the server returns JSON, parse it. If not, keep text response.
-            const result = await response.text(); 
-    
+            const result = await response.text();
+
             // Notify the user
             alert('Customers Deleted Successfully');
-    
+
             // Refresh the customer data
             await getCustomersData();
         } catch (error) {
@@ -491,7 +491,7 @@ const Customers = () => {
             alert('Failed to delete customers');
         }
     };
-    
+
     const onSelectRecord = (ID) => {
         let newSelectedRecords
         if (selectedRecords.includes(ID)) {
@@ -520,10 +520,10 @@ const Customers = () => {
 
                             <CustomContainer>
                                 {/* <CreateNewContainer> */}
-                                    {/* <Count> */}
-                                        <Label>Customers<SpanTag>{customersData.length}</SpanTag></Label>
+                                {/* <Count> */}
+                                <Label>Customers<SpanTag>{customersData.length}</SpanTag></Label>
 
-                                    {/* </Count> */}
+                                {/* </Count> */}
 
 
                                 {/* </CreateNewContainer> */}
@@ -531,7 +531,7 @@ const Customers = () => {
                                 <SearchActionsBar>
                                     <DivX >
                                         <SearchBar>
-                                            <RiSearch2Line size={25} style={{ color: '#667085',height:'100%',}} />
+                                            <RiSearch2Line size={25} style={{ color: '#667085', height: '100%', }} />
                                             <CustomInput type='text'
                                                 placeholder='Search'
                                                 value={SearchText}
@@ -542,7 +542,7 @@ const Customers = () => {
                                         <Actions>
 
                                             {selectedRecords.length >= 2 &&
-                                                <DeleteBtn style={{ marginRight: '1rem', outline: 'none', border: 'none' }}
+                                                <MulDeleteBtn 
                                                     onClick={(e) => {
                                                         e.preventDefault();
                                                         e.stopPropagation();
@@ -550,7 +550,7 @@ const Customers = () => {
                                                     }}
                                                 >
                                                     <MdOutlineDeleteSweep size={29} />
-                                                </DeleteBtn>
+                                                </MulDeleteBtn>
                                             }
 
                                             {selectedFilterColumn !== '' &&
@@ -560,7 +560,7 @@ const Customers = () => {
                                                 </ColumnText>
                                             }
 
-                                            <FilterBtn onClick={() => setFilterActive(!isFilterActive)} ref={FilterDropdownRef}> <IoFilter size={20}/>
+                                            <FilterBtn onClick={() => setFilterActive(!isFilterActive)} ref={FilterDropdownRef}> <IoFilter size={20} />
                                                 {isFilterActive && customersData?.[0] && (
                                                     <FilterDropdown>
                                                         {Object.keys(customersData[0]).map(key => snakeToNormal(key)).map(each => (
@@ -575,12 +575,12 @@ const Customers = () => {
                                     </DivX>
 
                                     {/* <div style={{ padding: '0', height: '3rem', display: 'flex', alignItems: 'center' }}> */}
-                                        <Link to='/create-customer'>
-                                            <CreateNewBtn>
-                                                <BsPlusCircleDotted size={23} />
-                                                <Span>New Customer</Span>
-                                            </CreateNewBtn>
-                                        </Link>
+                                    <Link to='/create-customer' style={{height:'100%'}}>
+                                        <CreateNewBtn>
+                                            <BsPlusCircleDotted size={23} />
+                                            <Span>New Customer</Span>
+                                        </CreateNewBtn>
+                                    </Link>
 
                                     {/* </div> */}
 
@@ -672,7 +672,7 @@ const Customers = () => {
                                                                         onClickSingleDelete(each.ID);
                                                                     }}
                                                                 >
-                                                                    <MdDelete/>
+                                                                    <MdDelete />
                                                                 </DeleteBtn>
                                                             </TdTagDelete>
                                                         </TrTag>

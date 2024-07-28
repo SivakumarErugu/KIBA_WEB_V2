@@ -116,7 +116,7 @@ const Login = () => {
             if (token) {
                 // Set the JWT token as a cookie (consider security settings)
                 // Cookies.set('KIBAJWTToken', token, { expires: 7, secure: true, sameSite: 'Strict' });
-                cookies.set('KIBAJWTToken', token, { path: '/', maxAge: 604800 });
+                cookies.set('KIBAJWTToken', token, { path: '/', maxAge: 86400 });
 
                 // Navigate to Dashboard
                 navigate('/dashboard');

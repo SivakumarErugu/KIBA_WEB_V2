@@ -22,21 +22,44 @@ export const CreateNew = styled.form`
 `
 
 export const CustomContainer = styled.div`
-    height: 92%;
+    /* height: 92%; */
+    height: 90vh;
     width: 100%;
     display: flex;
     flex-direction: column;
     border-radius: 1rem;
+    border: 1px solid red;
 `
 
 export const InnerContainer = styled.div`
     width: 83%;
-    height: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     background: #B4D4FF;
-    padding: 1rem;
+    /* padding: 1rem; */
+
+    @media screen and (max-width: 320px){
+        width: 100%;
+        padding: 0.2rem;
+    }
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        
+    }
+
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        
+    }
+
+    @media screen and (min-width: 1025px) {
+        
+    }
 `
 
 export const MainContainer = styled.div`
@@ -304,3 +327,31 @@ export const Icon = styled.div`
     }
 
 `;
+export const DivX = styled.div`
+    display: flex;
+    align-items: center;
+    padding: 0;
+    width: fit-content;
+    border: 1px solid red;
+
+    @media screen and (max-width: 320px){
+        height: 1rem;
+        width: 1rem;
+    }
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        
+    }
+
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        
+    }
+
+    @media screen and (min-width: 1025px) {
+        
+    }
+`

@@ -25,8 +25,8 @@ export const Actions = styled.div`
     display: flex;
     align-items: center;
     width: 40%;
+    height: 100% !important;
     justify-content: flex-end;
-    border: 1px solid red !important;
 
     @media screen and (max-width: 320px){
       display: none;
@@ -37,15 +37,7 @@ export const Actions = styled.div`
     }
 
     @media screen and (min-width: 481px) and (max-width:768px) {
-        
-    }
-
-    @media screen and (min-width: 769px) and (max-width:1024px) {
-        
-    }
-
-    @media screen and (min-width: 1025px) {
-        
+      display: none;
     }
 `;
 
@@ -66,34 +58,13 @@ export const Checkbox = styled.input`
   width: 1rem;
   height: 1rem;
   border: 1px solid red !important;
-
-  @media screen and (max-width: 320px){
-    display: none;
-
-  }
-
-  @media screen and (min-width: 321px) and (max-width:480px) {
-    display: none;
-  }
-
-  @media screen and (min-width: 481px) and (max-width:768px) {
-      
-  }
-
-  @media screen and (min-width: 769px) and (max-width:1024px) {
-      
-  }
-
-  @media screen and (min-width: 1025px) {
-      
-  }
 `;
 
 // ColumnText styling
 export const ColumnText = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 1rem;
+  margin-right: 0.4rem;
 `;
 
 // Count styling
@@ -113,7 +84,6 @@ export const Count = styled.div`
 export const CreateNewContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
-    border: 1px solid red;
 `;
 
 // CreeteNewBtn styling
@@ -144,26 +114,34 @@ export const CreateNewBtn = styled.button`
     }
 
     @media screen and (min-width: 481px) and (max-width:768px) {
-        
+      width: 2rem;
+      height: 2rem;
+      justify-content: center;
+      margin-right: 0.2rem;
     }
 
     @media screen and (min-width: 769px) and (max-width:1024px) {
-        
+      width: fit-content;
+      height: 2rem;
+      justify-content: center;
+      margin-right: 0.2rem;
     }
 
     @media screen and (min-width: 1025px) {
-        
+      width: fit-content;
+      height: 90% !important;
+      justify-content: center;
+      margin-right: 0.2rem;
     }
 `;
 
 // CustomContainer styling
 export const CustomContainer = styled.div`
-    height: 90%;
+    height: 90vh;
     width: 100%;
     display: flex;
     flex-direction: column;
-    padding: 0.5rem;
-    border: 1px solid red;
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
 `;
 
 // CustomInput styling
@@ -190,15 +168,8 @@ export const CustomInput = styled.input`
   }
 
   @media screen and (min-width: 481px) and (max-width:768px) {
-      
-  }
-
-  @media screen and (min-width: 769px) and (max-width:1024px) {
-      
-  }
-
-  @media screen and (min-width: 1025px) {
-      
+    font-size: 1rem;
+    margin-left: 0.3rem;
   }
 `;
 
@@ -206,7 +177,12 @@ export const CustomInput = styled.input`
 export const CustomSpan = styled.span`
   color: #660708;
   font-weight: bold;
-  margin-right: 1rem;
+  margin-right: 0.5rem;
+  font-size: 0.8rem;
+
+  @media screen and (min-width: 769px) and (max-width:1024px) {
+    font-size: 0.6rem;
+  }
 `;
 
 // CancelBtn styling
@@ -219,6 +195,11 @@ export const CancelBtn = styled.button`
   border: none;
   cursor: pointer;
   outline: none;
+
+  @media screen and (min-width: 769px) and (max-width:1024px) {
+    width:  0.8rem;
+    height:  0.8rem;
+  }
 `;
 
 // DeleteBtn styling
@@ -237,23 +218,33 @@ export const DeleteBtn = styled.button`
     width: 1rem;
   }
 
-  @media screen and (min-width: 321px) and (max-width:480px) {
+  @media screen and (min-width: 321px) and (max-width:1024px) {
     height: 1rem;
     width: 1rem;
   }
 
-  @media screen and (min-width: 481px) and (max-width:768px) {
-      
-  }
-
-  @media screen and (min-width: 769px) and (max-width:1024px) {
-      
-  }
-
   @media screen and (min-width: 1025px) {
-      
+    height: 1.5rem;
+    width: 1.5rem;
   }
 `;
+export const MulDeleteBtn = styled.button`
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: red;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border: 1px solid red;
+
+  @media screen and (min-width: 769px) and (max-width:1024px) {
+    height: 1.5rem;
+    width: 1.5rem;
+    margin-right: 0.3rem;
+  }
+`
 
 // DotSpinner styling
 export const DotSpinner = styled.div`
@@ -363,60 +354,45 @@ export const DotSpinnerDot = styled.div`
 export const FilterBtn = styled.button`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   height: fit-content;
   width: fit-content;
   padding: 0.4rem;
   margin: 0rem 0.2rem 0rem 0.3rem;
-  /* font-size: 1rem; */
   border: 1px solid #ccc;
   position: relative;
-  z-index: 10;
+  z-index: 1;
+  outline: none;
 
-  border: 1px solid red ;
-
-  @media screen and (max-width: 320px){
-    height: 30%;
-    padding: 0.1rem;
-    margin: 0rem 0rem 0rem 0.2rem;
-  }
-
-  @media screen and (min-width: 321px) and (max-width:480px) {
-    height: 30%;
-    padding: 0.1rem;
-    margin: 0rem 0rem 0rem 0.2rem;
-  }
-
-  @media screen and (min-width: 481px) and (max-width:768px) {
-      
-  }
 
   @media screen and (min-width: 769px) and (max-width:1024px) {
-      
+      height: 1.5rem;
+      width: 1.5rem;
+      padding: 0.2rem;
   }
 
   @media screen and (min-width: 1025px) {
-      
+    height: fit-content;
+    width: fit-content;
+    padding: 0.3rem;
+    margin: 0rem 0.4rem 0rem 0.3rem;
   }
 `;
 
 // FilterDropdown styling
 export const FilterDropdown = styled.div`
   min-width: 550%;
-  /* max-width: fit-content; */
   height: 1000%;
   display: flex;
   flex-direction: column;
   position: absolute;
   top: 2.5rem;
   right: 0;
-  /* background: #dee2e6; */
   background: #fff;
   padding: 0.1rem;
   border-radius: 0.7rem;
   overflow-y: auto;
   box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
-
 
   &::-webkit-scrollbar{
     width: 0.2rem;
@@ -446,8 +422,7 @@ export const HighlightText = styled.span`
 
 // ImgTag styling
 export const ImgTag = styled.img`
-  width: 2rem;
-  height: 2rem;
+  
   max-width: 2rem;
   max-height: 2rem;
   border-radius: 50%;
@@ -466,31 +441,32 @@ export const ImgTag = styled.img`
   }
 
   @media screen and (min-width: 481px) and (max-width:768px) {
-      
+    width: 1.6rem;
+    height: 1.6rem;
+    margin: 0.1rem 0.2rem 0.1rem 0.1rem;
   }
 
-  @media screen and (min-width: 769px) and (max-width:1024px) {
-      
+  @media screen and (min-width: 769px) {
+    width: 2rem;
+    height: 2rem;
   }
 
-  @media screen and (min-width: 1025px) {
-      
-  }
+
 `;
 
 // InnerContainer styling
 export const InnerContainer = styled.div`
   width: 83%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background: #B4D4FF;
-  /* padding: 1rem; */
-  border: 1px solid red;
+  padding: 1rem;
 
   @media screen and (max-width: 320px){
     width: 100%;
+    padding: 0;
   }
 
   @media screen and (min-width: 321px) and (max-width:480px) {
@@ -498,7 +474,7 @@ export const InnerContainer = styled.div`
   }
 
   @media screen and (min-width: 481px) and (max-width:768px) {
-      
+    width: 100%;
   }
 
   @media screen and (min-width: 769px) and (max-width:1024px) {
@@ -518,7 +494,6 @@ export const Label = styled.h1`
   margin: 0px;
   text-align: center;
   display: flex;
-  /* border: 1px solid red; */
 
   @media screen and (max-width: 320px){
     width: fit-content;
@@ -535,18 +510,18 @@ export const Label = styled.h1`
   }
 
   @media screen and (min-width: 481px) and (max-width:768px) {
-      
+    width: fit-content;
+    height: fit-content;
+    font-size: 1.1rem;
+    margin-left: 0.2rem;
   }
 
-  @media screen and (min-width: 769px) and (max-width:1024px) {
-      
+  @media screen and (min-width: 769px){
+    width: fit-content;
+    height: fit-content;
+    font-size: 1.2rem;
+    margin-left: 0.2rem;
   }
-
-  @media screen and (min-width: 1025px) {
-      
-  }
-
-
 `;
 
 // MainContainer styling
@@ -576,11 +551,9 @@ export const PaginationContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 6%;
+  height: 5vh;
   width: 100%;
-  margin-top: 1rem;
   padding: 0rem 0.5rem 0rem 0.5rem;
-  border: 1px solid red;
 
   @media screen and (max-width: 320px){
     margin-top: 0.5rem;
@@ -599,7 +572,7 @@ export const PaginationContainer = styled.div`
   }
 
   @media screen and (min-width: 1025px) {
-      
+    margin-top: 0.5rem;
   }
 `;
 
@@ -626,11 +599,15 @@ export const SearchActionsBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 7%;
+  /* height: 7%; */
+  height: 6vh;
   width: 100%;
   margin-top: 0.4rem;
   border-radius: 0.7rem;
-  /* border: 1px solid red; */
+
+  @media screen and (min-width: 1025px) {
+    height: 3rem !important;
+  }
 
 
 `;
@@ -645,7 +622,6 @@ export const SearchBar = styled.div`
   padding: 0rem 0rem 0rem 0rem;
   border-radius: 0.5rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  
   overflow: hidden;
 
   @media screen and (max-width: 320px){
@@ -659,23 +635,25 @@ export const SearchBar = styled.div`
   }
 
   @media screen and (min-width: 481px) and (max-width:768px) {
-      
+    height: 100%;
+    width: 100%;
+    padding-left: 0.1rem;
   }
 
   @media screen and (min-width: 769px) and (max-width:1024px) {
-      
+    height: 100%;
+    width: 100%;
+    padding-left: 0.2rem;
   }
 
   @media screen and (min-width: 1025px) {
-      
+    padding-left: 0.3rem;
   }
 `;
 
 // SpanTag styling
 export const SpanTag = styled.sup`
   color: #000;
-  height: 1.3rem;
-  width: 1.3rem;
   margin-left: 0.2rem;
   background: #F9F5FF;
   color: #93312B;
@@ -701,15 +679,24 @@ export const SpanTag = styled.sup`
   }
 
   @media screen and (min-width: 481px) and (max-width:768px) {
-      
+    height: 0.9rem;
+    width: 0.9rem;
+    font-size: 0.6rem;
+    padding: 0rem;
   }
 
   @media screen and (min-width: 769px) and (max-width:1024px) {
-      
+    height: 0.9rem;
+    width: 0.9rem;
+    font-size: 0.6rem;
+    padding: 0rem;
   }
 
   @media screen and (min-width: 1025px) {
-      
+    height: 0.9rem;
+    width: 0.9rem;
+    font-size: 0.6rem;
+    padding: 0.4rem;
   }
 `;
 
@@ -733,7 +720,8 @@ export const TableTag = styled.table`
   }
 
   @media screen and (min-width: 321px) and (max-width:480px) {
-    order-radius: 0.7rem;
+    border-radius: 0.7rem;
+    padding: 0.3rem;
   }
 
   @media screen and (min-width: 481px) and (max-width:768px) {
@@ -779,34 +767,35 @@ export const TdTag = styled.td`
   width: 23.5%;
   display: flex;
   align-items: center;
-  /* border: 1px solid red; */
 
   @media screen and (max-width: 320px){
-    width: 3.9rem;
+    width: 23.5%;
     font-size: 0.4rem;
-    /* margin: 0rem 0.2rem 0rem 0.1rem; */
     overflow: hidden;
     padding: 0.1rem;
   }
 
   @media screen and (min-width: 321px) and (max-width:480px) {
-    width: 3.9rem;
-    font-size: 0.4rem;
-    /* margin: 0rem 0.2rem 0rem 0.1rem; */
+    width: 23.5%;
+    font-size: 0.5rem;
     overflow: hidden;
     padding: 0.1rem;
   }
 
   @media screen and (min-width: 481px) and (max-width:768px) {
-      
+    font-size: 0.7rem;
+    overflow: hidden;
+    padding: 0.1rem;
   }
 
   @media screen and (min-width: 769px) and (max-width:1024px) {
-      
+    font-size: 0.9rem;
+    overflow: hidden;
+    padding: 0.1rem;
   }
 
   @media screen and (min-width: 1025px) {
-    width: 23.5%;
+
   }
 `;
 
@@ -814,25 +803,22 @@ export const TdTag = styled.td`
 export const ThTag = styled.th`
   width: 23.5%;
   text-align: left;
-  /* border: 1px solid red; */
 
   @media screen and (max-width: 320px){
-    width: 3.9rem;
     font-size: 0.5rem;
 
   }
 
   @media screen and (min-width: 321px) and (max-width:480px) {
-    width: 3.9rem;
     font-size: 0.5rem;
   }
 
   @media screen and (min-width: 481px) and (max-width:768px) {
-      
+    font-size: 0.7rem;
   }
 
   @media screen and (min-width: 769px) and (max-width:1024px) {
-      
+    font-size: 0.9rem;
   }
 
   @media screen and (min-width: 1025px) {
@@ -851,30 +837,9 @@ export const TrTag = styled.tr`
   border-bottom: 1px solid #ccc;
   background: #EEF5FF;
   overflow-y: auto;
-  /* border: 1px solid red; */
     &:hover {
         background-color: #e5e5e5;
     }
-
-  @media screen and (max-width: 320px){
-    
-  }
-
-  @media screen and (min-width: 321px) and (max-width:480px) {
-      
-  }
-
-  @media screen and (min-width: 481px) and (max-width:768px) {
-      
-  }
-
-  @media screen and (min-width: 769px) and (max-width:1024px) {
-      
-  }
-
-  @media screen and (min-width: 1025px) {
-      
-  }
 `;
 
 export const DivX =styled.div`
@@ -886,7 +851,6 @@ export const DivX =styled.div`
   border-radius: 0.5rem;
   background: #fff;
   padding: 0rem 0.3rem 0rem 0.3rem;
-  /* border: 1px solid red !important; */
 
   @media screen and (max-width: 320px){
     height: 2rem;
@@ -897,51 +861,38 @@ export const DivX =styled.div`
 
   @media screen and (min-width: 321px) and (max-width:480px) {
     height: 2rem;
-    width: 11.5rem;
+    width: 60%;
     padding: 0rem 0rem 0rem 0.1rem;
     margin-left: 0.2rem;
   }
 
   @media screen and (min-width: 481px) and (max-width:768px) {
-      
+    height: 2rem;
+    width: 60%;
+    padding: 0rem 0rem 0rem 0.1rem;
+    margin-left: 0.2rem;
   }
 
   @media screen and (min-width: 769px) and (max-width:1024px) {
-      
+    height: 2rem;
+    width: 60%;
+    padding: 0rem 0rem 0rem 0.1rem;
+    margin-left: 0.2rem;
   }
 
   @media screen and (min-width: 1025px) {
-      
+    height: 90%;
+    width: 60%;
+    padding: 0rem 0rem 0rem 0.1rem;
+    margin-left: 0.2rem;
+    padding-left: 0.3rem;
   }
 
 `
 
 export const DivY = styled.div`
-  height: 82%;
+  height: 70vh;
   margin-top: 0.5rem;
-  /* border: 1px solid red; */
-
-  @media screen and (max-width: 320px){
-    
-  }
-
-  @media screen and (min-width: 321px) and (max-width:480px) {
-      
-  }
-
-  @media screen and (min-width: 481px) and (max-width:768px) {
-      
-  }
-
-  @media screen and (min-width: 769px) and (max-width:1024px) {
-      
-  }
-
-  @media screen and (min-width: 1025px) {
-      
-  }
-
-
 `
 
 export const Span = styled.span`
@@ -954,15 +905,15 @@ export const Span = styled.span`
   }
 
   @media screen and (min-width: 481px) and (max-width:768px) {
-      
+    display: none;
   }
 
   @media screen and (min-width: 769px) and (max-width:1024px) {
-      
+      margin-left: 0.3rem;
   }
 
   @media screen and (min-width: 1025px) {
-      
+    margin-left: 0.4rem;
   }
 `
 export const TdTagCheckbox = styled.td`
@@ -975,11 +926,11 @@ export const TdTagCheckbox = styled.td`
   }
 
   @media screen and (min-width: 321px) and (max-width:480px) {
-      
+    display: none;
   }
 
   @media screen and (min-width: 481px) and (max-width:768px) {
-      
+    display: none;
   }
 
   @media screen and (min-width: 769px) and (max-width:1024px) {
@@ -995,7 +946,6 @@ export const TdTagDelete = styled.td`
   display: flex;
   align-items: center;
   position: absolute;
-  /* border: 1px solid red; */
 
 
   @media screen and (max-width: 320px){
@@ -1004,7 +954,8 @@ export const TdTagDelete = styled.td`
   }
 
   @media screen and (min-width: 321px) and (max-width:480px) {
-      
+    right: 0.5%;
+    width: fit-content;
   }
 
   @media screen and (min-width: 481px) and (max-width:768px) {
