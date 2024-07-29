@@ -48,7 +48,8 @@ import {
     ImgLabelTag,
     UploadDiv,
     ImageUploadTAg,
-    ImgLabel
+    ImgLabel,
+    ImgLabelTag2
 } from './StyledComponents'
 
 
@@ -130,30 +131,30 @@ const CustomerDetailedView = () => {
 
         const getCustomerData = async () => {
             try {
-            const url = `${apiUrl}/customer/${id}`;
-            const options = {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${savedToken}`, // Include authorization if required
-                    'Content-Type': 'application/json'
+                const url = `${apiUrl}/customer/${id}`;
+                const options = {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${savedToken}`, // Include authorization if required
+                        'Content-Type': 'application/json'
+                    }
+                };
+                const response = await fetch(url, options);
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`Error: ${response.status} - ${errorText}`);
                 }
-            };
-            const response = await fetch(url, options);
 
-            if (!response.ok) {
-                const errorText = await response.text();
-                throw new Error(`Error: ${response.status} - ${errorText}`);
+                const data = await response.json();
+                setCustomerDetails(data);
+                setLocalImage(data.image);
+            } catch (error) {
+                console.error('Error fetching customer data:', error.message);
+                // Optionally set an error state here
+            } finally {
+                setLoader(false);
             }
-
-            const data = await response.json();
-            setCustomerDetails(data);
-            setLocalImage(data.image);
-        } catch (error) {
-            console.error('Error fetching customer data:', error.message);
-            // Optionally set an error state here
-        } finally {
-            setLoader(false);
-        }
         }
 
         getCustomerData()
@@ -247,9 +248,9 @@ const CustomerDetailedView = () => {
     const onSubmitForm = async (e) => {
         e.preventDefault();
         setTrySubmit(true);
-    
+
         const isValid = ValidateForm(); // Ensure this function returns true if valid
-    
+
         if (!isValid) {
             Swal.fire({
                 icon: 'warning',
@@ -259,10 +260,10 @@ const CustomerDetailedView = () => {
             setTrySubmit(false); // Reset submission flag
             return;
         }
-    
+
         const savedToken = cookies.get('KIBAJWTToken'); // Retrieve token from cookies if required
         const url = `${apiUrl}/customer/${id}`; // Make sure `id` is defined and valid
-    
+
         const options = {
             method: 'PUT',
             headers: {
@@ -271,10 +272,10 @@ const CustomerDetailedView = () => {
             },
             body: JSON.stringify(customerDetails), // Ensure `customerDetails` is correctly defined
         };
-    
+
         try {
             const response = await fetch(url, options);
-    
+
             if (response.ok) {
                 console.log('Customer Updated Successfully!');
                 Swal.fire({
@@ -302,7 +303,7 @@ const CustomerDetailedView = () => {
             setTrySubmit(false); // Reset submission flag
         }
     };
-    
+
 
     const setTrailData = (date) => {
         setSelectedDate(date);
@@ -334,7 +335,7 @@ const CustomerDetailedView = () => {
 
                 <CustomContainer>
                     <DivX style={{ display: 'flex', alignItems: 'center', padding: '0', marginBottom: '0.5rem', height: '2rem', }}>
-                        <BackBtn onClick={onBack}><IoIosArrowBack size={28} /></BackBtn>
+                        <BackBtn onClick={onBack}><IoIosArrowBack /></BackBtn>
                         <Title >Customer Details</Title>
                     </DivX>
                     <IDTag>Customer ID: {customerDetails.ID}</IDTag>
@@ -514,7 +515,7 @@ const CustomerDetailedView = () => {
                                             <RadioCon>
                                                 <Custom>
                                                     <InputTag id='Yes' name='ownland' type='radio'
-                                                    style={{ height: "70%", width: "90%", margin: "0" }}
+                                                        style={{ height: "70%", width: "90%", margin: "0" }}
                                                         checked={customerDetails.own_land === 'true'}
                                                         onChange={() => onChangeInput('own_land', 'true')}
                                                     />
@@ -522,7 +523,7 @@ const CustomerDetailedView = () => {
                                                 </Custom>
                                                 <Custom>
                                                     <InputTag id='No' name='ownland' type='radio'
-                                                    style={{ height: "70%", width: "90%", margin: "0" }}
+                                                        style={{ height: "70%", width: "90%", margin: "0" }}
                                                         checked={customerDetails.own_land === 'false'}
                                                         onChange={() => onChangeInput('own_land', 'false')} />
                                                     <LabelTwo style={{ fontSize: '1rem', color: '#495057' }} id='No'>No</LabelTwo>
@@ -570,7 +571,7 @@ const CustomerDetailedView = () => {
                                             <RadioCon>
                                                 <Custom>
                                                     <InputTag id='Yes' name='Customer' type='radio'
-                                                    style={{ height: "70%", width: "90%", margin: "0" }}
+                                                        style={{ height: "70%", width: "90%", margin: "0" }}
                                                         checked={customerDetails.customer === 'true'}
                                                         onChange={() => onChangeInput('customer', 'true')}
                                                     />
@@ -578,7 +579,7 @@ const CustomerDetailedView = () => {
                                                 </Custom>
                                                 <Custom>
                                                     <InputTag id='No' name='Customer' type='radio'
-                                                    style={{ height: "70%", width: "90%", margin: "0" }}
+                                                        style={{ height: "70%", width: "90%", margin: "0" }}
                                                         checked={customerDetails.customer === 'false'}
                                                         onChange={() => onChangeInput('customer', 'false')} />
                                                     <LabelTwo style={{ fontSize: '1rem', color: '#495057' }} id='No'>No</LabelTwo>
@@ -634,7 +635,11 @@ const CustomerDetailedView = () => {
                                                             onChange={setTrailData}
                                                             dateFormat="dd/MM/yyyy"
                                                             placeholderText="Select a date"
-                                                            style={{ color: '#000' }}
+                                                            style={{
+                                                                color: '#000',
+                                                                margin: '0px',
+                                                                height: '100%'
+                                                            }}
                                                         />
                                                     </DatePickerWrapper>
                                                 }
@@ -665,12 +670,12 @@ const CustomerDetailedView = () => {
                                             }}
                                         >
                                             {localImage ? (
-                                                <ImgLabelTag>
+                                                <ImgLabelTag2>
                                                     <ImgTag src={localImage} />
-                                                </ImgLabelTag>
+                                                </ImgLabelTag2>
                                             ) : (
-                                                <LabelTag
-                                                    style={{ display: "flex", justifyContent: "flex-end",marginRight:'0.5rem',width:'30%' }}
+                                                <ImgLabelTag2
+                                                    style={{ display: "flex", justifyContent: "flex-end", marginRight: '0.5rem', width: '30%' }}
                                                 >
                                                     <ImgLabelTag
                                                         style={{
@@ -685,7 +690,7 @@ const CustomerDetailedView = () => {
                                                         <FaUserTie />
                                                     </ImgLabelTag>
 
-                                                </LabelTag>
+                                                </ImgLabelTag2>
                                             )}
 
                                             <UploadDiv

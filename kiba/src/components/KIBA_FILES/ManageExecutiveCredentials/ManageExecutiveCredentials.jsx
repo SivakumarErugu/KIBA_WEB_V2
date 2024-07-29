@@ -133,7 +133,7 @@ const ManageExecutiveCredentials = () => {
 
                             <CustomContainer>
                                 <TitleDiv>
-                                    <BackBtn onClick={onBack}><IoIosArrowBack size={28} /></BackBtn>
+                                    <BackBtn onClick={onBack}><IoIosArrowBack /></BackBtn>
                                     <Title>Manage Executive Credentials</Title>
                                 </TitleDiv>
 

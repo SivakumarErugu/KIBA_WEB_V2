@@ -9,8 +9,7 @@ import Header from "../Header/Header";
 
 import Swal from "sweetalert2";
 
-// import { IoIosArrowBack } from "react-icons/io";
-import { MdArrowBackIos } from "react-icons/md";
+import { IoIosArrowBack } from "react-icons/io";
 import { FaAngleDown } from "react-icons/fa6";
 import { FaUserTie } from "react-icons/fa";
 import { MdFileUpload } from "react-icons/md";
@@ -46,7 +45,8 @@ import {
     DivSlider,
     UploadDiv,
     ImageUploadTAg,ImgLabel,
-    ImgLabelTag
+    ImgLabelTag,
+    ImgLabelTag2
 } from "./CreateCustomerStyles";
 
 const indianStates = [
@@ -329,7 +329,7 @@ const CreateCustomer = () => {
                 <CustomContainer>
                     <DivX>
                         <BackBtn onClick={onBack} >
-                            <MdArrowBackIos  />
+                            <IoIosArrowBack  />
                         </BackBtn>
                         <Title>Create Customer</Title>
                     </DivX>
@@ -759,7 +759,8 @@ const CreateCustomer = () => {
                                                 placeholderText="Select a date"
                                                 style={{
                                                     color: '#000',
-                                                    margin:'0',
+                                                    margin:'0px',
+                                                    height:'100%'
                                                 }}
                                             />
                                         </DatePickerWrapper>
@@ -798,11 +799,11 @@ const CreateCustomer = () => {
                                 }}
                             >
                                 {localImage ? (
-                                    <ImgLabelTag>
+                                    <ImgLabelTag2>
                                         <ImgTag src={localImage} />
-                                    </ImgLabelTag>
+                                    </ImgLabelTag2>
                                 ) : (
-                                    <LabelTag
+                                    <ImgLabelTag2
                                         style={{ display: "flex", justifyContent: "flex-end" }}
                                     >
                                         <ImgLabelTag
@@ -817,7 +818,7 @@ const CreateCustomer = () => {
                                         >
                                             <FaUserTie />
                                         </ImgLabelTag>
-                                    </LabelTag>
+                                    </ImgLabelTag2>
                                 )}
 
                                 <UploadDiv

@@ -56,6 +56,7 @@ export const InnerContainer = styled.div`
 
     @media screen and (min-width: 769px) {
         width: 83%;
+        padding: 1rem;
     }
 `
 
@@ -92,7 +93,7 @@ export const Title = styled.h1`
     }
 
     @media screen and (min-width: 1025px) {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
 `
 
@@ -160,7 +161,6 @@ export const LabelTag = styled.label`
 export const InputTag = styled.input`
     width: 68%;
     height: 70%;
-    font-size: 1rem;
     border-radius: 0.4rem;
     padding: 0.5rem 0.5rem 0.5rem 0.5rem;
     border: 2px solid #ccc;
@@ -176,23 +176,27 @@ export const InputTag = styled.input`
         height: 1.2rem;
         flex-grow: 1;
         width: 100%;
+        font-size: 0.6rem;
     }
 
     @media screen and (min-width: 321px) and (max-width:480px) {
         height: 1.2rem;
         flex-grow: 1;
         width: 100%;
+        font-size: 0.7rem;
     }
 
     @media screen and (min-width: 481px) and (max-width:768px) {
         height: 1.2rem;
         flex-grow: 1;
         width: 100%;
+        font-size: 0.8rem;
     }
 
     @media screen and (min-width: 769px){
         width: 68%;
         height: 70%;
+        font-size: 1rem;
     }
 
 `
@@ -311,12 +315,39 @@ export const TextArea = styled.textarea`
 `
 export const IDTag = styled.h1`
     position: absolute;
-    color: #000;
-    font-size: 1.3rem;
+    color: #495057;
     left: 50%;
     top: 3%;
     margin: 0;
     transform: translate(-50%);
+
+    width: fit-content;
+    /* height: 100%; */
+    margin: 0px;
+    padding: 0px;
+    margin: 0rem 0rem 0rem 0rem;
+    display: flex;
+    align-items: center;
+
+    @media screen and (max-width: 320px){
+        font-size: 0.9rem;
+    }
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        font-size: 0.9rem;
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        font-size: 0.9rem;
+    }
+
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        font-size: 1rem;
+    }
+
+    @media screen and (min-width: 1025px) {
+        font-size: 1.2rem;
+    }
 `
 export const BackBtn = styled.button`
     color: #000;
@@ -474,11 +505,11 @@ export const Span = styled.span`
     }
 
     @media screen and (min-width: 321px) and (max-width:480px) {
-        font-size: 0.6rem;
+        font-size: 0.7rem;
     }
 
     @media screen and (min-width: 481px) and (max-width:768px) {
-        font-size: 0.6rem;
+        font-size: 0.8rem;
     }
 
     @media screen and (min-width: 769px) {
@@ -591,8 +622,6 @@ export const Switch = styled.label`
     }
 
     @media screen and (max-width: 320px){
-        /* width: 2em; */
-        /* height: 1em; */
         font-size: 11px;
         input {
         opacity: 0;
@@ -638,7 +667,6 @@ export const Switch = styled.label`
             transform: translateX(1.4em);
             background-color: #fff;
         }
-            border: 1px solid red;
     }
 
     @media screen and (min-width: 321px) and (max-width:480px) {
@@ -687,11 +715,10 @@ export const Switch = styled.label`
             transform: translateX(1.4em);
             background-color: #fff;
         }
-            border: 1px solid red;
     }
 
     @media screen and (min-width: 481px) and (max-width:768px) {
-        font-size: 11px;
+        font-size: 12px;
         input {
         opacity: 0;
         width: 0;
@@ -717,7 +744,7 @@ export const Switch = styled.label`
             width: 1em;
             border-radius: 50%;
             left: 0.1em;
-            bottom: 0.1em;
+            bottom: 0.2em;
             background-color: #adb5bd;
             transition: .4s;
         }
@@ -736,7 +763,6 @@ export const Switch = styled.label`
             transform: translateX(1.4em);
             background-color: #fff;
         }
-            border: 1px solid red;
     }
 
     @media screen and (min-width: 769px) {
@@ -792,6 +818,9 @@ export const DatePickerWrapper  = styled.div`
     border-radius: 1rem;
     z-index: 3;
     padding: 0 !important;
+    display: flex;
+    align-items: center;
+
     .react-datepicker-wrapper {
     width: fit-content;
     }
@@ -854,12 +883,16 @@ export const DatePickerWrapper  = styled.div`
 
     @media screen and (min-width: 481px) and (max-width:768px) {
         width: 4rem;
-        height: 1rem;
+        /* height: 1rem; */
+        height: 100%;
+
         margin: 0 !important;
         padding: 0 !important;
 
         .react-datepicker-wrapper {
             width: fit-content;
+            padding: 0 !important;
+            margin: 0 !important;
         }
 
         .react-datepicker__input-container input {
@@ -968,6 +1001,8 @@ export const DivSlider = styled.div`
 
     @media screen and (min-width: 481px) and (max-width:768px) {
         width: 100%;
+        height: 1.2rem;
+        flex-grow: 1;
         justify-content: space-between;
     }
 
@@ -1015,7 +1050,7 @@ export const ImgLabelTag = styled.label`
 export const UploadDiv = styled.div`
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     background: #EEF5FF;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 68%;
@@ -1066,13 +1101,13 @@ export const ImageUploadTAg = styled.input`
     }
 
     @media screen and (min-width: 769px) and (max-width:1024px) {
-        border: 1px solid red;
         font-size: 0.5rem;
         max-width: 7rem;
     }
 
     @media screen and (min-width: 1025px) {
         font-size: 1rem;
+        max-width: 10rem;
     }
 `
 
@@ -1086,5 +1121,40 @@ export const ImgLabel = styled.label`
 
     @media screen and (min-width: 1025px) {
         display: none;
+    }
+`
+
+export const ImgLabelTag2 = styled.label`
+    width: 30%;
+    text-align: right;
+    margin-right: 1rem;
+
+    @media screen and (max-width: 320px){
+        font-size: 0.8rem;
+        margin-right: 0.5rem;
+        text-align: left;
+        padding: 0;
+    }
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        font-size: 0.8rem;
+        margin-right: 0.5rem;
+        text-align: left;
+        padding: 0;
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        font-size: 0.8rem;
+        margin-right: 0.7rem;
+        text-align: left;
+        padding: 0;
+    }
+
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        font-size: 0.8rem;
+    }
+
+    @media screen and (min-width: 1025px) {
+        font-size: 1rem;
     }
 `

@@ -47,15 +47,6 @@ function App() {
     };
 
     getAdminData();
-
-    const handleResize = () => {
-      setIsPortrait(window.innerHeight > window.innerWidth);
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
   }, []);
 
   const onChangeActiveTab = (id) => {

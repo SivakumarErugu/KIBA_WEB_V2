@@ -75,34 +75,35 @@ export const CustomProfile = styled.form`
     }
 `;
 export const Title = styled.h1`
-  font-size: 1.5rem;
-  color: #000;
-  width: fit-content;
-  margin: 0px;
-  padding: 0px;
-  margin: 0rem 0rem 0rem 0rem;
-  text-align: center;
+    color: #000;
+    width: fit-content;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    margin: 0rem 0rem 0rem 0rem;
+    display: flex;
+    align-items: center;
 
-  @media screen and (max-width: 320px){
-    font-size: 0.9rem;
-  }
+    @media screen and (max-width: 320px){
+        font-size: 0.9rem;
+    }
 
-  @media screen and (min-width: 321px) and (max-width:480px) {
-    font-size: 0.9rem;
-  }
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        font-size: 0.9rem;
+    }
 
-  @media screen and (min-width: 481px) and (max-width:768px) {
-    font-size: 1rem;
-  }
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        font-size: 0.9rem;
+    }
 
-  @media screen and (min-width: 769px) and (max-width:1024px) {
-    font-size: 1.2rem;
-  }
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        font-size: 1.2rem;
+    }
 
-  @media screen and (min-width: 1025px) {
-   
-  }
-`;
+    @media screen and (min-width: 1025px) {
+        font-size: 1.3rem;
+    }
+`
 export const FieldContainer = styled.div`
   width: 95%;
   display: flex;
@@ -256,46 +257,46 @@ export const Btn = styled.button`
 `;
 
 export const BackBtn = styled.button`
-  height: 100%;
-  color: #000;
-  padding: 0;
-  width: fit-content;
-  border: none;
-  outline: none;
-  background: transparent;
-  margin-right: 1rem;
-  display: flex;
-  align-items: center;
+    color: #000;
+    border: none; 
+    outline: none;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
 
-  &:focus {
-    outline: none; /* Ensure no outline on focus */
-  }
+    &:focus {
+        outline: none; /* Ensure no outline on focus */
+    }
 
     @media screen and (max-width: 320px){
-        font-size: 1.2rem;
-        margin-right: 0.2rem;
+        font-size: 0.6rem;
+        margin-right: 0.3rem;
+        padding: 0;
+        
     }
 
     @media screen and (min-width: 321px) and (max-width:480px) {
-        font-size: 1.2rem;
-        margin-right: 0.2rem;
+        font-size: 0.6rem;
+        margin-right: 0.3rem;
+        padding: 0;
     }
 
     @media screen and (min-width: 481px) and (max-width:768px) {
-        font-size: 1.2rem;
-        margin-right: 0.2rem;
+        font-size: 0.9rem;
+        margin-right: 0.3rem;
+        padding: 0;
+        font-size: 1rem;
     }
 
-    @media screen and (min-width: 769px) and (max-width:1024px) {
-        font-size: 1.4rem;
-        margin-right: 0.2rem;
-    }
-
-    @media screen and (min-width: 1025px) {
-        font-size: 1.7rem;
-        margin-right: 0.2rem;
+    @media screen and (min-width: 769px) {
+        height: 100% !important;
+        width: fit-content;
+        font-size: 1.5rem;
+        padding: 0;
     }
 `;
+
 export const CustomPart = styled.div`
   width: 50%;
   display: flex;

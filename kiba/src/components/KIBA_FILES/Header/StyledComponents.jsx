@@ -155,7 +155,6 @@ export const HamburgerDiv = styled.div`
     flex-direction: column;
     align-items: center;
     position: relative;
-    border: 1px solid red;
 
     @media screen and (max-width: 320px){
         width: 2.5rem;
@@ -203,7 +202,6 @@ export const HamburgerButton = styled.button`
     z-index: 2;
     border: none !important;
     outline: none !important;
-    border: 1px solid green !important;
 
     @media screen and (max-width: 320px){
         width: 100%;

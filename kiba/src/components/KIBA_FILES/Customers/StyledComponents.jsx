@@ -238,12 +238,11 @@ export const MulDeleteBtn = styled.button`
   cursor: pointer;
   outline: none;
   border: none;
-  border: 1px solid red;
 
-  @media screen and (min-width: 769px) and (max-width:1024px) {
+  @media screen and (min-width: 769px){
     height: 1.5rem;
     width: 1.5rem;
-    margin-right: 0.3rem;
+    margin-right: 0.5rem;
   }
 `
 
