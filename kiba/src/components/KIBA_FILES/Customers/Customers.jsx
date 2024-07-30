@@ -47,7 +47,8 @@ import {
     Span,
     TdTagCheckbox,
     TdTagDelete,
-    MulDeleteBtn
+    MulDeleteBtn,
+    
 } from './StyledComponents'
 
 
@@ -286,7 +287,7 @@ const Customers = () => {
     const [customersData, setCustomersData] = useState(Data)
     const [SearchText, setSearchText] = useState('')
     const [isFilterActive, setFilterActive] = useState(false)
-    const [selectedFilterColumn, setSelectedFilterColumn] = useState('')
+    const [selectedFilterColumn, setSelectedFilterColumn] = useState([])
     const [currentPage, setCurrentPage] = useState(1);
     const pageSize = 20; // Number of records per page
     const [selectedRecords, setSelectedRecords] = useState([])
@@ -345,30 +346,76 @@ const Customers = () => {
 
     //FILTERING THE DATA BY CONDITION OR KEYWORD 
     const filteredCustomers = () => {
-        let result = [...customersData];
+        // let result = [...customersData];
 
         const searchText = SearchText.trim().toLowerCase();
-        const snakeCaseColumn = selectedFilterColumn.split(' ')
+        const snakeCaseColumn = selectedFilterColumn.map(each => each.split(' ')
             .map(word => word.charAt(0).toLowerCase() + word.slice(1).toLowerCase())
-            .join('_');
+            .join('_'));
 
-        if (selectedFilterColumn !== '' && searchText !== '') {
-            result = result.filter(customer => {
-                const cellValue = customer[snakeCaseColumn];
-                const stringValue = cellValue !== null && cellValue !== undefined ? cellValue.toString().toLowerCase() : '';
-                return stringValue.includes(searchText);
-            });
-        } else if (searchText !== '') {
-            result = result.filter(customer => {
-                return Object.values(customer).some(value => {
-                    const stringValue = value !== null && value !== undefined ? value.toString().toLowerCase() : '';
-                    return stringValue.includes(searchText);
+        const searchTextsArray = searchText.split(' ')
+        console.log('searchText is', searchTextsArray)
+        console.log(selectedFilterColumn)
+
+
+        const filterTable = (data, searchTextsArray) => {
+            return data.filter(item => {
+                return searchTextsArray.every((searchText) => {
+                    if (searchText === undefined || searchText === null) return true;
+                    return Object.values(item).some(value => {
+                        return value !== null && value !== undefined && value.toString().toLowerCase().includes(searchText.toString().toLowerCase());
+                    });
                 });
             });
-        }
+        };
+
+        const result = filterTable([...customersData], searchTextsArray);
+
+        // if (selectedFilterColumn.length !== 0 && searchText.length !== 0) {
+        //     selectedFilterColumn.forEach((col, index) => {
+        //         const searchText1 = searchTextsArray[index];
+
+        //         if (searchText1 !== undefined) {
+        //             const snakeCaseColumn = col.toLowerCase().replace(/ /g, '_');
+        //             result = result.filter(customer => {
+        //                 const cellValue = customer[snakeCaseColumn];
+        //                 const stringValue = cellValue !== null && cellValue !== undefined ? cellValue.toString().toLowerCase() : '';
+        //                 return stringValue.includes(searchText1.toString().toLowerCase());
+        //             });
+        //         }
+        //     });
+        // } else if (searchText !== '') {
+        //     result = result.filter(customer => {
+        //         return Object.values(customer).some(value => {
+        //             const stringValue = value !== null && value !== undefined ? value.toString().toLowerCase() : '';
+        //             return stringValue.includes(searchText);
+        //         });
+        //     });
+        // }
+
+
+
+
+        // if (selectedFilterColumn !== '' && searchText !== '') {
+        //     result = result.filter(customer => {
+        //         const cellValue = customer[snakeCaseColumn];
+        //         const stringValue = cellValue !== null && cellValue !== undefined ? cellValue.toString().toLowerCase() : '';
+        //         return stringValue.includes(searchText);
+        //     });
+        // } 
+
+        // else if (searchText !== '') {
+        //     result = result.filter(customer => {
+        //         return Object.values(customer).some(value => {
+        //             const stringValue = value !== null && value !== undefined ? value.toString().toLowerCase() : '';
+        //             return stringValue.includes(searchText);
+        //         });
+        //     });
+        // }
 
         // Apply pagination
         const startIndex = (currentPage - 1) * pageSize;
+        console.log(result)
         return result.slice(startIndex, startIndex + pageSize);
     };
 
@@ -504,6 +551,24 @@ const Customers = () => {
         setSelectedRecords(newSelectedRecords)
     }
 
+    const onSelectFilterOptions = (option) => {
+        let options = [...selectedFilterColumn]
+        if (options.includes(option)) {
+            options = options.filter(each => each !== option)
+        }
+        else {
+            options = [...options, option]
+        }
+
+        setSelectedFilterColumn(options)
+    }
+
+    const onRemoveFilterCol = (col) => {
+        let options = [...selectedFilterColumn]
+        options = options.filter(each => each !== col)
+        setSelectedFilterColumn(options)
+    }
+
     const onClickCreateNew = () => {
         navigate('/create-customer')
     }
@@ -551,23 +616,31 @@ const Customers = () => {
                                                 </MulDeleteBtn>
                                             }
 
-                                            {selectedFilterColumn !== '' &&
+                                            {/* {selectedFilterColumn.length !== 0 &&
                                                 <ColumnText>
-                                                    <CustomSpan>{selectedFilterColumn}</CustomSpan>
-                                                    <CancelBtn onClick={() => setSelectedFilterColumn('')}><MdOutlineCancel style={{ color: '#000' }} /></CancelBtn>
+                                                    {selectedFilterColumn.map(each => (
+                                                        <>
+                                                            <CustomSpan key={each}>{each}</CustomSpan>
+                                                            <CancelBtn key={each} onClick={() => onRemoveFilterCol(each)}><MdOutlineCancel style={{ color: '#000' }} /></CancelBtn>
+                                                        </>
+                                                    ))}
                                                 </ColumnText>
-                                            }
+                                            } */}
 
-                                            <FilterBtn onClick={() => setFilterActive(!isFilterActive)} ref={FilterDropdownRef}> <IoFilter size={20} />
-                                                {isFilterActive && customersData?.[0] && (
-                                                    <FilterDropdown>
-                                                        {Object.keys(customersData[0]).map(key => snakeToNormal(key)).map(each => (
-                                                            <FilterItem key={each} onClick={() => setSelectedFilterColumn(each)}>{each}</FilterItem>
-                                                        ))}
-                                                    </FilterDropdown>
-                                                )}
+                                            {/* <FilterDiv>
+                                                <FilterBtn onClick={() => setFilterActive(!isFilterActive)} ref={FilterDropdownRef}> <IoFilter size={20} />
+                                                    {isFilterActive && customersData?.[0] && (
+                                                        <FilterDropdown>
+                                                            {Object.keys(customersData[0]).map(key => snakeToNormal(key)).map(each => (
+                                                                <FilterItem key={each} onClick={() => onSelectFilterOptions(each)}>
+                                                                    <input type='checkbox' checked={selectedFilterColumn.includes(each)} />{each}
+                                                                </FilterItem>
+                                                            ))}
+                                                        </FilterDropdown>
+                                                    )}
 
-                                            </FilterBtn>
+                                                </FilterBtn>
+                                            </FilterDiv> */}
 
                                         </Actions>
                                     </DivX>

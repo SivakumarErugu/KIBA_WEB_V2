@@ -24,7 +24,7 @@ const breakpoints = {
 export const Actions = styled.div`
     display: flex;
     align-items: center;
-    width: 40%;
+    width: 10%;
     height: 100% !important;
     justify-content: flex-end;
 
@@ -350,6 +350,7 @@ export const DotSpinnerDot = styled.div`
   }
 `;
 
+
 // FilterBtn styling
 export const FilterBtn = styled.button`
   display: flex;
@@ -616,7 +617,7 @@ export const SearchBar = styled.div`
   display: flex;
   align-items: center;
   color: #000;
-  width: 60%;
+  width: 90%;
   height: 80%;
   padding: 0rem 0rem 0rem 0rem;
   border-radius: 0.5rem;
@@ -641,7 +642,6 @@ export const SearchBar = styled.div`
 
   @media screen and (min-width: 769px) and (max-width:1024px) {
     height: 100%;
-    width: 100%;
     padding-left: 0.2rem;
   }
 
