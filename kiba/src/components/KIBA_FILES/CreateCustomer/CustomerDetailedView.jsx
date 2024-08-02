@@ -13,6 +13,8 @@ import { IoIosArrowBack } from "react-icons/io";
 import { FaAngleDown } from "react-icons/fa6";
 import { FaUserTie } from "react-icons/fa";
 import { MdFileUpload } from "react-icons/md";
+import { CiSquarePlus } from "react-icons/ci";
+import { IoCloseCircle } from "react-icons/io5";
 
 import {
     AlertText,
@@ -49,7 +51,13 @@ import {
     UploadDiv,
     ImageUploadTAg,
     ImgLabel,
-    ImgLabelTag2
+    ImgLabelTag2,
+    UploadDiv2,
+    ImgDiv,
+    ImgTag2,
+    Remove,
+    ImageUploadTAg2,
+    ImgLabel2
 } from './StyledComponents'
 
 
@@ -93,6 +101,8 @@ const CustomerDetailedView = () => {
     const navigate = useNavigate();
     const [customerDetails, setCustomerDetails] = useState({})
 
+    const [additionalImages, setAdditionalImages] = useState([])
+    const [additionalObjectImages, setAdditionaObjectlImages] = useState([])
     const [image, setImage] = useState(null);
     const [localImage, setLocalImage] = useState(null)
     const [trySubmit, setTrySubmit] = useState(false)
@@ -207,6 +217,17 @@ const CustomerDetailedView = () => {
         setLocalImage(URL.createObjectURL(event.target.files[0]))
     };
 
+    const handleMultipleImgChange = (event) => {
+        const imageFile = event.target.files[0];
+        setAdditionaObjectlImages(prev => ([...prev, imageFile]));
+        const imgUrl = URL.createObjectURL(event.target.files[0])
+        setAdditionalImages(prev => ([
+            ...prev,
+            imgUrl
+        ]))
+        event.target.value = '';
+    }
+
     const handleUpload = async () => {
         try {
             if (!image) {
@@ -240,24 +261,102 @@ const CustomerDetailedView = () => {
         }
     };
 
-    const ValidateForm = () => {
-        return Object.values(customerDetails).every(each => each !== '');
+    const handleUploadMultipleImages = async () => {
+        try {
+            if (additionalObjectImages.length === 0) {
+                console.error("Please select images to upload.");
+                return null;
+            }
+
+            const formData = new FormData();
+            additionalObjectImages.forEach((file) => {
+                formData.append("files", file);
+            });
+
+            const res = await fetch(`${apiUrl}/multiple-image-upload`, {
+                method: "POST",
+                body: formData,
+            });
+
+            if (!res.ok) {
+                const errorText = await res.text();
+                throw new Error("Error uploading images: " + res.statusText + " - " + errorText);
+            }
+
+            const data = await res.json();
+            setUploadImgStatus("Images uploaded successfully!");
+            console.log(data.urls);
+            return data.urls;
+        } catch (error) {
+            console.error("Error uploading images:", error);
+            return null;
+        }
+    };
+
+    const ValidateForm = (customer) => {
+        let error = false;
+
+        if (
+            customer.first_name === "" ||
+            customer.last_name === "" ||
+            customer.mobile_number === "" ||
+            (!customer.same_for_whatsapp && customer.whatsapp_number === "") ||
+            customer.own_land === "" ||
+            customer.cultivation === "" ||
+            customer.state === "" ||
+            customer.district === "" ||
+            customer.city === "" ||
+            customer.pincode === "" ||
+            customer.place === "" ||
+            customer.customer === "" ||
+            customer.created_on === "" ||
+            (customer.trail_pack && customer.trail_pack_given_on === "")
+        ) {
+            error = true;
+        } else if (customer.mobile_number.length !== 10) {
+            error = true;
+        } else if (
+            !customer.same_for_whatsapp &&
+            customer.whatsapp_number.length !== 10
+        ) {
+            error = true;
+        } else if (String(customer.pincode).length !== 6) {
+            error = true;
+        }
+
+        return error;
     };
 
     //UPDATE CUSTOMER
     const onSubmitForm = async (e) => {
         e.preventDefault();
+        
+        let imagesURLS
+        let imageUrl
+        if (localImage) {
+            imageUrl = await handleUpload(); // Wait for the image upload to complete
+        }
+
+        if (additionalObjectImages.length !== 0) {
+            imagesURLS = await handleUploadMultipleImages(); // Wait for the image upload to
+        }
+        const updatedCustomerDetails = {
+            ...customerDetails,
+            image: imageUrl,
+            additional_images: imagesURLS,
+        };
+        setCustomerDetails(updatedCustomerDetails);
+
         setTrySubmit(true);
 
-        const isValid = ValidateForm(); // Ensure this function returns true if valid
+        const isValid = ValidateForm(updatedCustomerDetails); // Ensure this function returns true if valid
 
         if (!isValid) {
             Swal.fire({
-                icon: 'warning',
-                text: 'Please fill in all the required fields.',
-                confirmButtonText: 'OK'
+                icon: "warning",
+                text: "Fill required details correctly!",
+                confirmButtonText: "OK",
             });
-            setTrySubmit(false); // Reset submission flag
             return;
         }
 
@@ -319,6 +418,10 @@ const CustomerDetailedView = () => {
             return () => clearTimeout(timer)
         }
     }, [uploadImgStatus])
+
+    const onRemoveMultipleImg = (image) => {
+        setAdditionalImages((prev) => prev.filter((img) => img !== image));
+    }
 
     const onBack = () => {
         navigate(-1)
@@ -651,7 +754,7 @@ const CustomerDetailedView = () => {
 
                                     </Row>
 
-                                    <Row style={{ flexGrow: '1', margin: '0' }}>
+                                    <Row >
 
                                         <InputContainer style={{ alignItems: 'flex-start' }}>
                                             <LabelTag>Notes</LabelTag>
@@ -669,14 +772,21 @@ const CustomerDetailedView = () => {
                                                 justifyContent: "space-between",
                                             }}
                                         >
-                                            {localImage ? (
-                                                <ImgLabelTag2>
-                                                    <ImgTag src={localImage} />
-                                                </ImgLabelTag2>
-                                            ) : (
-                                                <ImgLabelTag2
-                                                    style={{ display: "flex", justifyContent: "flex-end", marginRight: '0.5rem', width: '30%' }}
-                                                >
+                                            <LabelTag style={{ width: '30%' }}>profile Image</LabelTag>
+
+                                            <UploadDiv
+                                                style={{
+                                                    border:
+                                                        trySubmit & (customerDetails.image === "")
+                                                            ? "2px solid red"
+                                                            : "",
+                                                }}
+                                            >
+                                                {localImage ? (
+                                                    <ImgLabelTag2>
+                                                        <ImgTag src={localImage} />
+                                                    </ImgLabelTag2>
+                                                ) : (
                                                     <ImgLabelTag
                                                         style={{
                                                             border: "1px solid #ccc",
@@ -689,32 +799,60 @@ const CustomerDetailedView = () => {
                                                     >
                                                         <FaUserTie />
                                                     </ImgLabelTag>
+                                                )}
 
-                                                </ImgLabelTag2>
-                                            )}
-
-                                            <UploadDiv
-                                                style={{
-                                                    border:
-                                                        trySubmit & (customerDetails.image === "")
-                                                            ? "2px solid red"
-                                                            : ""
-                                                }}
-                                            >
                                                 <ImageUploadTAg
                                                     type="file"
                                                     accept="image/*"
                                                     onChange={handleFileChange}
+                                                    id="uploadImg"
                                                     style={{ color: "#000" }}
                                                 />
-                                                <ImgLabel htmlFor="uploadImg"> <MdFileUpload /> </ImgLabel>
-                                                <UploadBtn type="button" onClick={handleUpload}>
-                                                    Upload
-                                                </UploadBtn>
+                                                <ImgLabel htmlFor="uploadImg">
+                                                    {" "}
+                                                    <MdFileUpload />{" "}
+                                                </ImgLabel>
+                                                {/* <UploadBtn type="button" onClick={handleUpload}>
+                                        Upload
+                                    </UploadBtn> */}
                                             </UploadDiv>
                                         </InputContainer>
 
 
+                                    </Row>
+
+                                    <Row style={{ flexGrow: "1", height: "12rem" }}>
+                                        <InputContainer style={{ height: "100%" }}>
+                                            <LabelTag>Additional Images</LabelTag>
+                                            <UploadDiv2>
+                                                {additionalImages &&
+                                                    additionalImages.map((image, index) => (
+                                                        <ImgDiv key={index}>
+                                                            <ImgTag2 src={image} />
+                                                            <Remove type="button" onClick={() => onRemoveMultipleImg(image)}>
+                                                                <IoCloseCircle style={{ padding: '0' }} />
+                                                            </Remove>
+                                                        </ImgDiv>
+
+                                                    ))
+                                                }
+
+                                                <ImageUploadTAg2
+                                                    type="file"
+                                                    accept="image/*"
+                                                    onChange={handleMultipleImgChange}
+                                                    id="multipleuploadImg"
+                                                    style={{ color: "#000" }}
+                                                />
+                                                {additionalImages.length < 3 &&
+                                                    <ImgLabel2 htmlFor="multipleuploadImg">
+                                                        <CiSquarePlus />
+                                                    </ImgLabel2>
+                                                }
+
+
+                                            </UploadDiv2>
+                                        </InputContainer>
                                     </Row>
 
                                     <SaveBtn style={{ alignSelf: 'flex-end' }} type='submit'>Update</SaveBtn>

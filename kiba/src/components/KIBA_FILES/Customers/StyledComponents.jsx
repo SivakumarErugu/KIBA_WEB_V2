@@ -60,12 +60,7 @@ export const Checkbox = styled.input`
   border: 1px solid red !important;
 `;
 
-// ColumnText styling
-export const ColumnText = styled.div`
-  display: flex;
-  align-items: center;
-  margin-right: 0.4rem;
-`;
+
 
 // Count styling
 export const Count = styled.div`

@@ -10,7 +10,7 @@ export const AlertText = styled.span`
 export const CreateNew = styled.form`
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     border: 1px solid #ccc;
     height: 93%;
@@ -20,6 +20,7 @@ export const CreateNew = styled.form`
     background: #EEF5FF;
     position: relative;
     margin-top: 0.3rem;
+    overflow-y: auto;
 `
 
 export const CustomContainer = styled.div`
@@ -99,6 +100,7 @@ export const InputContainer = styled.div`
     display: flex;
     align-items: center;
     width: 48%;
+    height: 3rem;
     position: relative;
 
     @media screen and (max-width: 320px){
@@ -253,6 +255,8 @@ export const SaveBtn = styled.button`
     margin: 0;
     margin-top: 1rem;
     color: #FFF;
+    position: absolute;
+    bottom: 2%;
 
     @media screen and (max-width: 320px){
         width: 5rem;
@@ -488,6 +492,8 @@ export const ImgTag = styled.img`
     @media screen and (max-width: 320px){
         height: 2rem;
         width: 2rem;
+        /* height: 1rem;
+        width: 1rem; */
     }
 
     @media screen and (min-width: 321px) and (max-width:480px) {
@@ -506,8 +512,47 @@ export const ImgTag = styled.img`
     }
 
     @media screen and (min-width: 1025px) {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+`
+export const ImgTag2 = styled.img`
+    height: 4rem;
+    width: 4rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0;
+    margin: 0;
+
+    @media screen and (max-width: 320px){
+        /* height: 2rem; */
+        /* width: 2rem; */
+        height: 100%;
+        width: 100%;
+    }
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        height: 100%;
+        width: 100%;
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        height: 100%;
+        width: 100%;
+    }
+
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        height: 100%;
+        width: 100%;
+    }
+
+    @media screen and (min-width: 1025px) {
         height: 4rem;
         width: 4rem;
+        height: 100%;
+        width: 100%;
+        /* height: 2rem; */
+        /* width: 2rem; */
     }
 `
 export const UploadBtn = styled.button`
@@ -995,35 +1040,72 @@ export const UploadDiv = styled.div`
     background: #EEF5FF;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 68%;
-
+    height: 100%;
 
     @media screen and (max-width: 320px){
         padding: 0.1rem;
         border-radius: 0.5rem;
-        justify-content: space-between;
     }
 
     @media screen and (min-width: 321px) and (max-width:480px) {
         padding: 0.2rem;
         border-radius: 0.5rem;
-        justify-content: space-between;
         
     }
 
     @media screen and (min-width: 481px) and (max-width:768px) {
         padding: 0.2rem;
         border-radius: 0.5rem;
-        justify-content: space-between;
     }
 
     @media screen and (min-width: 769px) and (max-width:1024px) {
         padding: 0.2rem;
-        border-radius: 0.5rem;
-        justify-content: space-between;
+        border-radius: 0.5rem
     }
 
     @media screen and (min-width: 1025px) {
-        padding: 1rem;
+        padding: 0.3rem;
+        border-radius: 1rem;
+    }
+`
+export const UploadDiv2 = styled.div`
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+    background: #EEF5FF;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    width: 68%;
+    height: 100%;
+    color: #000;
+    font-size: 2rem;
+    border: 2px solid  #ccc;
+
+    @media screen and (max-width: 320px){
+        padding: 0.1rem;
+        border-radius: 0.5rem;
+        width: 100%;
+    }
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        padding: 0.2rem;
+        border-radius: 0.5rem;
+        width: 100%;
+        
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        padding: 0.2rem;
+        border-radius: 0.5rem;
+        width: 100%;
+    }
+
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        padding: 0.2rem;
+        border-radius: 0.5rem
+    }
+
+    @media screen and (min-width: 1025px) {
+        padding: 0.3rem;
         border-radius: 1rem;
     }
 `
@@ -1046,8 +1128,30 @@ export const ImageUploadTAg = styled.input`
     }
 
     @media screen and (min-width: 1025px) {
-        font-size: 1rem;
-        max-width: 10rem;
+        font-size: 0.9rem;
+        max-width: 13rem;
+    }
+`
+
+export const ImageUploadTAg2 = styled.input`
+    @media screen and (max-width: 320px){
+        display: none;
+    }
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        display: none;
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        display: none;
+    }
+
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        display: none;
+    }
+
+    @media screen and (min-width: 1025px) {
+        display: none;
     }
 `
 
@@ -1063,8 +1167,19 @@ export const ImgLabel = styled.label`
         display: none;
     }
 `
+export const ImgLabel2 = styled.label`
+    display: flex;
+    font-size: 3rem;
+    height: 4rem;
+    width: 4rem;
+    padding: 0;
+    margin: 0;
+    margin-left: 0.2rem;
+    display: flex;
+    align-items: center;
+`
 export const ImgLabelTag = styled.label`
-    width: 30%;
+    /* width: 30%; */
     text-align: right;
     margin-right: 1rem;
 
@@ -1094,13 +1209,18 @@ export const ImgLabelTag = styled.label`
         width: 4rem;
         height: 4rem;
         font-size: 2rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1rem;
     }
 `
 
 export const ImgLabelTag2 = styled.label`
-    width: 30%;
+    /* width: 30%; */
     text-align: right;
     margin-right: 1rem;
+    display: flex;
+    align-items: center;
 
     @media screen and (max-width: 320px){
         font-size: 0.8rem;
@@ -1130,4 +1250,63 @@ export const ImgLabelTag2 = styled.label`
     @media screen and (min-width: 1025px) {
         font-size: 1rem;
     }
+`
+export const ImgDiv = styled.div`
+    height: 5rem;
+    width: 6rem;
+    padding: 8px;
+    position: relative;
+
+    @media screen and (max-width: 768px){
+        height: 3rem;
+        width: 4rem;
+        padding: 1px;
+    }
+
+    @media screen and (min-width: 769px){
+        height: 5rem;
+    width: 6rem;
+    }
+`
+export const Remove = styled.button`
+    position: absolute;
+    height: 0.8rem;
+    width: 0.8rem;
+    padding: 0 !important;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    top: 0;
+    right: 0;
+    font-size: 0.8rem;
+    color: red;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    @media screen and (max-width: 320px){
+        /* height: 0.2rem;
+        width: 0.2rem; */
+    }
+
+    @media screen and (min-width: 321px) and (max-width:480px) {
+        top: 0%;
+        right: 2%;
+    }
+
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        top: 0%;
+        right: 0%;
+    }
+
+    @media screen and (min-width: 769px) and (max-width:1024px) {
+        
+    }
+
+    @media screen and (min-width: 1025px) {
+        
+    }
+    /* border: 1px solid red; */
 `

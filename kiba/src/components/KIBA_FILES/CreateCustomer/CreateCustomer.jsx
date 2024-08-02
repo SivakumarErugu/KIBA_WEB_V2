@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import DatePicker from 'react-datepicker';
+import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Cookies from 'universal-cookie';
+import Cookies from "universal-cookie";
 
 import SideNav from "../SideNav/SideNav";
 import Header from "../Header/Header";
@@ -13,6 +13,8 @@ import { IoIosArrowBack } from "react-icons/io";
 import { FaAngleDown } from "react-icons/fa6";
 import { FaUserTie } from "react-icons/fa";
 import { MdFileUpload } from "react-icons/md";
+import { CiSquarePlus } from "react-icons/ci";
+import { IoCloseCircle } from "react-icons/io5";
 
 import {
     AlertText,
@@ -44,9 +46,15 @@ import {
     DivX,
     DivSlider,
     UploadDiv,
-    ImageUploadTAg,ImgLabel,
+    ImageUploadTAg,
+    ImgLabel,
     ImgLabelTag,
-    ImgLabelTag2
+    ImgLabelTag2,
+    UploadDiv2,
+    ImageUploadTAg2, ImgLabel2,
+    ImgTag2,
+    ImgDiv,
+    Remove
 } from "./CreateCustomerStyles";
 
 const indianStates = [
@@ -103,8 +111,11 @@ const CreateCustomer = () => {
         customer: "false",
         created_on: "",
         trail_pack_given_on: "",
+        additional_images: []
     });
     const [image, setImage] = useState(null);
+    const [additionalImages, setAdditionalImages] = useState([])
+    const [additionalObjectImages, setAdditionaObjectlImages] = useState([])
     const [localImage, setLocalImage] = useState(null);
     const [trySubmit, setTrySubmit] = useState(false);
     const [isCultivationActive, setCultivationActive] = useState(false);
@@ -168,11 +179,22 @@ const CreateCustomer = () => {
         setLocalImage(URL.createObjectURL(event.target.files[0]));
     };
 
+    const handleMultipleImgChange = (event) => {
+        const imageFile = event.target.files[0];
+        setAdditionaObjectlImages(prev => ([...prev, imageFile]));
+        const imgUrl = URL.createObjectURL(event.target.files[0])
+        setAdditionalImages(prev => ([
+            ...prev,
+            imgUrl
+        ]))
+        event.target.value = '';
+    }
+
     const handleUpload = async () => {
         try {
             if (!image) {
                 console.error("Please select an image.");
-                return;
+                return null; // Return null if no image is selected
             }
 
             const formData = new FormData();
@@ -192,37 +214,73 @@ const CreateCustomer = () => {
 
             const data = await res.json();
             setUploadImgStatus("Image uploaded successfully!");
-            const url = data.url;
-            onChangeInput("image", url);
+            return data.url; // Return the URL of the uploaded image
         } catch (error) {
             console.error("Error uploading image:", error);
             // Handle error or show error message
+            return null;
         }
     };
+
+    const handleUploadMultipleImages = async () => {
+        try {
+            if (additionalObjectImages.length === 0) {
+                console.error("Please select images to upload.");
+                return null;
+            }
+
+            const formData = new FormData();
+            additionalObjectImages.forEach((file) => {
+                formData.append("files", file);
+            });
+
+            const res = await fetch(`${apiUrl}/multiple-image-upload`, {
+                method: "POST",
+                body: formData,
+            });
+
+            if (!res.ok) {
+                const errorText = await res.text();
+                throw new Error("Error uploading images: " + res.statusText + " - " + errorText);
+            }
+
+            const data = await res.json();
+            setUploadImgStatus("Images uploaded successfully!");
+            console.log(data.urls);
+            return data.urls;
+        } catch (error) {
+            console.error("Error uploading images:", error);
+            return null;
+        }
+    };
+
 
     const ValidateForm = (customer) => {
         let error = false;
 
         if (
-            customer.first_name === '' ||
-            customer.last_name === '' ||
-            customer.mobile_number === '' ||
-            (!customer.same_for_whatsapp && customer.whatsapp_number === '') ||
-            customer.own_land === '' ||
-            customer.cultivation === '' ||
-            customer.state === '' ||
-            customer.district === '' ||
-            customer.city === '' ||
-            customer.pincode === '' ||
-            customer.place === '' ||
-            customer.customer === '' ||
-            customer.created_on === '' ||
-            (customer.trail_pack && customer.trail_pack_given_on === '')
+            customer.first_name === "" ||
+            customer.last_name === "" ||
+            customer.mobile_number === "" ||
+            (!customer.same_for_whatsapp && customer.whatsapp_number === "") ||
+            customer.own_land === "" ||
+            customer.cultivation === "" ||
+            customer.state === "" ||
+            customer.district === "" ||
+            customer.city === "" ||
+            customer.pincode === "" ||
+            customer.place === "" ||
+            customer.customer === "" ||
+            customer.created_on === "" ||
+            (customer.trail_pack && customer.trail_pack_given_on === "")
         ) {
             error = true;
         } else if (customer.mobile_number.length !== 10) {
             error = true;
-        } else if (!customer.same_for_whatsapp && customer.whatsapp_number.length !== 10) {
+        } else if (
+            !customer.same_for_whatsapp &&
+            customer.whatsapp_number.length !== 10
+        ) {
             error = true;
         } else if (String(customer.pincode).length !== 6) {
             error = true;
@@ -233,16 +291,34 @@ const CreateCustomer = () => {
 
     const onSubmitForm = async (e) => {
         e.preventDefault();
-        const savedToken = cookies.get('KIBAJWTToken'); // Retrieve the saved token from cookies
-    
+        const savedToken = cookies.get("KIBAJWTToken"); // Retrieve the saved token from cookies
+
+        let imagesURLS
+        let imageUrl
+        if (localImage) {
+            imageUrl = await handleUpload(); // Wait for the image upload to complete
+        }
+
+        if (additionalObjectImages.length !== 0) {
+            imagesURLS = await handleUploadMultipleImages(); // Wait for the image upload to
+        }
+
+
+        // Update customerDetails with the uploaded image URL
+        const updatedCustomerDetails = {
+            ...customerDetails,
+            image: imageUrl,
+            additional_images: imagesURLS,
+            created_on: formattedData,
+        };
+
+        setCustomerDetails(updatedCustomerDetails); // Update the state
+
         setTrySubmit(true); // Set flag indicating form submission attempt
-    
-        // Ensure `formattedData` is defined correctly in your component
-        let customer = { ...customerDetails, created_on: formattedData };
-    
+
         // Validate form data
-        const isValid = !ValidateForm(customer);
-    
+        const isValid = !ValidateForm(updatedCustomerDetails);
+
         if (!isValid) {
             Swal.fire({
                 icon: "warning",
@@ -251,21 +327,21 @@ const CreateCustomer = () => {
             });
             return;
         }
-    
+
         const url = `${apiUrl}/new/customer`;
-    
+
         const options = {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${savedToken}`, // Add Bearer token
+                Authorization: `Bearer ${savedToken}`, // Add Bearer token
             },
-            body: JSON.stringify(customer),
+            body: JSON.stringify(updatedCustomerDetails),
         };
-    
+
         try {
             const response = await fetch(url, options);
-    
+
             if (response.ok) {
                 console.log("Customer Added Successfully!");
                 Swal.fire({
@@ -273,10 +349,7 @@ const CreateCustomer = () => {
                     text: "Customer Added Successfully!",
                     confirmButtonText: "OK",
                 });
-                navigate('/customers'); // Redirect upon successful submission
-    
-                // Optionally, reset the form or customer details
-                // resetForm(); // If you have a resetForm function
+                navigate("/customers"); // Redirect upon successful submission
             } else {
                 console.error("Error adding customer:", response.statusText);
                 Swal.fire({
@@ -294,13 +367,12 @@ const CreateCustomer = () => {
             });
         }
     };
-    
 
     const setTrailData = (date) => {
-        if (!date) return ''
-        const stringDate = date.toLocaleDateString('en-GB')
-        onChangeInput('trail_pack_given_on', stringDate)
-    }
+        if (!date) return "";
+        const stringDate = date.toLocaleDateString("en-GB");
+        onChangeInput("trail_pack_given_on", stringDate);
+    };
 
     useEffect(() => {
         if (uploadImgStatus) {
@@ -312,12 +384,13 @@ const CreateCustomer = () => {
         }
     }, [uploadImgStatus]);
 
+    const onRemoveMultipleImg = (image) => {
+        setAdditionalImages((prev) => prev.filter((img) => img !== image));
+    }
+
     const onBack = () => {
         navigate(-1);
     };
-
-
-
 
     return (
         <MainContainer>
@@ -328,8 +401,8 @@ const CreateCustomer = () => {
 
                 <CustomContainer>
                     <DivX>
-                        <BackBtn onClick={onBack} >
-                            <IoIosArrowBack  />
+                        <BackBtn onClick={onBack}>
+                            <IoIosArrowBack />
                         </BackBtn>
                         <Title>Create Customer</Title>
                     </DivX>
@@ -394,18 +467,18 @@ const CreateCustomer = () => {
                                                 style={{
                                                     transform: `rotate(${isCultivationActive ? "180deg" : "0deg"
                                                         })`,
-                                                    height: '100%',
-                                                    width: '100%'
+                                                    height: "100%",
+                                                    width: "100%",
                                                 }}
                                             />
                                         </Icon>
                                     </CustomDropDown>
 
                                     {isCultivationActive && (
-                                        <CustomDropDownOptions >
+                                        <CustomDropDownOptions>
                                             <CustomOption
                                                 onClick={() => {
-                                                    onChangeInput("cultivation", "Shrimps");
+                                                    onChangeInput("cultivation", "Shrimp");
                                                     setCultivationActive(!isCultivationActive);
                                                 }}
                                             >
@@ -445,7 +518,9 @@ const CreateCustomer = () => {
                                 <InputTag
                                     style={{
                                         border:
-                                            trySubmit & (customerDetails.mobile_number === "" || customerDetails.mobile_number.length !== 10)
+                                            trySubmit &
+                                                (customerDetails.mobile_number === "" ||
+                                                    customerDetails.mobile_number.length !== 10)
                                                 ? "2px solid red"
                                                 : "",
                                     }}
@@ -490,11 +565,7 @@ const CreateCustomer = () => {
                                                 onChangeInput("same_for_whatsapp", "true")
                                             }
                                         />
-                                        <LabelTwo
-                                            htmlFor="Yes"
-                                        >
-                                            Yes
-                                        </LabelTwo>
+                                        <LabelTwo htmlFor="Yes">Yes</LabelTwo>
                                     </Custom>
                                     <Custom>
                                         <InputTag
@@ -540,7 +611,9 @@ const CreateCustomer = () => {
                                 <InputTag
                                     style={{
                                         border:
-                                            trySubmit & (customerDetails.whatsapp_number === "" || customerDetails.whatsapp_number.length !== 10)
+                                            trySubmit &
+                                                (customerDetails.whatsapp_number === "" ||
+                                                    customerDetails.whatsapp_number.length !== 10)
                                                 ? "2px solid red"
                                                 : "",
                                     }}
@@ -638,15 +711,15 @@ const CreateCustomer = () => {
                                                 style={{
                                                     transform: `rotate(${isStateActive ? "180deg" : "0deg"
                                                         })`,
-                                                    height: '100%',
-                                                    width: '100%'
+                                                    height: "100%",
+                                                    width: "100%",
                                                 }}
                                             />
                                         </Icon>
                                     </CustomDropDown>
 
                                     {isStateActive && (
-                                        <CustomDropDownOptions >
+                                        <CustomDropDownOptions>
                                             {indianStates.map((state) => (
                                                 <CustomOption
                                                     key={state}
@@ -708,7 +781,9 @@ const CreateCustomer = () => {
                                 <InputTag
                                     style={{
                                         border:
-                                            trySubmit & (customerDetails.pincode === "" || customerDetails.pincode.length !== 6)
+                                            trySubmit &
+                                                (customerDetails.pincode === "" ||
+                                                    customerDetails.pincode.length !== 6)
                                                 ? "2px solid red"
                                                 : "",
                                     }}
@@ -720,7 +795,6 @@ const CreateCustomer = () => {
                             </InputContainer>
 
                             <InputContainer>
-
                                 <LabelTag>Trail Pack </LabelTag>
 
                                 <DivSlider>
@@ -738,43 +812,39 @@ const CreateCustomer = () => {
                                         <span className="slider"></span>
                                     </Switch>
 
-                                    {
-                                        customerDetails.trail_pack &&
+                                    {customerDetails.trail_pack && (
                                         <DatePickerWrapper
                                             style={{
-                                                color: '#000',
+                                                color: "#000",
                                                 border:
-                                                    trySubmit & (customerDetails.trail_pack && customerDetails.trail_pack_given_on === "")
+                                                    trySubmit &
+                                                        (customerDetails.trail_pack &&
+                                                            customerDetails.trail_pack_given_on === "")
                                                         ? "2px solid red"
-                                                        : ""
+                                                        : "",
                                             }}
                                         >
                                             <DatePicker
                                                 selected={selectedDate}
                                                 onChange={(date) => {
                                                     setSelectedDate(date);
-                                                    setTrailData(date)
+                                                    setTrailData(date);
                                                 }}
                                                 dateFormat="dd/MM/yyyy"
                                                 placeholderText="Select a date"
                                                 style={{
-                                                    color: '#000',
-                                                    margin:'0px',
-                                                    height:'100%'
+                                                    color: "#000",
+                                                    margin: "0px",
+                                                    height: "100%",
                                                 }}
                                             />
                                         </DatePickerWrapper>
-                                    }
+                                    )}
                                 </DivSlider>
-
-
-
-
                             </InputContainer>
-
                         </Row>
 
-                        <Row style={{ flexGrow: "1", margin: "0" }}>
+                        <Row>
                             <InputContainer style={{ alignItems: "flex-start" }}>
                                 <LabelTag>Notes</LabelTag>
                                 <TextArea
@@ -788,7 +858,6 @@ const CreateCustomer = () => {
                                     onChange={(e) => onChangeInput("notes", e.target.value)}
                                 // placeholder="Enter Notes"
                                 />
-
                             </InputContainer>
 
                             <InputContainer
@@ -798,14 +867,21 @@ const CreateCustomer = () => {
                                     justifyContent: "space-between",
                                 }}
                             >
-                                {localImage ? (
-                                    <ImgLabelTag2>
-                                        <ImgTag src={localImage} />
-                                    </ImgLabelTag2>
-                                ) : (
-                                    <ImgLabelTag2
-                                        style={{ display: "flex", justifyContent: "flex-end" }}
-                                    >
+                                <LabelTag style={{ width: '30%' }}>profile Image</LabelTag>
+
+                                <UploadDiv
+                                    style={{
+                                        border:
+                                            trySubmit & (customerDetails.image === "")
+                                                ? "2px solid red"
+                                                : "",
+                                    }}
+                                >
+                                    {localImage ? (
+                                        <ImgLabelTag2>
+                                            <ImgTag src={localImage} />
+                                        </ImgLabelTag2>
+                                    ) : (
                                         <ImgLabelTag
                                             style={{
                                                 border: "1px solid #ccc",
@@ -818,17 +894,8 @@ const CreateCustomer = () => {
                                         >
                                             <FaUserTie />
                                         </ImgLabelTag>
-                                    </ImgLabelTag2>
-                                )}
+                                    )}
 
-                                <UploadDiv
-                                    style={{
-                                        border:
-                                            trySubmit & (customerDetails.image === "")
-                                                ? "2px solid red"
-                                                : ""
-                                    }}
-                                >
                                     <ImageUploadTAg
                                         type="file"
                                         accept="image/*"
@@ -836,14 +903,49 @@ const CreateCustomer = () => {
                                         id="uploadImg"
                                         style={{ color: "#000" }}
                                     />
-                                    <ImgLabel htmlFor="uploadImg"> <MdFileUpload /> </ImgLabel>
-                                    <UploadBtn type="button" onClick={handleUpload}>
+                                    <ImgLabel htmlFor="uploadImg">
+                                        {" "}
+                                        <MdFileUpload />{" "}
+                                    </ImgLabel>
+                                    {/* <UploadBtn type="button" onClick={handleUpload}>
                                         Upload
-                                    </UploadBtn>
+                                    </UploadBtn> */}
                                 </UploadDiv>
-
                             </InputContainer>
+                        </Row>
 
+                        <Row style={{ flexGrow: "1", height: "12rem" }}>
+                            <InputContainer style={{ height: "100%" }}>
+                                <LabelTag>Additional Images</LabelTag>
+                                <UploadDiv2>
+                                    {additionalImages &&
+                                        additionalImages.map((image, index) => (
+                                            <ImgDiv key={index}>
+                                                <ImgTag2 src={image} />
+                                                <Remove type="button" onClick={() => onRemoveMultipleImg(image)}>
+                                                    <IoCloseCircle style={{ padding: '0' }} />
+                                                </Remove>
+                                            </ImgDiv>
+
+                                        ))
+                                    }
+
+                                    <ImageUploadTAg2
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={handleMultipleImgChange}
+                                        id="multipleuploadImg"
+                                        style={{ color: "#000" }}
+                                    />
+                                    {additionalImages.length < 3 &&
+                                        <ImgLabel2 htmlFor="multipleuploadImg">
+                                            <CiSquarePlus />
+                                        </ImgLabel2>
+                                    }
+
+
+                                </UploadDiv2>
+                            </InputContainer>
                         </Row>
 
                         <SaveBtn style={{ alignSelf: "flex-end" }} type="submit">
@@ -852,11 +954,8 @@ const CreateCustomer = () => {
 
                         {uploadImgStatus && <AlertText>{uploadImgStatus}</AlertText>}
                     </CreateNew>
-                    
                 </CustomContainer>
-
             </InnerContainer>
-
         </MainContainer>
     );
 };

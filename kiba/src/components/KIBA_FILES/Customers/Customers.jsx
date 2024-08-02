@@ -11,7 +11,6 @@ import {
     Actions,
     AlertText,
     Checkbox,
-    ColumnText,
     Count,
     CreateNewContainer,
     CreateNewBtn,
@@ -371,47 +370,6 @@ const Customers = () => {
 
         const result = filterTable([...customersData], searchTextsArray);
 
-        // if (selectedFilterColumn.length !== 0 && searchText.length !== 0) {
-        //     selectedFilterColumn.forEach((col, index) => {
-        //         const searchText1 = searchTextsArray[index];
-
-        //         if (searchText1 !== undefined) {
-        //             const snakeCaseColumn = col.toLowerCase().replace(/ /g, '_');
-        //             result = result.filter(customer => {
-        //                 const cellValue = customer[snakeCaseColumn];
-        //                 const stringValue = cellValue !== null && cellValue !== undefined ? cellValue.toString().toLowerCase() : '';
-        //                 return stringValue.includes(searchText1.toString().toLowerCase());
-        //             });
-        //         }
-        //     });
-        // } else if (searchText !== '') {
-        //     result = result.filter(customer => {
-        //         return Object.values(customer).some(value => {
-        //             const stringValue = value !== null && value !== undefined ? value.toString().toLowerCase() : '';
-        //             return stringValue.includes(searchText);
-        //         });
-        //     });
-        // }
-
-
-
-
-        // if (selectedFilterColumn !== '' && searchText !== '') {
-        //     result = result.filter(customer => {
-        //         const cellValue = customer[snakeCaseColumn];
-        //         const stringValue = cellValue !== null && cellValue !== undefined ? cellValue.toString().toLowerCase() : '';
-        //         return stringValue.includes(searchText);
-        //     });
-        // } 
-
-        // else if (searchText !== '') {
-        //     result = result.filter(customer => {
-        //         return Object.values(customer).some(value => {
-        //             const stringValue = value !== null && value !== undefined ? value.toString().toLowerCase() : '';
-        //             return stringValue.includes(searchText);
-        //         });
-        //     });
-        // }
 
         // Apply pagination
         const startIndex = (currentPage - 1) * pageSize;
@@ -551,24 +509,6 @@ const Customers = () => {
         setSelectedRecords(newSelectedRecords)
     }
 
-    const onSelectFilterOptions = (option) => {
-        let options = [...selectedFilterColumn]
-        if (options.includes(option)) {
-            options = options.filter(each => each !== option)
-        }
-        else {
-            options = [...options, option]
-        }
-
-        setSelectedFilterColumn(options)
-    }
-
-    const onRemoveFilterCol = (col) => {
-        let options = [...selectedFilterColumn]
-        options = options.filter(each => each !== col)
-        setSelectedFilterColumn(options)
-    }
-
     const onClickCreateNew = () => {
         navigate('/create-customer')
     }
@@ -615,32 +555,6 @@ const Customers = () => {
                                                     <MdOutlineDeleteSweep size={29} />
                                                 </MulDeleteBtn>
                                             }
-
-                                            {/* {selectedFilterColumn.length !== 0 &&
-                                                <ColumnText>
-                                                    {selectedFilterColumn.map(each => (
-                                                        <>
-                                                            <CustomSpan key={each}>{each}</CustomSpan>
-                                                            <CancelBtn key={each} onClick={() => onRemoveFilterCol(each)}><MdOutlineCancel style={{ color: '#000' }} /></CancelBtn>
-                                                        </>
-                                                    ))}
-                                                </ColumnText>
-                                            } */}
-
-                                            {/* <FilterDiv>
-                                                <FilterBtn onClick={() => setFilterActive(!isFilterActive)} ref={FilterDropdownRef}> <IoFilter size={20} />
-                                                    {isFilterActive && customersData?.[0] && (
-                                                        <FilterDropdown>
-                                                            {Object.keys(customersData[0]).map(key => snakeToNormal(key)).map(each => (
-                                                                <FilterItem key={each} onClick={() => onSelectFilterOptions(each)}>
-                                                                    <input type='checkbox' checked={selectedFilterColumn.includes(each)} />{each}
-                                                                </FilterItem>
-                                                            ))}
-                                                        </FilterDropdown>
-                                                    )}
-
-                                                </FilterBtn>
-                                            </FilterDiv> */}
 
                                         </Actions>
                                     </DivX>
