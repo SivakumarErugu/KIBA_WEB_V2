@@ -10,7 +10,7 @@ export const AlertText = styled.span`
 export const CreateNew = styled.form`
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
+    justify-content: center;
     align-items: center;
     border: 1px solid #ccc;
     height: 93%;
@@ -522,49 +522,6 @@ export const Span = styled.span`
 
 `
 
-export const UploadBtn = styled.button`
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #4895ef;
-    color: #fff;
-
-    @media screen and (max-width: 320px){
-        width: 2rem;
-        height: 1rem;
-        font-size: 0.5rem;
-        border-radius: 0.3rem;
-    }
-
-    @media screen and (min-width: 321px) and (max-width:480px) {
-        width: 2rem;
-        height: 1rem;
-        font-size: 0.5rem;
-        border-radius: 0.3rem;
-    }
-
-    @media screen and (min-width: 481px) and (max-width:768px) {
-        width: 2rem;
-        height: 1rem;
-        font-size: 0.5rem;
-        border-radius: 0.3rem;
-    }
-
-    @media screen and (min-width: 769px) and (max-width:1024px) {
-        width: 3rem;
-        height: 1.3rem;
-        font-size: 0.5rem;
-        border-radius: 0.3rem;
-    }
-
-    @media screen and (min-width: 1025px) {
-        height: 2rem;
-        width: 5rem;
-    }
-`
-
 export const ImgTag = styled.img`
     height: 4rem;
     width: 4rem;
@@ -849,13 +806,14 @@ export const DatePickerWrapper  = styled.div`
     padding: 0 !important;
     display: flex;
     align-items: center;
+    /* border: 1px solid red; */
 
     .react-datepicker-wrapper {
-    width: fit-content;
+        width: 90%;
     }
 
     .react-datepicker__input-container input {
-    width: 100%;
+    width: 90%;
     font-size: 16px;
     padding: 0.3rem;
     margin: 0;
@@ -899,7 +857,7 @@ export const DatePickerWrapper  = styled.div`
         }
 
         .react-datepicker__input-container input {
-        width: 100%;
+        width: 90%;
         font-size: 8px;
         padding: 0.3rem;
         margin: 0 !important;
@@ -937,7 +895,7 @@ export const DatePickerWrapper  = styled.div`
     }
 
     @media screen and (min-width: 769px) and (max-width:1024px) {
-        width: 50%;
+        /* width: 50%; */
     }
 
 `
@@ -1043,8 +1001,7 @@ export const DivSlider = styled.div`
 `
 
 export const ImgLabelTag = styled.label`
-    width: 30%;
-    text-align: center;
+    text-align: right;
     margin-right: 1rem;
 
     @media screen and (max-width: 320px){
@@ -1073,6 +1030,9 @@ export const ImgLabelTag = styled.label`
         width: 4rem;
         height: 4rem;
         font-size: 2rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1rem;
     }
 `
 
@@ -1298,7 +1258,7 @@ export const Remove = styled.button`
     font-size: 0.8rem;
     color: red;
     border: none;
-    outline: none;
+    outline: none !important;
     cursor: pointer;
 
     @media screen and (max-width: 320px){

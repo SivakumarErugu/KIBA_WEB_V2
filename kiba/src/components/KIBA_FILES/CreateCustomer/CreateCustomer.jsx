@@ -217,7 +217,6 @@ const CreateCustomer = () => {
             return data.url; // Return the URL of the uploaded image
         } catch (error) {
             console.error("Error uploading image:", error);
-            // Handle error or show error message
             return null;
         }
     };
@@ -246,7 +245,6 @@ const CreateCustomer = () => {
 
             const data = await res.json();
             setUploadImgStatus("Images uploaded successfully!");
-            console.log(data.urls);
             return data.urls;
         } catch (error) {
             console.error("Error uploading images:", error);
@@ -907,9 +905,6 @@ const CreateCustomer = () => {
                                         {" "}
                                         <MdFileUpload />{" "}
                                     </ImgLabel>
-                                    {/* <UploadBtn type="button" onClick={handleUpload}>
-                                        Upload
-                                    </UploadBtn> */}
                                 </UploadDiv>
                             </InputContainer>
                         </Row>
@@ -918,7 +913,7 @@ const CreateCustomer = () => {
                             <InputContainer style={{ height: "100%" }}>
                                 <LabelTag>Additional Images</LabelTag>
                                 <UploadDiv2>
-                                    {additionalImages &&
+                                    {additionalImages !== null && additionalImages.length !== 0 &&
                                         additionalImages.map((image, index) => (
                                             <ImgDiv key={index}>
                                                 <ImgTag2 src={image} />
@@ -937,7 +932,7 @@ const CreateCustomer = () => {
                                         id="multipleuploadImg"
                                         style={{ color: "#000" }}
                                     />
-                                    {additionalImages.length < 3 &&
+                                    {(additionalImages && additionalImages.length < 3) &&
                                         <ImgLabel2 htmlFor="multipleuploadImg">
                                             <CiSquarePlus />
                                         </ImgLabel2>

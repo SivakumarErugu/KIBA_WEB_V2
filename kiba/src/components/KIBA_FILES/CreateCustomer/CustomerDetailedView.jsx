@@ -17,52 +17,14 @@ import { CiSquarePlus } from "react-icons/ci";
 import { IoCloseCircle } from "react-icons/io5";
 
 import {
-    AlertText,
-    BackBtn,
-    CreateNew,
-    Custom,
-    CustomContainer,
-    CustomDropDown,
-    CustomDropdownContainer,
-    CustomDropDownOptions,
-    CustomOption,
-    IDTag,
-    ImgTag,
-    InputContainer,
-    InputTag,
-    InnerContainer,
-    LabelTag,
-    LabelTwo,
-    MainContainer,
-    RadioCon,
-    Row,
-    SaveBtn,
-    Span,
-    TextArea,
-    Title,
-    UploadBtn,
-    Switch,
-    DatePickerWrapper,
-    CreatedDate,
-    Icon,
-    DivX,
-    DivSlider,
-    ImgLabelTag,
-    UploadDiv,
-    ImageUploadTAg,
-    ImgLabel,
-    ImgLabelTag2,
-    UploadDiv2,
-    ImgDiv,
-    ImgTag2,
-    Remove,
-    ImageUploadTAg2,
-    ImgLabel2
+    AlertText, BackBtn, CreateNew, Custom, CustomContainer, CustomDropDown, CustomDropdownContainer, 
+    CustomDropDownOptions, CustomOption, DatePickerWrapper, DivSlider, DivX, Icon, IDTag, ImgDiv, 
+    ImgLabel, ImgLabel2, ImgLabelTag, ImgLabelTag2, ImageUploadTAg, ImageUploadTAg2, ImgTag, 
+    ImgTag2, InputContainer, InputTag, InnerContainer, LabelTag, LabelTwo, MainContainer, RadioCon, 
+    Remove, Row, SaveBtn, Span, Switch, TextArea, Title, UploadDiv, UploadDiv2, CreatedDate 
 } from './StyledComponents'
 
-
 import { DotSpinner, DotSpinnerDot } from '../Customers/StyledComponents'
-// import './index.css'
 
 const indianStates = [
     "Andhra Pradesh",
@@ -102,7 +64,7 @@ const CustomerDetailedView = () => {
     const [customerDetails, setCustomerDetails] = useState({})
 
     const [additionalImages, setAdditionalImages] = useState([])
-    const [additionalObjectImages, setAdditionaObjectlImages] = useState([])
+    const [additionalLocalImages, setAdditionalLocalImages] = useState([])
     const [image, setImage] = useState(null);
     const [localImage, setLocalImage] = useState(null)
     const [trySubmit, setTrySubmit] = useState(false)
@@ -125,7 +87,6 @@ const CustomerDetailedView = () => {
             if (StateRef.current && !StateRef.current.contains(event.target)) {
                 setStateActive(false)
             }
-
         };
 
         document.addEventListener('click', handleOutsideClick);
@@ -159,9 +120,11 @@ const CustomerDetailedView = () => {
                 const data = await response.json();
                 setCustomerDetails(data);
                 setLocalImage(data.image);
+                const moreIMgs = JSON.parse(data.additional_images) || []
+
+                setAdditionalLocalImages(moreIMgs)
             } catch (error) {
                 console.error('Error fetching customer data:', error.message);
-                // Optionally set an error state here
             } finally {
                 setLoader(false);
             }
@@ -189,7 +152,6 @@ const CustomerDetailedView = () => {
     }, [customerDetails.trail_pack_given_on]);
 
     const onChangeInput = (key, value) => {
-
         if (key === 'same_for_whatsapp' && value === 'true') {
             setCustomerDetails(prev => ({
                 ...prev,
@@ -219,12 +181,9 @@ const CustomerDetailedView = () => {
 
     const handleMultipleImgChange = (event) => {
         const imageFile = event.target.files[0];
-        setAdditionaObjectlImages(prev => ([...prev, imageFile]));
+        setAdditionalImages(prev => ([...prev, imageFile]));
         const imgUrl = URL.createObjectURL(event.target.files[0])
-        setAdditionalImages(prev => ([
-            ...prev,
-            imgUrl
-        ]))
+        setAdditionalLocalImages(prevState => ([...prevState, imgUrl]))
         event.target.value = '';
     }
 
@@ -253,23 +212,21 @@ const CustomerDetailedView = () => {
             const data = await res.json();
             setUploadImgStatus('Image uploaded successfully!')
             const url = data.url;
-            onChangeInput('image', url)
-            // Handle success or update UI
+            return url
         } catch (error) {
             console.error('Error uploading image:', error);
-            // Handle error or show error message
         }
     };
 
     const handleUploadMultipleImages = async () => {
         try {
-            if (additionalObjectImages.length === 0) {
+            if (additionalImages.length === 0) {
                 console.error("Please select images to upload.");
                 return null;
             }
 
             const formData = new FormData();
-            additionalObjectImages.forEach((file) => {
+            additionalImages.forEach(file => {
                 formData.append("files", file);
             });
 
@@ -285,7 +242,6 @@ const CustomerDetailedView = () => {
 
             const data = await res.json();
             setUploadImgStatus("Images uploaded successfully!");
-            console.log(data.urls);
             return data.urls;
         } catch (error) {
             console.error("Error uploading images:", error);
@@ -293,6 +249,7 @@ const CustomerDetailedView = () => {
         }
     };
 
+    // VALIDATE FORM
     const ValidateForm = (customer) => {
         let error = false;
 
@@ -330,26 +287,33 @@ const CustomerDetailedView = () => {
     //UPDATE CUSTOMER
     const onSubmitForm = async (e) => {
         e.preventDefault();
-        
-        let imagesURLS
-        let imageUrl
-        if (localImage) {
+
+        let imagesURLS = JSON.parse(customerDetails.additional_images) || [];
+        let imageUrl = customerDetails.image;
+
+        if (localImage !== customerDetails.image) {
             imageUrl = await handleUpload(); // Wait for the image upload to complete
         }
 
-        if (additionalObjectImages.length !== 0) {
-            imagesURLS = await handleUploadMultipleImages(); // Wait for the image upload to
+        if (additionalLocalImages.length !== 0) {
+            const newImageUrls = await handleUploadMultipleImages(); // Wait for the image upload to complete
+            if (imagesURLS.length !== 0) {
+                imagesURLS = [...imagesURLS,...newImageUrls];
+            } else {
+                imagesURLS = newImageUrls;
+            }
         }
+
         const updatedCustomerDetails = {
             ...customerDetails,
             image: imageUrl,
             additional_images: imagesURLS,
         };
-        setCustomerDetails(updatedCustomerDetails);
 
         setTrySubmit(true);
 
         const isValid = ValidateForm(updatedCustomerDetails); // Ensure this function returns true if valid
+        
 
         if (!isValid) {
             Swal.fire({
@@ -369,7 +333,7 @@ const CustomerDetailedView = () => {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${savedToken}`, // Add Bearer token if needed
             },
-            body: JSON.stringify(customerDetails), // Ensure `customerDetails` is correctly defined
+            body: JSON.stringify(updatedCustomerDetails), // Ensure `customerDetails` is correctly defined
         };
 
         try {
@@ -419,15 +383,76 @@ const CustomerDetailedView = () => {
         }
     }, [uploadImgStatus])
 
-    const onRemoveMultipleImg = (image) => {
+    const UpdateDatabaseOnDeleteImage = async (updatedImages) => {
+        const savedToken = cookies.get('KIBAJWTToken'); // Retrieve token from cookies
+        const url = `${apiUrl}/customer/${id}/additional-images`; // Make sure `id` is defined and valid
+    
+        const options = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${savedToken}`, // Add Bearer token if needed
+            },
+            body: JSON.stringify({ additional_images: updatedImages }) // Directly stringify the array
+        };
+    
+        try {
+            const response = await fetch(url, options);
+    
+            if (response.ok) {
+                console.log('Customer Additional Images Updated Successfully!');
+            } else {
+                const errorText = await response.text();
+                console.error('Error updating customer Additional Images:', errorText);
+            }
+        } catch (error) {
+            console.error('Error:', error.message);
+        } finally {
+            setLoader(false);
+        }
+    };
+
+    const onRemoveMultipleImg = async (image) => { 
+        setLoader(true)
+        const savedToken = cookies.get('KIBAJWTToken'); // Retrieve token from cookies
+        const url = `${apiUrl}/delete-image`;
+    
+        const options = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${savedToken}`, // Add Bearer token if needed
+            },
+            body: JSON.stringify({ imageUrl: image }) // Pass the correct parameter
+        };
+    
+        try {
+            const response = await fetch(url, options);
+            const data = await response.json();
+    
+            if (response.ok) {
+                console.log('Image deleted successfully', data);
+            } else {
+                console.error('Failed to delete image:', data.error);
+            }
+        } catch (error) {
+            console.error('Error:', error.message);
+        }
+    
+        // Filter out the deleted image from local state and update the database
+        const updatedImages = additionalLocalImages.filter((img) => img !== image);
+        
+        // Update the database with the new list of images
+        await UpdateDatabaseOnDeleteImage(updatedImages);
+        
+        // Update local state
         setAdditionalImages((prev) => prev.filter((img) => img !== image));
-    }
+        setAdditionalLocalImages((prev) => prev.filter((img) => img !== image));
+    };
 
     const onBack = () => {
         navigate(-1)
     }
-
-
 
     return (
         <MainContainer>
@@ -441,8 +466,11 @@ const CustomerDetailedView = () => {
                         <BackBtn onClick={onBack}><IoIosArrowBack /></BackBtn>
                         <Title >Customer Details</Title>
                     </DivX>
+
                     <IDTag>Customer ID: {customerDetails.ID}</IDTag>
+
                     <CreatedDate>{customerDetails.created_on}</CreatedDate>
+
                     {loader ?
                         <CreateNew>
                             <DotSpinner>
@@ -458,8 +486,6 @@ const CustomerDetailedView = () => {
                         </CreateNew>
                         :
                         <>
-                            {/* <IDTag>Customer ID: {customerDetails.ID}</IDTag> */}
-                            {/* <CreatedDate>{customerDetails.created_on}</CreatedDate> */}
 
                             {customerDetails ?
                                 <CreateNew onSubmit={onSubmitForm}>
@@ -825,8 +851,9 @@ const CustomerDetailedView = () => {
                                         <InputContainer style={{ height: "100%" }}>
                                             <LabelTag>Additional Images</LabelTag>
                                             <UploadDiv2>
-                                                {additionalImages &&
-                                                    additionalImages.map((image, index) => (
+                                                {additionalLocalImages !== null && additionalLocalImages.length !== 0 &&
+                                                    additionalLocalImages.map((image, index) => {
+                                                        return (
                                                         <ImgDiv key={index}>
                                                             <ImgTag2 src={image} />
                                                             <Remove type="button" onClick={() => onRemoveMultipleImg(image)}>
@@ -834,7 +861,7 @@ const CustomerDetailedView = () => {
                                                             </Remove>
                                                         </ImgDiv>
 
-                                                    ))
+                                                    )})
                                                 }
 
                                                 <ImageUploadTAg2
@@ -844,12 +871,11 @@ const CustomerDetailedView = () => {
                                                     id="multipleuploadImg"
                                                     style={{ color: "#000" }}
                                                 />
-                                                {additionalImages.length < 3 &&
+                                                {(additionalLocalImages === null || (additionalLocalImages && additionalLocalImages.length < 3)) &&
                                                     <ImgLabel2 htmlFor="multipleuploadImg">
                                                         <CiSquarePlus />
                                                     </ImgLabel2>
                                                 }
-
 
                                             </UploadDiv2>
                                         </InputContainer>
@@ -870,13 +896,9 @@ const CustomerDetailedView = () => {
                     }
 
                 </CustomContainer>
-
             </InnerContainer>
-
         </MainContainer>
     )
-
-
 
 }
 

@@ -353,8 +353,6 @@ const Customers = () => {
             .join('_'));
 
         const searchTextsArray = searchText.split(' ')
-        console.log('searchText is', searchTextsArray)
-        console.log(selectedFilterColumn)
 
 
         const filterTable = (data, searchTextsArray) => {
@@ -373,7 +371,6 @@ const Customers = () => {
 
         // Apply pagination
         const startIndex = (currentPage - 1) * pageSize;
-        console.log(result)
         return result.slice(startIndex, startIndex + pageSize);
     };
 

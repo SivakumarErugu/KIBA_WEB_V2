@@ -20,9 +20,6 @@ const SideNav = () => {
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
 
-    console.log(isOpen)
-
-
     const onImage = () => {
         navigate("/dashboard");
     }
