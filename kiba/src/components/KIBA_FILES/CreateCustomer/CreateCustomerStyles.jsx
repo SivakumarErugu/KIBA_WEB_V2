@@ -555,48 +555,6 @@ export const ImgTag2 = styled.img`
         /* width: 2rem; */
     }
 `
-export const UploadBtn = styled.button`
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #4895ef;
-    color: #fff;
-
-    @media screen and (max-width: 320px){
-        width: 2rem;
-        height: 1rem;
-        font-size: 0.5rem;
-        border-radius: 0.3rem;
-    }
-
-    @media screen and (min-width: 321px) and (max-width:480px) {
-        width: 2rem;
-        height: 1rem;
-        font-size: 0.5rem;
-        border-radius: 0.3rem;
-    }
-
-    @media screen and (min-width: 481px) and (max-width:768px) {
-        width: 2rem;
-        height: 1rem;
-        font-size: 0.5rem;
-        border-radius: 0.3rem;
-    }
-
-    @media screen and (min-width: 769px) and (max-width:1024px) {
-        width: 3rem;
-        height: 1.3rem;
-        font-size: 0.5rem;
-        border-radius: 0.3rem;
-    }
-
-    @media screen and (min-width: 1025px) {
-        height: 2rem;
-        width: 5rem;
-    }
-`
 
 export const Switch = styled.label`
     font-size: 17px;
@@ -1070,10 +1028,7 @@ export const UploadDiv = styled.div`
 `
 export const UploadDiv2 = styled.div`
     display: flex;
-    align-items: center;
-    /* justify-content: space-between; */
     background: #EEF5FF;
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
     width: 68%;
     height: 100%;
     color: #000;

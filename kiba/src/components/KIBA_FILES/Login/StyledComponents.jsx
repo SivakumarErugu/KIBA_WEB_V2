@@ -1,5 +1,4 @@
-import styled, { css } from 'styled-components';
-import Slider from "react-slick";
+import styled from 'styled-components';
 
 export const MainContainer = styled.div`
     height: 100vh;
@@ -207,34 +206,6 @@ export const ImgTag = styled.img`
         left: 0.8rem;
     }
 `
-
-
-export const StyledSlider = styled(Slider)`
-    width: 52%;
-    height: 95%;
-    background: transparent;
-    border-radius: 8px;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    align-items: center;
-`;
-
-export const SliderItem = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: fit-content;
-    width: 95%; 
-    background-color: #000;
-    border-radius: 1.5rem;
-    overflow: hidden;
-`;
-export const SlideImage = styled.img`
-    width: 100%;
-    height: 100%  !important;
-    object-fit: cover; 
-`;
 
 export const CoolInput = styled.div`
     display: flex;

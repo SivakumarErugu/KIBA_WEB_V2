@@ -3,20 +3,11 @@ import Swal from "sweetalert2";
 import Cookies from 'universal-cookie';
 import { useState, useEffect, useRef, useContext } from "react";
 
-
 import {
-    CustomProfile,
-    HeaderContainer,
-    ProfileIcon,
-    Span,
-    SpanTag,
-    PopUp,
-    PopUpItem,
-    HamburgerDiv,
-    HamburgerButton,
-    Menu
+    CustomProfile, HeaderContainer, ProfileIcon, Span, PopUp, PopUpItem, HamburgerDiv, HamburgerButton, Menu
 } from "./StyledComponents";
 
+// ICON IMPORTS
 import { Link, useNavigate } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 
@@ -60,21 +51,16 @@ const Header = () => {
                 // Remove the JWT token cookie
                 cookies.remove('KIBAJWTToken');
 
-
                 // Redirect to login page
                 navigate("/login");
             }
         });
     };
 
-
     const onClickProfile = () => {
         setPopUp(!popUp)
         setHeaderPopup(!popUp);
     };
-
-
-
 
     return (
         <HeaderContainer>

@@ -1,24 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import {
-    SideNavContainer,
-    ImgTag,
-    IconContainer,
-    NavOption,
-    PTag,
-    HamburgerDiv,
-    HamburgerButton,
-    Menu
-} from "./StyledComponents";
+import { SideNavContainer, ImgTag, IconContainer, NavOption, PTag } from "./StyledComponents";
 import { TbLayoutDashboardFilled } from "react-icons/tb";
 import { MdGroups2 } from "react-icons/md";
-import { GiHamburgerMenu } from "react-icons/gi";
 
 import KibaContext from "../../../context/KibaContext";
 
 const SideNav = () => {
     const navigate = useNavigate();
-    const [isOpen, setIsOpen] = useState(false);
 
     const onImage = () => {
         navigate("/dashboard");
@@ -79,6 +67,7 @@ const SideNav = () => {
             }}
         </KibaContext.Consumer>
     );
+    
 };
 
 export default SideNav;

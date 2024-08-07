@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 export const AlertText = styled.span`
     color: #70e000;
-    font-size: 1.2rem;
+    font-size: 1rem;
     position: absolute;
-    bottom: 0.5rem;
+    bottom: 0.2rem;
 `
 
 export const CreateNew = styled.form`
@@ -1147,10 +1147,7 @@ export const ImgLabelTag2 = styled.label`
 `
 export const UploadDiv2 = styled.div`
     display: flex;
-    align-items: center;
-    /* justify-content: space-between; */
     background: #EEF5FF;
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
     width: 68%;
     height: 100%;
     color: #000;

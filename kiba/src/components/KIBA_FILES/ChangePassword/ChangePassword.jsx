@@ -10,9 +10,7 @@ import Swal from "sweetalert2";
 
 import {
     Btn,
-    CardContainer,
     CustomContainer,
-    CustomDiv,
     EyeIconContainer,
     Form,
     Heading,
@@ -21,9 +19,6 @@ import {
     Line,
     LoginContainer,
     MainContainer,
-    StyledSlider,
-    SliderItem,
-    SlideImage,
     CoolInput,
     LabelText,
     TextInput,
@@ -47,17 +42,6 @@ const ChangePassword = () => {
     const [msgColor, setMsgColor] = useState('')
     const [otp, setOtp] = useState('')
     const apiUrl = import.meta.env.VITE_API_URL;
-
-
-    const settings = {
-        dots: true,
-        infinite: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 2000,
-        pauseOnHover: true,
-    };
 
     const onChangeAdminCredentials = async (e) => {
         e.preventDefault();
@@ -171,6 +155,7 @@ const ChangePassword = () => {
                     src="../../kiba-logo-1.png"
                     alt="Image description"
                 />
+                
                 <LoginContainer>
                     <CustomContainer>
                         <Heading>Change Password</Heading>
@@ -282,38 +267,12 @@ const ChangePassword = () => {
                                 </>
                             )}
                         </Form>
+
                         <Line></Line>
 
                         <PopUpText style={{ color: `${msgColor}` }} >{message}</PopUpText>
                     </CustomContainer>
                 </LoginContainer>
-
-                {/* <StyledSlider {...settings}>
-
-                    <SliderItem>
-                        <SlideImage src="../../1.png" alt="Image 1" />
-                    </SliderItem>
-                    <SliderItem>
-                        <SlideImage src="../../2.jpg" alt="Image 2" />
-                    </SliderItem>
-                    <SliderItem>
-                        <SlideImage src="../../3.png" alt="Image 3" />
-                    </SliderItem>
-                    <SliderItem>
-                        <SlideImage src="../../5.png" alt="Image 4" />
-                    </SliderItem>
-                    <SliderItem>
-                        <SlideImage src="../../7.jpg" alt="Image 5" />
-                    </SliderItem>
-                    <SliderItem>
-                        <SlideImage src="../../8.jpg" alt="Image 6" />
-                    </SliderItem>
-                    <SliderItem>
-                        <SlideImage src="../../9.jpg" alt="Image 7" />
-                    </SliderItem>
-
-                </StyledSlider> */}
-
 
             </InnerContainer>
         </MainContainer>

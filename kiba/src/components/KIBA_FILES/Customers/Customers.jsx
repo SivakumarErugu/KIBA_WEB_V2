@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
@@ -7,54 +7,17 @@ import SideNav from '../SideNav/SideNav'
 import KibaContext from '../../../context/KibaContext';
 import Header from '../Header/Header'
 
+// STYLES
 import {
-    Actions,
-    AlertText,
-    Checkbox,
-    Count,
-    CreateNewContainer,
-    CreateNewBtn,
-    CustomContainer,
-    CustomInput,
-    CustomSpan,
-    CancelBtn,
-    DeleteBtn,
-    DotSpinner,
-    DotSpinnerDot,
-    FilterBtn,
-    FilterDropdown,
-    FilterItem,
-    HighlightText,
-    ImgTag,
-    InnerContainer,
-    Label,
-    MainContainer,
-    New,
-    PaginationBtn,
-    PaginationContainer,
-    SearchActionsBar,
-    SearchBar,
-    SpanTag,
-    TableTag,
-    Tabs,
-    Tab,
-    TdTag,
-    ThTag,
-    TrTag,
-    DivX,
-    DivY,
-    Span,
-    TdTagCheckbox,
-    TdTagDelete,
-    MulDeleteBtn,
-    
+    Actions, AlertText, Checkbox, CreateNewBtn, CustomContainer, CustomInput, CustomSpan,
+    DeleteBtn, DivX, DivY, DotSpinner, DotSpinnerDot, HighlightText, ImgTag, InnerContainer,
+    Label, MainContainer, MulDeleteBtn, PaginationBtn, PaginationContainer, SearchActionsBar,
+    SearchBar, Span, SpanTag, TableTag, TdTag, TdTagCheckbox, TdTagDelete, ThTag, TrTag
 } from './StyledComponents'
 
-
+// ICON IMPORTS
 import { BsPlusCircleDotted } from "react-icons/bs";
 import { RiSearch2Line } from "react-icons/ri";
-import { IoFilter } from "react-icons/io5";
-import { MdOutlineCancel } from "react-icons/md";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
 import { MdOutlineArrowForwardIos } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
@@ -282,11 +245,8 @@ const Data = [
 const Customers = () => {
     const navigate = useNavigate()
     const cookies = new Cookies();
-    const FilterDropdownRef = useRef(null)
     const [customersData, setCustomersData] = useState(Data)
     const [SearchText, setSearchText] = useState('')
-    const [isFilterActive, setFilterActive] = useState(false)
-    const [selectedFilterColumn, setSelectedFilterColumn] = useState([])
     const [currentPage, setCurrentPage] = useState(1);
     const pageSize = 20; // Number of records per page
     const [selectedRecords, setSelectedRecords] = useState([])
@@ -328,29 +288,11 @@ const Customers = () => {
         }
     };
 
-    // DROPDOWN OUTSIDE CLICK CONTROL
-    useEffect(() => {
-        const handleOutsideClick = (event) => {
-            if (FilterDropdownRef.current && !FilterDropdownRef.current.contains(event.target)) {
-                setFilterActive(false)
-            }
-        };
-
-        document.addEventListener('click', handleOutsideClick);
-
-        return () => {
-            document.removeEventListener('click', handleOutsideClick);
-        };
-    }, [setFilterActive]);
-
     //FILTERING THE DATA BY CONDITION OR KEYWORD 
     const filteredCustomers = () => {
         // let result = [...customersData];
 
         const searchText = SearchText.trim().toLowerCase();
-        const snakeCaseColumn = selectedFilterColumn.map(each => each.split(' ')
-            .map(word => word.charAt(0).toLowerCase() + word.slice(1).toLowerCase())
-            .join('_'));
 
         const searchTextsArray = searchText.split(' ')
 
@@ -397,21 +339,12 @@ const Customers = () => {
         );
     };
 
-    //CONVERTING THE TEXT TO NORMALCASE FROM SNAKECASE
-    const snakeToNormal = (snakeCaseStr) => {
-        return snakeCaseStr
-            .split('_')
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(' ');
-    };
-
     const totalPages = Math.ceil(customersData.length / pageSize);
 
     //HANDLING PAGE CHANGE 
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
-
 
     const onClickSingleDelete = async (ID) => {
         const savedToken = cookies.get('KIBAJWTToken');
@@ -445,7 +378,6 @@ const Customers = () => {
             setAlertText('Failed to delete Customer'); // Use setAlertText to show error message
         }
     };
-
 
     // Use effect to hide the alert after 3 seconds
     useEffect(() => {
@@ -584,7 +516,6 @@ const Customers = () => {
                                                 <thead style={{ width: '100%' }}>
                                                     <TrTag style={{ width: '100%', borderBottom: '2px solid #353535' }}>
                                                         <TdTagCheckbox ></TdTagCheckbox>
-                                                        {/* <Checkbox type='checkbox' style={{ border: '1px solid red' }} /> */}
                                                         <ThTag style={{ paddingLeft: '0.5rem' }}>First Name</ThTag>
                                                         <ThTag>Customer ID</ThTag>
                                                         <ThTag>City</ThTag>

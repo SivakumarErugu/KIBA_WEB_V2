@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { RouterProvider } from 'react-router-dom';
 
-
 import KibaContext from './context/KibaContext';
 import router from './Router';
 
@@ -91,12 +90,3 @@ function App() {
 }
 
 export default App;
-
-
-// {isPortrait ? (
-//   <div className="portrait-message">
-//     Please open in desktop mode.
-//   </div>
-// ) : (
-//   <RouterProvider router={router} />
-// )}

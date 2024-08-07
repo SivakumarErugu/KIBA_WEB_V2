@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
 import {
-    ProfileCon, InnerContainer, CustomContainer, CustomProfile, Title, FieldContainer, LabelTag, H1Tag, InputTag, Btn, BackBtn, CustomPart, Title2, SaveBtn,
+    ProfileCon, InnerContainer, CustomContainer, CustomProfile, Title, FieldContainer, LabelTag, H1Tag, InputTag, BackBtn, CustomPart, Title2, SaveBtn,
     EyeIconContainer,TitleDiv
 } from './StyledComponents'
 
@@ -12,7 +12,6 @@ import { DotSpinner, DotSpinnerDot } from '../Customers/StyledComponents'
 import SideNav from '../SideNav/SideNav'
 import KibaContext from '../../../context/KibaContext';
 import Header from '../Header/Header'
-
 
 // ICON IMPORTS
 import { FaRegEye } from "react-icons/fa";
@@ -223,10 +222,7 @@ const ManageExecutiveCredentials = () => {
 
                                 }
 
-
-
                             </CustomContainer>
-
 
                         </InnerContainer>
 

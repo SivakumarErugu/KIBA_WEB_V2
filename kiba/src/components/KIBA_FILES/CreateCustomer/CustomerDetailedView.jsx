@@ -9,6 +9,7 @@ import Header from '../Header/Header'
 
 import Swal from 'sweetalert2';
 
+// ICON IMPORTS
 import { IoIosArrowBack } from "react-icons/io";
 import { FaAngleDown } from "react-icons/fa6";
 import { FaUserTie } from "react-icons/fa";
@@ -17,11 +18,11 @@ import { CiSquarePlus } from "react-icons/ci";
 import { IoCloseCircle } from "react-icons/io5";
 
 import {
-    AlertText, BackBtn, CreateNew, Custom, CustomContainer, CustomDropDown, CustomDropdownContainer, 
-    CustomDropDownOptions, CustomOption, DatePickerWrapper, DivSlider, DivX, Icon, IDTag, ImgDiv, 
-    ImgLabel, ImgLabel2, ImgLabelTag, ImgLabelTag2, ImageUploadTAg, ImageUploadTAg2, ImgTag, 
-    ImgTag2, InputContainer, InputTag, InnerContainer, LabelTag, LabelTwo, MainContainer, RadioCon, 
-    Remove, Row, SaveBtn, Span, Switch, TextArea, Title, UploadDiv, UploadDiv2, CreatedDate 
+    AlertText, BackBtn, CreateNew, Custom, CustomContainer, CustomDropDown, CustomDropdownContainer,
+    CustomDropDownOptions, CustomOption, DatePickerWrapper, DivSlider, DivX, Icon, IDTag, ImgDiv,
+    ImgLabel, ImgLabel2, ImgLabelTag, ImgLabelTag2, ImageUploadTAg, ImageUploadTAg2, ImgTag,
+    ImgTag2, InputContainer, InputTag, InnerContainer, LabelTag, LabelTwo, MainContainer, RadioCon,
+    Remove, Row, SaveBtn, Span, Switch, TextArea, Title, UploadDiv, UploadDiv2, CreatedDate
 } from './StyledComponents'
 
 import { DotSpinner, DotSpinnerDot } from '../Customers/StyledComponents'
@@ -298,7 +299,7 @@ const CustomerDetailedView = () => {
         if (additionalLocalImages.length !== 0) {
             const newImageUrls = await handleUploadMultipleImages(); // Wait for the image upload to complete
             if (imagesURLS.length !== 0) {
-                imagesURLS = [...imagesURLS,...newImageUrls];
+                imagesURLS = [...imagesURLS, ...newImageUrls];
             } else {
                 imagesURLS = newImageUrls;
             }
@@ -313,7 +314,7 @@ const CustomerDetailedView = () => {
         setTrySubmit(true);
 
         const isValid = ValidateForm(updatedCustomerDetails); // Ensure this function returns true if valid
-        
+
 
         if (!isValid) {
             Swal.fire({
@@ -386,7 +387,7 @@ const CustomerDetailedView = () => {
     const UpdateDatabaseOnDeleteImage = async (updatedImages) => {
         const savedToken = cookies.get('KIBAJWTToken'); // Retrieve token from cookies
         const url = `${apiUrl}/customer/${id}/additional-images`; // Make sure `id` is defined and valid
-    
+
         const options = {
             method: 'PUT',
             headers: {
@@ -395,10 +396,10 @@ const CustomerDetailedView = () => {
             },
             body: JSON.stringify({ additional_images: updatedImages }) // Directly stringify the array
         };
-    
+
         try {
             const response = await fetch(url, options);
-    
+
             if (response.ok) {
                 console.log('Customer Additional Images Updated Successfully!');
             } else {
@@ -412,11 +413,11 @@ const CustomerDetailedView = () => {
         }
     };
 
-    const onRemoveMultipleImg = async (image) => { 
+    const onRemoveMultipleImg = async (image) => {
         setLoader(true)
         const savedToken = cookies.get('KIBAJWTToken'); // Retrieve token from cookies
         const url = `${apiUrl}/delete-image`;
-    
+
         const options = {
             method: 'DELETE',
             headers: {
@@ -425,11 +426,11 @@ const CustomerDetailedView = () => {
             },
             body: JSON.stringify({ imageUrl: image }) // Pass the correct parameter
         };
-    
+
         try {
             const response = await fetch(url, options);
             const data = await response.json();
-    
+
             if (response.ok) {
                 console.log('Image deleted successfully', data);
             } else {
@@ -438,13 +439,13 @@ const CustomerDetailedView = () => {
         } catch (error) {
             console.error('Error:', error.message);
         }
-    
+
         // Filter out the deleted image from local state and update the database
         const updatedImages = additionalLocalImages.filter((img) => img !== image);
-        
+
         // Update the database with the new list of images
         await UpdateDatabaseOnDeleteImage(updatedImages);
-        
+
         // Update local state
         setAdditionalImages((prev) => prev.filter((img) => img !== image));
         setAdditionalLocalImages((prev) => prev.filter((img) => img !== image));
@@ -624,7 +625,6 @@ const CustomerDetailedView = () => {
                                             />
 
                                         </InputContainer>
-                                        {/* } */}
 
                                     </Row>
 
@@ -774,13 +774,11 @@ const CustomerDetailedView = () => {
                                                 }
                                             </DivSlider>
 
-
-
                                         </InputContainer>
 
                                     </Row>
 
-                                    <Row >
+                                    <Row style={{flexGrow: "1"}}>
 
                                         <InputContainer style={{ alignItems: 'flex-start' }}>
                                             <LabelTag>Notes</LabelTag>
@@ -838,30 +836,29 @@ const CustomerDetailedView = () => {
                                                     {" "}
                                                     <MdFileUpload />{" "}
                                                 </ImgLabel>
-                                                {/* <UploadBtn type="button" onClick={handleUpload}>
-                                        Upload
-                                    </UploadBtn> */}
+
                                             </UploadDiv>
                                         </InputContainer>
 
 
                                     </Row>
 
-                                    <Row style={{ flexGrow: "1", height: "12rem" }}>
+                                    <Row style={{ height: "12rem" }}>
                                         <InputContainer style={{ height: "100%" }}>
                                             <LabelTag>Additional Images</LabelTag>
                                             <UploadDiv2>
                                                 {additionalLocalImages !== null && additionalLocalImages.length !== 0 &&
                                                     additionalLocalImages.map((image, index) => {
                                                         return (
-                                                        <ImgDiv key={index}>
-                                                            <ImgTag2 src={image} />
-                                                            <Remove type="button" onClick={() => onRemoveMultipleImg(image)}>
-                                                                <IoCloseCircle style={{ padding: '0' }} />
-                                                            </Remove>
-                                                        </ImgDiv>
+                                                            <ImgDiv key={index}>
+                                                                <ImgTag2 src={image} />
+                                                                <Remove type="button" onClick={() => onRemoveMultipleImg(image)}>
+                                                                    <IoCloseCircle style={{ padding: '0' }} />
+                                                                </Remove>
+                                                            </ImgDiv>
 
-                                                    )})
+                                                        )
+                                                    })
                                                 }
 
                                                 <ImageUploadTAg2

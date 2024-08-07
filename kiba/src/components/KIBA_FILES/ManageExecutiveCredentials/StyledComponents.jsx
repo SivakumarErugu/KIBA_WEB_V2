@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 export const ProfileCon = styled.div`
   height: 100vh;
@@ -45,7 +44,6 @@ export const CustomContainer = styled.div`
 export const CustomProfile = styled.form`
   display: flex;
   justify-content: center;
-  /* align-items: center; */
   border: 2px solid #ccc;
   height: 93%;
   flex-grow: 1;
@@ -245,16 +243,6 @@ export const InputTag = styled.input`
         right: 0.3%;
     }
 `;
-export const Btn = styled.button`
-  min-width: 8rem;
-  width: fit-content;
-  font-size: 1.1rem;
-  background: blue;
-  color: #fff;
-  position: absolute;
-  bottom: 20%;
-  padding: 0.5rem;
-`;
 
 export const BackBtn = styled.button`
     color: #000;
@@ -302,10 +290,8 @@ export const CustomPart = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* border: 1px solid red; */
   position: relative;
   border-radius: 0.9rem;
-  /* box-shadow: 0 2px 5px 0 rgba(0,0,0,0.2); */
   background: transparent;
 
     @media screen and (max-width: 320px){
@@ -328,6 +314,7 @@ export const CustomPart = styled.div`
         right: 0.3%;
     }
 `;
+
 export const Title2 = styled.h1`
   color: #000;
   font-size: 1.5rem;

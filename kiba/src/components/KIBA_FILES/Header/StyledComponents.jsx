@@ -31,7 +31,6 @@ export const HeaderContainer = styled.div`
     }
 `
 export const CustomProfile = styled.div`
-    /* width: 5%; */
     height: 100%;
     display: flex;
     align-items: center;
@@ -86,16 +85,6 @@ export const ProfileIcon = styled.div`
 
 
 `
-export const SpanTag = styled.span`
-    font-size: 1.2rem;
-    background: #ccc;
-    padding: 0 0.4rem;
-    border-radius: 0.3rem;
-
-    @media screen and (max-width: 1024px) {
-        font-size: 0.5rem;
-    }
-`;
 
 export const Span = styled.span`
     font-size: 1.5rem;

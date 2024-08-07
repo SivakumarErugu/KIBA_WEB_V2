@@ -9,6 +9,7 @@ import Header from "../Header/Header";
 
 import Swal from "sweetalert2";
 
+// ICON IMPORTS
 import { IoIosArrowBack } from "react-icons/io";
 import { FaAngleDown } from "react-icons/fa6";
 import { FaUserTie } from "react-icons/fa";
@@ -16,45 +17,12 @@ import { MdFileUpload } from "react-icons/md";
 import { CiSquarePlus } from "react-icons/ci";
 import { IoCloseCircle } from "react-icons/io5";
 
+// STYLES 
 import {
-    AlertText,
-    BackBtn,
-    CreateNew,
-    Custom,
-    CustomContainer,
-    CustomDropDown,
-    CustomDropdownContainer,
-    CustomDropDownOptions,
-    CustomOption,
-    ImgTag,
-    InputContainer,
-    InputTag,
-    InnerContainer,
-    LabelTag,
-    LabelTwo,
-    MainContainer,
-    RadioCon,
-    Row,
-    SaveBtn,
-    Span,
-    TextArea,
-    Title,
-    UploadBtn,
-    Switch,
-    DatePickerWrapper,
-    Icon,
-    DivX,
-    DivSlider,
-    UploadDiv,
-    ImageUploadTAg,
-    ImgLabel,
-    ImgLabelTag,
-    ImgLabelTag2,
-    UploadDiv2,
-    ImageUploadTAg2, ImgLabel2,
-    ImgTag2,
-    ImgDiv,
-    Remove
+    AlertText, BackBtn, CreateNew, Custom, CustomContainer, CustomDropDown, CustomDropdownContainer, CustomDropDownOptions, CustomOption,
+    DatePickerWrapper, DivSlider, DivX, Icon, ImageUploadTAg, ImageUploadTAg2, ImgDiv, ImgLabel, ImgLabel2, ImgLabelTag, ImgLabelTag2, ImgTag, ImgTag2,
+    InputContainer, InputTag, InnerContainer, LabelTag, LabelTwo, MainContainer, RadioCon, Remove, Row, SaveBtn, Span, Switch, TextArea, Title,
+    UploadDiv, UploadDiv2
 } from "./CreateCustomerStyles";
 
 const indianStates = [
@@ -252,7 +220,6 @@ const CreateCustomer = () => {
         }
     };
 
-
     const ValidateForm = (customer) => {
         let error = false;
 
@@ -419,7 +386,6 @@ const CreateCustomer = () => {
                                     type="text"
                                     value={customerDetails.first_name}
                                     onChange={(e) => onChangeInput("first_name", e.target.value)}
-                                // placeholder="Enter First Name"
                                 />
                             </InputContainer>
 
@@ -435,7 +401,6 @@ const CreateCustomer = () => {
                                     type="text"
                                     value={customerDetails.last_name}
                                     onChange={(e) => onChangeInput("last_name", e.target.value)}
-                                // placeholder="Enter Last Name"
                                 />
                             </InputContainer>
                         </Row>
@@ -527,7 +492,6 @@ const CreateCustomer = () => {
                                     onChange={(e) =>
                                         onChangeInput("mobile_number", e.target.value)
                                     }
-                                // placeholder="Enter Mobile Number"
                                 />
                             </InputContainer>
                         </Row>
@@ -545,7 +509,6 @@ const CreateCustomer = () => {
                                     type="text"
                                     value={customerDetails.place}
                                     onChange={(e) => onChangeInput("place", e.target.value)}
-                                // placeholder="Enter Place"
                                 />
                             </InputContainer>
 
@@ -600,7 +563,6 @@ const CreateCustomer = () => {
                                     type="text"
                                     value={customerDetails.city}
                                     onChange={(e) => onChangeInput("city", e.target.value)}
-                                // placeholder="Enter City"
                                 />
                             </InputContainer>
 
@@ -623,10 +585,8 @@ const CreateCustomer = () => {
                                     readOnly={
                                         customerDetails.same_for_whatsapp === "true" ? true : false
                                     }
-                                // placeholder="Enter WhatsApp Number"
                                 />
                             </InputContainer>
-                            {/* } */}
                         </Row>
 
                         <Row>
@@ -642,7 +602,6 @@ const CreateCustomer = () => {
                                     type="text"
                                     value={customerDetails.district}
                                     onChange={(e) => onChangeInput("district", e.target.value)}
-                                // placeholder="Enter District"
                                 />
                             </InputContainer>
 
@@ -788,7 +747,6 @@ const CreateCustomer = () => {
                                     type="number"
                                     value={customerDetails.pincode}
                                     onChange={(e) => onChangeInput("pincode", e.target.value)}
-                                // placeholder="Enter Pincode"
                                 />
                             </InputContainer>
 
@@ -842,7 +800,7 @@ const CreateCustomer = () => {
                             </InputContainer>
                         </Row>
 
-                        <Row>
+                        <Row style={{flexGrow:'1'}}>
                             <InputContainer style={{ alignItems: "flex-start" }}>
                                 <LabelTag>Notes</LabelTag>
                                 <TextArea
@@ -854,7 +812,6 @@ const CreateCustomer = () => {
                                     }}
                                     value={customerDetails.notes}
                                     onChange={(e) => onChangeInput("notes", e.target.value)}
-                                // placeholder="Enter Notes"
                                 />
                             </InputContainer>
 
@@ -909,7 +866,7 @@ const CreateCustomer = () => {
                             </InputContainer>
                         </Row>
 
-                        <Row style={{ flexGrow: "1", height: "12rem" }}>
+                        <Row style={{ height: "12rem" }}>
                             <InputContainer style={{ height: "100%" }}>
                                 <LabelTag>Additional Images</LabelTag>
                                 <UploadDiv2>
@@ -949,8 +906,11 @@ const CreateCustomer = () => {
 
                         {uploadImgStatus && <AlertText>{uploadImgStatus}</AlertText>}
                     </CreateNew>
+
                 </CustomContainer>
+
             </InnerContainer>
+
         </MainContainer>
     );
 };

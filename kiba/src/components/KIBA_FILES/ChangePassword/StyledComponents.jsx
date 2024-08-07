@@ -1,5 +1,4 @@
-import styled, { css } from 'styled-components';
-import Slider from "react-slick";
+import styled from 'styled-components';
 
 // General Media Query Breakpoints
 const breakpoints = {
@@ -95,21 +94,6 @@ export const CustomContainer = styled.div`
     }
 `;
 
-export const CardContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 52%;
-    height: 100%;
-    background-size: cover;
-
-    @media only screen and (max-width: ${breakpoints.mobileL}) {
-        width: 100%;
-        display: none;
-    }
-    
-`;
-
 export const Heading = styled.h1`
     font-size: 2rem;
     color: #000;
@@ -148,16 +132,6 @@ export const Form = styled.form`
     display: flex;
     flex-direction: column;
     width: 100%;
-`;
-
-export const CustomDiv = styled.div`
-    width: 100%;
-    position: relative;
-    margin-bottom: 1rem;
-
-    @media (max-width: ${breakpoints.mobileL}) {
-        margin-bottom: 0.5rem;
-    }
 `;
 
 export const Btn = styled.button`
@@ -255,39 +229,6 @@ export const ImgTag = styled.img`
     }
 `;
 
-export const StyledSlider = styled(Slider)`
-    width: 52%;
-    height: 95%;
-    background: transparent;
-    border-radius: 8px;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    /* border: 1px solid red; */
-`;
-
-export const SliderItem = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* height: 42rem; */
-    /* height: 90% ; */
-    height: fit-content;
-    width: 95%; 
-    background-color: #000;
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
-    border-radius: 1.5rem;
-    overflow: hidden;
-`;
-export const SlideImage = styled.img`
-    width: 100%;
-    height: 100%  !important;
-    object-fit: cover; 
-`;
-
-
-
 export const CoolInput = styled.div`
     display: flex;
     flex-direction: column;
@@ -321,7 +262,6 @@ export const TextInput = styled.input`
         outline: none;
     }
 `;
-
 
 export const SlideItem = styled.div`
     width: 100%;

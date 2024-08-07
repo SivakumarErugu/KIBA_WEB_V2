@@ -2,23 +2,15 @@ import { useState, useEffect } from 'react';
 import Cookies from 'universal-cookie';
 
 import {
-    ChartContainer,
-    Count,
-    DashboardContainer,
-    DashBoard,
-    InnerContainer,
-    Label,
-    MainContainer,
-    Tile,
-    TilesContainer,
-    Title,
-    Icon,
-    DivX
+    ChartContainer, Count, DashboardContainer, DashBoard, DivX, Icon, InnerContainer,
+    Label, MainContainer, Tile, TilesContainer, Title
 } from './StyledComponents'
 
+// COMPONENT IMPORTS
 import SideNav from '../SideNav/SideNav'
 import Header from '../Header/Header'
 
+// ICONS
 import { FaUsers } from "react-icons/fa";
 import { GrTest } from "react-icons/gr";
 
@@ -99,7 +91,6 @@ const Dashboard = () => {
         ],
     };
 
-
     const options = {
         responsive: true,
         plugins: {
@@ -124,7 +115,6 @@ const Dashboard = () => {
         },
         cutout: '0%',
     };
-
 
     return (
         <MainContainer>

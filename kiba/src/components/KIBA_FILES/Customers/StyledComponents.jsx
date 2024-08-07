@@ -60,27 +60,6 @@ export const Checkbox = styled.input`
   border: 1px solid red !important;
 `;
 
-
-
-// Count styling
-export const Count = styled.div`
-  width: 50%;
-  display: flex;
-  align-items: center;
-
-    @media (max-width: ${breakpoints.mobile}) {
-        width: 100%;
-        justify-content: center;
-        margin-bottom: 1rem;
-    }
-`;
-
-// CreateNewContainer styling
-export const CreateNewContainer = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-`;
-
 // CreeteNewBtn styling
 export const CreateNewBtn = styled.button`
     display: flex;
@@ -178,23 +157,6 @@ export const CustomSpan = styled.span`
 
   @media screen and (min-width: 769px) and (max-width:1024px) {
     font-size: 0.6rem;
-  }
-`;
-
-// CancelBtn styling
-export const CancelBtn = styled.button`
-  padding: 0;
-  width: fit-content;
-  height: fit-content;
-  display: flex;
-  align-items: center;
-  border: none;
-  cursor: pointer;
-  outline: none;
-
-  @media screen and (min-width: 769px) and (max-width:1024px) {
-    width:  0.8rem;
-    height:  0.8rem;
   }
 `;
 
@@ -345,70 +307,6 @@ export const DotSpinnerDot = styled.div`
   }
 `;
 
-
-// FilterBtn styling
-export const FilterBtn = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: fit-content;
-  width: fit-content;
-  padding: 0.4rem;
-  margin: 0rem 0.2rem 0rem 0.3rem;
-  border: 1px solid #ccc;
-  position: relative;
-  z-index: 1;
-  outline: none;
-
-
-  @media screen and (min-width: 769px) and (max-width:1024px) {
-      height: 1.5rem;
-      width: 1.5rem;
-      padding: 0.2rem;
-  }
-
-  @media screen and (min-width: 1025px) {
-    height: fit-content;
-    width: fit-content;
-    padding: 0.3rem;
-    margin: 0rem 0.4rem 0rem 0.3rem;
-  }
-`;
-
-// FilterDropdown styling
-export const FilterDropdown = styled.div`
-  min-width: 550%;
-  height: 1000%;
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 2.5rem;
-  right: 0;
-  background: #fff;
-  padding: 0.1rem;
-  border-radius: 0.7rem;
-  overflow-y: auto;
-  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
-
-  &::-webkit-scrollbar{
-    width: 0.2rem;
-  }
-`;
-
-// FilterItem styling
-export const FilterItem = styled.p`
-  margin: 0.2rem;
-  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-  color: #000;
-  text-align: left;
-  font-size: 0.8rem;
-  border-bottom: 1px solid #000;
-
-  &:hover{
-    background: #dee2e6;
-  }
-`;
-
 // HighlightText styling
 export const HighlightText = styled.span`
   background-color: yellow;
@@ -528,19 +426,6 @@ export const MainContainer = styled.div`
 
 `;
 
-// New styling
-export const New = styled.div`
-  width: 50%;
-  display: flex;
-  justify-content: flex-end;
-
-  @media (max-width: ${breakpoints.mobile}) {
-    width: 100%;
-    justify-content: center;
-    margin-top: 1rem;
-  }
-`;
-
 // PaginationContainer styling
 export const PaginationContainer = styled.div`
   display: flex;
@@ -594,7 +479,6 @@ export const SearchActionsBar = styled.div`
   display: flex;
   align-items: center !important;
   justify-content: space-between;
-  /* height: 7%; */
   height: 6vh;
   width: 100%;
   margin-top: 0.4rem;
@@ -698,7 +582,6 @@ export const SpanTag = styled.sup`
 export const TableTag = styled.table`
   border: 2px solid #ccc;
   height: 100%;
-  /* min-height: fit-content; */
   max-height: 100%;
   width: 100%;
   flex-grow: 1;
@@ -728,31 +611,6 @@ export const TableTag = styled.table`
 
   @media screen and (min-width: 1025px) {
       
-  }
-`;
-
-// Tabs styling
-export const Tabs = styled.div`
-  height: 5%;
-  width: 100%;
-  padding: 0rem;
-  display: flex;
-  align-items: center;
-`;
-
-// Tab styling
-export const Tab = styled.button`
-  height: 100%;
-  padding: 0.4rem;
-  border: none;
-  border-bottom: ${props => (props.active ? '2px solid #6A1039' : 'none')};   
-  border-radius: 0;
-  margin: 0rem 0.5rem 0rem 0.5rem;
-  outline: none !important;
-
-  @media (max-width: ${breakpoints.mobile}) {
-    margin: 0rem 0.2rem;
-    padding: 0.2rem;
   }
 `;
 
