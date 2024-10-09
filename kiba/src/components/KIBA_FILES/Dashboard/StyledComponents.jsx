@@ -33,7 +33,7 @@ export const InnerContainer = styled.div`
 `
 
 export const DashboardContainer = styled.div`
-    height: 93%;
+    height: 92%;
     flex-grow: 1;
     width: 100%;
     display: flex;

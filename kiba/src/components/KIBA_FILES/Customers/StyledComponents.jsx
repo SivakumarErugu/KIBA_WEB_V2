@@ -112,9 +112,10 @@ export const CreateNewBtn = styled.button`
 
 // CustomContainer styling
 export const CustomContainer = styled.div`
-    height: 90vh;
+    max-height: 93vh;
     width: 100%;
     display: flex;
+    flex-grow: 1;
     flex-direction: column;
     padding: 0.5rem 0.5rem 0.3rem 0.5rem;
 `;
@@ -431,7 +432,7 @@ export const PaginationContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 5vh;
+  height: 3vh;
   width: 100%;
   padding: 0rem 0.5rem 0rem 0.5rem;
 
